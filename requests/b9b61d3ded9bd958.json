@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+      "status": "running"
+    }
+  ],
+  "latest_status": "running",
+  "params_hash": "sha256:b0ec024f0efa9db44836a6afc4c2d2786c2b15510226489d15a59a64df0676a5",
+  "request_id": "b9b61d3ded9bd958"
+}
