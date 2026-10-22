@@ -1,0 +1,11 @@
+{
+  "releases": [
+    {
+      "created_at": "2026-10-22T01:17:47Z",
+      "release_id": "data-refinery-20261022T011747Z-9cf163e",
+      "run_id": "data-refinery-20261022T011439Z-a830bbc9-a1",
+      "source_commit": "9cf163e0b89bc7bca7d1a9d8a0074ce8fa52e5be",
+      "status": "released"
+    }
+  ]
+}
