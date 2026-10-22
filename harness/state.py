@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import random
+import re
 import shutil
 import subprocess
 import time
@@ -23,6 +24,11 @@ INDEX = "index.json"
 LATEST = "latest.json"
 
 
+def _scrub(stderr: str) -> str:
+    """The end of git's stderr with any URL userinfo removed (none is expected here, but logs are public)."""
+    return re.sub(r"://[^/@\s]+@", "://", stderr.strip())[-600:]
+
+
 class StateRepo:
     def __init__(self, path: Path, branch: str | None = None, remote: str = "origin") -> None:
         self.path = Path(path)
@@ -30,10 +36,20 @@ class StateRepo:
         self.remote = remote
 
     def git(self, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
-        return subprocess.run(["git", *args], cwd=self.path, check=check, capture_output=True, text=True)
+        proc = subprocess.run(["git", *args], cwd=self.path, capture_output=True, text=True)
+        if check and proc.returncode != 0:
+            raise HarnessError(f"git {args[0]} failed with exit {proc.returncode}: {_scrub(proc.stderr)}")
+        return proc
 
     def sync(self) -> None:
-        self.git("fetch", "--quiet", "--depth=1", self.remote, self.branch)
+        # Fetch failures are usually transient (network, a concurrent ref update); retry briefly.
+        for attempt in range(3):
+            fetched = self.git("fetch", "--quiet", "--depth=1", self.remote, self.branch, check=False)
+            if fetched.returncode == 0:
+                break
+            if attempt == 2:
+                raise HarnessError(f"git fetch failed with exit {fetched.returncode}: {_scrub(fetched.stderr)}")
+            time.sleep(1 + attempt)
         self.git("reset", "--quiet", "--hard", f"{self.remote}/{self.branch}")
         self.git("clean", "-qfdx")
 
