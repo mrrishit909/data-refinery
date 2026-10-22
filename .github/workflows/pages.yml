@@ -84,7 +84,7 @@ jobs:
           OWNER: ${{ github.repository_owner }}
         run: |
           base="https://${OWNER}.github.io/${REPO}/"
-          for i in 1 2 3 4 5 6; do
+          for _ in 1 2 3 4 5 6; do
             code=$(curl -s -o page.html -w '%{http_code}' "$base") || code=000
             if [ "$code" = "200" ] && grep -q "data-app=\"${REPO}\"" page.html; then break; fi
             sleep 10

@@ -38,7 +38,8 @@ async function axe(page: Page) {
   // @axe-core/playwright is typed against its own Playwright Page version; the runtime object is the same.
   const results = await new AxeBuilder({ page: page as never }).withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]).analyze();
   const serious = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
-  expect(serious.map((v) => `${v.id}: ${v.nodes.length} node(s)`)).toEqual([]);
+  // Name every failing element and axe's reason so a CI-only failure can be diagnosed from the log alone.
+  expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => `${n.target.join(" ")} (${(n.failureSummary ?? "").replace(/\s+/g, " ").slice(0, 160)})`).join("; ")}`)).toEqual([]);
 }
 
 const narrow = (page: Page) => (page.viewportSize()?.width ?? 0) <= 720;
@@ -171,6 +172,7 @@ test("keyboard: skip link and visible focus", async ({ page }) => {
 test("dark theme: the theme control applies and stays accessible", async ({ page }) => {
   await page.goto("./#/stage/quarantine");
   await page.getByRole("group", { name: "Colour theme" }).getByRole("button", { name: "Dark" }).click();
+  await page.waitForTimeout(500); // theme transitions settle before the audit
   await expect(page.locator(".dr-root")).toHaveAttribute("data-theme", "dark");
   await axe(page);
   // axe reports identical text and background colours as incomplete, not as a violation; check the primary action directly.
