@@ -12,7 +12,7 @@ from datetime import timedelta
 from pathlib import Path
 from typing import Any
 
-from .core import config, iso, parse_iso, transition, utcnow
+from .core import HarnessError, config, iso, parse_iso, transition, utcnow
 from .github import GitHub
 from .runs import publish
 from .state import StateRepo, put_request, put_run_record, read_json, upsert_index
@@ -50,13 +50,20 @@ def reconcile(state: StateRepo, gh: GitHub, now=None) -> list[dict[str, Any]]:
             continue  # still genuinely running or queued on GitHub's side
         conclusion = (wf or {}).get("conclusion") or "unknown"
         recovered = False
+        republish_error = ""
         if wf:
             for art in gh.run_artifacts(rec["workflow_run_id"]):
                 if art["name"] == f"run-{rec['run_id']}" and not art["expired"]:
-                    with tempfile.TemporaryDirectory() as tmp:
-                        _safe_extract(gh.download_artifact(art["id"]), Path(tmp))
-                        result = publish(state, rec["run_id"], "success", Path(tmp), None,
-                                         gh.repo.run_url(rec["workflow_run_id"]), now)
+                    try:
+                        with tempfile.TemporaryDirectory() as tmp:
+                            _safe_extract(gh.download_artifact(art["id"]), Path(tmp))
+                            result = publish(state, rec["run_id"], "success", Path(tmp), None,
+                                             gh.repo.run_url(rec["workflow_run_id"]), now)
+                    except HarnessError as exc:
+                        # The artifact cannot be published (for example it predates an output-contract change):
+                        # record why and fall through to marking the run failed, never crash the reconciler.
+                        republish_error = f"; republishing its artifact failed: {str(exc)[:300]}"
+                        break
                     actions.append({"run_id": rec["run_id"], "action": "republished_from_artifact",
                                     "status": result["status"]})
                     recovered = True
@@ -65,12 +72,13 @@ def reconcile(state: StateRepo, gh: GitHub, now=None) -> list[dict[str, Any]]:
             continue
         status = "cancelled" if conclusion == "cancelled" else "failed"
 
-        def mutate(root: Path, rec=rec, status=status, conclusion=conclusion) -> None:
+        def mutate(root: Path, rec=rec, status=status, conclusion=conclusion, republish_error=republish_error) -> None:
             current = read_json(root, f"runs/{rec['run_id']}/run.json")
             if current["status"] != "running":
                 return
             new = transition(current, status, completed_at=iso(now),
-                             error_summary=f"reconciled: workflow concluded '{conclusion}' without publishing")
+                             error_summary=(f"reconciled: workflow concluded '{conclusion}' without publishing"
+                                            f"{republish_error}"))
             put_run_record(root, new)
             req = read_json(root, f"requests/{new['request_id']}.json")
             put_request(root, new["request_id"], req["params_hash"], new)

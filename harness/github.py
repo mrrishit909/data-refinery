@@ -11,6 +11,7 @@ import os
 import random
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from typing import Any
 
@@ -32,6 +33,11 @@ LABELS: dict[str, tuple[str, str]] = {
     "type:release": ("29201B", "Release record"),
     "memory:accept": ("4C7A3A", "Owner accepts the memory proposals in this issue"),
 }
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001, ANN201
+        return None
 
 
 class GitHub:
@@ -117,7 +123,31 @@ class GitHub:
         return self.request("GET", f"/repos/{self.repo.slug}/actions/runs/{run_id}/artifacts")["artifacts"]
 
     def download_artifact(self, artifact_id: int) -> bytes:
-        return self.request("GET", f"/repos/{self.repo.slug}/actions/artifacts/{artifact_id}/zip", raw=True)
+        """The API answers with a redirect to a short-lived storage URL. urllib would forward the Authorization
+        header there (storage rejects it, and the token must not leave the API host), so follow it by hand."""
+        req = urllib.request.Request(f"{self.api}/repos/{self.repo.slug}/actions/artifacts/{artifact_id}/zip")
+        req.add_header("Authorization", f"Bearer {self.token}")
+        req.add_header("Accept", "application/vnd.github+json")
+        req.add_header("X-GitHub-Api-Version", "2022-11-28")
+        try:
+            with urllib.request.build_opener(_NoRedirect).open(req, timeout=60) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code not in (301, 302, 303, 307, 308):
+                raise HarnessError(f"GitHub API GET artifact {artifact_id} failed: HTTP {exc.code}") from None
+            location = exc.headers.get("Location", "")
+        if urllib.parse.urlparse(location).scheme != "https":
+            raise HarnessError(f"artifact {artifact_id} download did not redirect to an https URL")
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(urllib.request.Request(location), timeout=120) as resp:  # noqa: S310
+                    return resp.read()
+            except (urllib.error.HTTPError, urllib.error.URLError) as exc:
+                if attempt == 2:
+                    reason = getattr(exc, "code", exc)
+                    raise HarnessError(f"artifact {artifact_id} storage download failed: {reason}") from None
+                time.sleep(1 + attempt)
+        raise HarnessError("unreachable")
 
     def dispatch(self, workflow: str, ref: str, inputs: dict[str, str]) -> None:
         self.request("POST", f"/repos/{self.repo.slug}/actions/workflows/{workflow}/dispatches",
