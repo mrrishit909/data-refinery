@@ -1,0 +1,31 @@
+{
+  "attempt": 1,
+  "completed_at": null,
+  "created_at": "2026-10-22T01:14:39Z",
+  "error_summary": null,
+  "evidence_paths": [],
+  "input_manifest_hash": null,
+  "parent_run_id": null,
+  "project": "data-refinery",
+  "request_id": "a830bbc92dbe90b0",
+  "request_source": {
+    "actor": "mrrishit909",
+    "issue_number": null,
+    "type": "manual"
+  },
+  "resource_usage_summary": {
+    "inference": {
+      "usd": null,
+      "used": false
+    },
+    "output_bytes": null,
+    "wall_seconds": null
+  },
+  "result_paths": [],
+  "run_id": "data-refinery-20261022T011439Z-a830bbc9-a1",
+  "schema_version": "1.0",
+  "source_commit": "9cf163e0b89bc7bca7d1a9d8a0074ce8fa52e5be",
+  "started_at": "2026-10-22T01:14:39Z",
+  "status": "running",
+  "workflow_run_id": 39704531057
+}
