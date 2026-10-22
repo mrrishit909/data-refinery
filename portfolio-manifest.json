@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "name": "Data Refinery",
+  "short_description": "A self-repairing data pipeline workbench: contracts, drift repair with evidence, quarantine with reasons, and proof that every input row is accounted for.",
+  "repository_url": "https://github.com/mrrishit909/data-refinery",
+  "live_url": "https://mrrishit909.github.io/data-refinery/",
+  "preview_image": "https://mrrishit909.github.io/data-refinery/preview.jpg",
+  "tags": ["python", "pandas", "pandera", "pydantic", "data-quality", "data-contracts", "lineage", "github-actions", "react", "typescript"],
+  "capabilities": [
+    "CSV, JSON and bounded XLSX intake with immutable source manifests",
+    "Schema profiling, contract validation and schema-drift detection",
+    "Repair proposals with evidence and confidence; only unambiguous repairs auto-applied",
+    "Row-level quarantine with reason codes; exact and conflicting duplicate handling",
+    "Row reconciliation identity, period restatements for late arrivals, lineage graph",
+    "Deterministic replay; GitHub-native run ledger, outcome loop and memory curation",
+    "In-browser CSV preview against the contract, never persisted"
+  ],
+  "data_limitations": [
+    "All batches are synthetic orders with documented, injected defects",
+    "One contract and one fixed, synthetic FX table",
+    "Durable runs process committed fixtures only; no uploads",
+    "The site shows a snapshot of the state branch, not live data"
+  ],
+  "integration": {
+    "standalone": "https://mrrishit909.github.io/data-refinery/",
+    "iframe": "https://mrrishit909.github.io/data-refinery/#/",
+    "module": "https://mrrishit909.github.io/data-refinery/lib/data-refinery.js",
+    "stylesheet": "https://mrrishit909.github.io/data-refinery/lib/data-refinery.css",
+    "entry_point": "DataRefineryApp (React component) or mount(element, config)",
+    "data_url": "https://mrrishit909.github.io/data-refinery/data/",
+    "docs": "https://github.com/mrrishit909/data-refinery/blob/main/docs/PORTFOLIO_INTEGRATION.md"
+  },
+  "build_version": "1.0.0"
+}

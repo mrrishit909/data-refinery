@@ -1,0 +1,26 @@
+name: Pipeline run request
+description: Run the refinery over committed synthetic order batches. Runs start automatically only for the repository owner; other requests wait for owner approval.
+title: "[run] "
+labels: ["type:run"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Runs process the committed synthetic fixtures only (no uploads), are validated against `schemas/request.schema.json`, and record every row: accepted, quarantined with a reason, or merged as a duplicate. A GitHub sign-in is required to open an issue. Nothing here can trigger paid AI inference.
+  - type: checkboxes
+    attributes:
+      label: Batches
+      description: Processed in date order. Later batches are checked for drift against earlier ones.
+      options:
+        - label: 2026-01 (CSV, clean baseline)
+        - label: 2026-02 (CSV, renamed column, mixed dates, duplicates)
+        - label: 2026-03 (JSON, currencies, unit change, categories, nulls)
+        - label: 2026-04 (XLSX, late arrivals, missing identifiers)
+  - type: dropdown
+    attributes:
+      label: Repair mode
+      description: propose lists repairs without applying them; apply-safe applies only unambiguous repairs.
+      options: ["apply-safe", "propose"]
+      default: 0
+    validations:
+      required: true

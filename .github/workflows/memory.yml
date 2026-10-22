@@ -1,0 +1,71 @@
+name: Memory Curation Workflow
+
+# Local-harness equivalent of curated memory (not a native Claude feature).
+# propose: after completed runs (called from run.yml) or on demand.
+# accept:  only when the repository owner labels a `type:memory` issue `memory:accept`.
+on:
+  workflow_dispatch:
+  workflow_call:
+  issues:
+    types: [labeled]
+
+permissions: {}
+
+concurrency:
+  group: memory
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    if: github.event_name != 'issues'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: state
+          path: state
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git -C state remote set-url origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          uv run --frozen python -m harness memory-propose --state-dir state --ledger
+
+  accept:
+    if: github.event_name == 'issues' && github.event.label.name == 'memory:accept'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - name: Owner-accepted lessons to memory/lessons.json
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          uv run --frozen python -m harness memory-accept --event "$GITHUB_EVENT_PATH"

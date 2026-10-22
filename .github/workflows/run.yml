@@ -1,0 +1,186 @@
+name: Run
+
+# One research run: admit (idempotency, ceilings) -> compute (no write access) -> publish
+# (validated outputs to the state branch) -> Pages deploy -> Outcome Verification Loop ->
+# memory proposals. Chaining uses reusable workflows because events created with GITHUB_TOKEN
+# do not start new workflow runs (workflow_dispatch and repository_dispatch excepted).
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: Run parameters as JSON (validated against schemas/request.schema.json)
+        required: true
+        type: string
+      source_type:
+        description: Origin of the request
+        type: choice
+        options: [manual, issue, schedule, reconcile]
+        default: manual
+      issue:
+        description: Issue number for issue-originated requests
+        type: string
+        default: ""
+
+run-name: "Run (${{ inputs.source_type }}${{ inputs.issue && format(', issue {0}', inputs.issue) || '' }})"
+
+permissions: {}
+
+jobs:
+  admit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    concurrency:
+      group: state-writer
+      queue: max
+    outputs:
+      decision: ${{ steps.admit.outputs.decision }}
+      run_id: ${{ steps.admit.outputs.run_id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: state
+          path: state
+          fetch-depth: 1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - id: admit
+        name: Admit request
+        env:
+          REQUEST_JSON: ${{ inputs.request }}
+          SOURCE_TYPE: ${{ inputs.source_type }}
+          ISSUE: ${{ inputs.issue }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git -C state config user.name "github-actions[bot]"
+          git -C state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          uv run --frozen python -m harness admit --state-dir state --source-type "$SOURCE_TYPE" \
+            --issue "$ISSUE" --workflow-run-id "$GITHUB_RUN_ID" --source-commit "$GITHUB_SHA" \
+            --result admission.json
+
+  compute:
+    needs: admit
+    if: needs.admit.outputs.decision == 'run'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - name: Deterministic research run
+        env:
+          REQUEST_JSON: ${{ inputs.request }}
+          RUN_ID: ${{ needs.admit.outputs.run_id }}
+        run: |
+          printf '%s' "$REQUEST_JSON" > request.json
+          mkdir -p out
+          if ! uv run --frozen python -m harness compute --request request.json --out "out/$RUN_ID" 2> compute-error.log; then
+            tail -c 4000 compute-error.log
+            exit 1
+          fi
+      - if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: run-${{ needs.admit.outputs.run_id }}
+          path: out/${{ needs.admit.outputs.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+      - if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: error-${{ needs.admit.outputs.run_id }}
+          path: compute-error.log
+          retention-days: 14
+          if-no-files-found: ignore
+
+  publish:
+    needs: [admit, compute]
+    if: always() && needs.admit.outputs.decision == 'run'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    concurrency:
+      group: state-writer
+      queue: max
+    outputs:
+      status: ${{ steps.publish.outputs.status }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: state
+          path: state
+          fetch-depth: 1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - if: needs.compute.result == 'success'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: run-${{ needs.admit.outputs.run_id }}
+          path: out
+      - if: needs.compute.result == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: error-${{ needs.admit.outputs.run_id }}
+          path: err
+      - id: publish
+        name: Publish to state branch
+        env:
+          RUN_ID: ${{ needs.admit.outputs.run_id }}
+          CONCLUSION: ${{ needs.compute.result }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git -C state config user.name "github-actions[bot]"
+          git -C state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          OUT=""; [ -d out ] && OUT=out
+          uv run --frozen python -m harness publish --state-dir state --run-id "$RUN_ID" \
+            --conclusion "$CONCLUSION" --out-dir "$OUT" --error-file err/compute-error.log \
+            --workflow-run-id "$GITHUB_RUN_ID"
+
+  deploy:
+    needs: publish
+    if: needs.publish.outputs.status == 'completed'
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+  verify:
+    needs: deploy
+    uses: ./.github/workflows/outcome.yml
+    permissions:
+      contents: write
+      issues: write
+    secrets: inherit
+
+  memory:
+    needs: [deploy, verify]
+    if: always() && needs.deploy.result == 'success'
+    uses: ./.github/workflows/memory.yml
+    permissions:
+      contents: write
+      issues: write

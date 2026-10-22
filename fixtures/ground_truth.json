@@ -1,0 +1,5169 @@
+{
+  "batches": {
+    "2026-01": {
+      "column_defects": [],
+      "file": "orders_2026-01.csv",
+      "format": "csv",
+      "row_defects": [],
+      "rows": 1000
+    },
+    "2026-02": {
+      "column_defects": [
+        {
+          "column": "customer_id",
+          "expected": {
+            "applied_in": "apply-safe",
+            "repair": "rename"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "UNKNOWN_COLUMN_SET"
+          },
+          "kind": "column_renamed",
+          "source_column": "cust_id"
+        }
+      ],
+      "file": "orders_2026-02.csv",
+      "format": "csv",
+      "row_defects": [
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 3
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-17"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "17/02/2026",
+          "row": 13
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "malformed_date",
+          "raw": "2026-02-30",
+          "row": 16
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 17
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-02"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "02/02/2026",
+          "row": 29
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 48
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 50
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-03"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "03/02/2026",
+          "row": 55
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 63
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "malformed_date",
+          "raw": "31/02/2026",
+          "row": 73
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-25"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "25/02/2026",
+          "row": 77
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-17"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "17/02/2026",
+          "row": 83
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 84
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 87
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-24"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "24/02/2026",
+          "row": 90
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 33,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 33,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 101
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 103
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-06"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "06/02/2026",
+          "row": 116
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 119
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 122
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-17"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "17/02/2026",
+          "row": 127
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 130
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 131
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-16"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "16/02/2026",
+          "row": 137
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 68,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 68,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 146
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 151
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 156
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 158
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 140,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 140,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 165
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-22"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "22/02/2026",
+          "row": 178
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 183
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-02"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "02/02/2026",
+          "row": 190
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-16"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "16/02/2026",
+          "row": 191
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 153,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 153,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 193
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 281,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200194",
+          "row": 198
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 199
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 200
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 61,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 61,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 203
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-02"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "02/02/2026",
+          "row": 204
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-13"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "13/02/2026",
+          "row": 208
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 218
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 222
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 224
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-28"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "28/02/2026",
+          "row": 231
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 232
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 239
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 174,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 174,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 241
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-03"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "03/02/2026",
+          "row": 243
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-16"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "16/02/2026",
+          "row": 247
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 362,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200244",
+          "row": 250
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 251
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-13"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "13/02/2026",
+          "row": 264
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 266
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 198,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200194",
+          "row": 281
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-03"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "03/02/2026",
+          "row": 282
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-04"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "04/02/2026",
+          "row": 283
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 286
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-28"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "28/02/2026",
+          "row": 293
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-25"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "25/02/2026",
+          "row": 308
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 320
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 327
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 331
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 334
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 461,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200328",
+          "row": 335
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 340
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 269,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 269,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 344
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 345
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 349
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 250,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200244",
+          "row": 362
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 364
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 371
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-17"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "17/02/2026",
+          "row": 382
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 389
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-14"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "14/02/2026",
+          "row": 395
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "malformed_date",
+          "raw": "not a date",
+          "row": 420
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 422
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 432
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 433
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 437
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-22"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "22/02/2026",
+          "row": 439
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 443
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 456
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 457
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 335,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200328",
+          "row": 461
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 467
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-25"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "25/02/2026",
+          "row": 483
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 577,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200480",
+          "row": 490
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 492
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 495
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 373,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 373,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 497
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 502
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 451,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 451,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 508
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-28"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "28/02/2026",
+          "row": 510
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 515
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 519
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-28"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "28/02/2026",
+          "row": 522
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 525
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-14"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "14/02/2026",
+          "row": 527
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 543
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 552
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 555
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 557
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 560
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 568
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-17"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "17/02/2026",
+          "row": 572
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 576
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 490,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200480",
+          "row": 577
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 584
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 587
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 482,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 482,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 595
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 488,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 488,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 604
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 605
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-04"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "04/02/2026",
+          "row": 608
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 610
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 616
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 619
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 499,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 499,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 620
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 622
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-04"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "04/02/2026",
+          "row": 635
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 647
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 651
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 652
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-02"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "02/02/2026",
+          "row": 654
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 659
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-06"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "06/02/2026",
+          "row": 668
+        },
+        {
+          "column": "amount",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "kind": "negative_amount",
+          "raw": "-227.53",
+          "row": 672
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 591,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 591,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 682
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 687
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 697
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-02"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "02/02/2026",
+          "row": 700
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 701
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 704
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-13"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "13/02/2026",
+          "row": 706
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 707
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 596,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 596,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 708
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 714
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 716
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-13"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "13/02/2026",
+          "row": 719
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 725
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-04"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "04/02/2026",
+          "row": 727
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-03"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "03/02/2026",
+          "row": 729
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-24"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "24/02/2026",
+          "row": 730
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 732
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 733
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 752
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 795,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 795,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 805
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 808
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 775,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 775,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 810
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 824
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-14"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "14/02/2026",
+          "row": 825
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 765,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 765,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 844
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 849
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "malformed_date",
+          "raw": "2026-02-31",
+          "row": 851
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 852
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 856
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 858
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-22"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "22/02/2026",
+          "row": 860
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-03"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "03/02/2026",
+          "row": 868
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "malformed_date",
+          "raw": "TBD",
+          "row": 870
+        },
+        {
+          "column": "amount",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "kind": "negative_amount",
+          "raw": "-151.72",
+          "row": 873
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 875
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-23"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "23/02/2026",
+          "row": 881
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 891
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 894
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 896
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 898
+        },
+        {
+          "column": "amount",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NEGATIVE_AMOUNT"
+          },
+          "kind": "negative_amount",
+          "raw": "-1484.03",
+          "row": 916
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 874,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 874,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 917
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 911,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 911,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 921
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-14"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "14/02/2026",
+          "row": 923
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-04"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "04/02/2026",
+          "row": 934
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-24"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "24/02/2026",
+          "row": 937
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 947
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-24"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "24/02/2026",
+          "row": 949
+        },
+        {
+          "column": null,
+          "expected": {
+            "duplicate_of": 901,
+            "outcome": "merged"
+          },
+          "expected_propose": {
+            "duplicate_of": 901,
+            "outcome": "merged"
+          },
+          "kind": "exact_duplicate",
+          "raw": null,
+          "row": 951
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 952
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 954
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 1083,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200941",
+          "row": 965
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 972
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 1110,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200962",
+          "row": 986
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-15"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "15/02/2026",
+          "row": 990
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 998
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 1005
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 1006
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-08"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "08/02/2026",
+          "row": 1009
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 1010
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 1045
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-21"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "21/02/2026",
+          "row": 1048
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-13"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "13/02/2026",
+          "row": 1054
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 1056
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 1062
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-25"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "25/02/2026",
+          "row": 1081
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 965,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200941",
+          "row": 1083
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 1087
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-01"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "01/02/2026",
+          "row": 1092
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 1097
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 1098
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-11"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "11/02/2026",
+          "row": 1101
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 1109
+        },
+        {
+          "column": "order_id",
+          "conflicts_with": 986,
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "DUPLICATE_CONFLICT"
+          },
+          "kind": "duplicate_conflict",
+          "raw": "ORD-200962",
+          "row": 1110
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 1116
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 1124
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-12"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "12/02/2026",
+          "row": 1132
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-16"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "16/02/2026",
+          "row": 1144
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-06"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "06/02/2026",
+          "row": 1148
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-18"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "18/02/2026",
+          "row": 1150
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-27"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "27/02/2026",
+          "row": 1151
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-06"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "06/02/2026",
+          "row": 1154
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-20"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "20/02/2026",
+          "row": 1155
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-05"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "05/02/2026",
+          "row": 1157
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-16"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "16/02/2026",
+          "row": 1166
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-19"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "19/02/2026",
+          "row": 1174
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-07"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "07/02/2026",
+          "row": 1179
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-10"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "10/02/2026",
+          "row": 1185
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-26"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "26/02/2026",
+          "row": 1190
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-22"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "22/02/2026",
+          "row": 1201
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "cleaned": {
+              "order_date": "2026-02-09"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "BAD_DATE"
+          },
+          "kind": "date_ddmmyyyy",
+          "raw": "09/02/2026",
+          "row": 1202
+        }
+      ],
+      "rows": 1206
+    },
+    "2026-03": {
+      "column_defects": [
+        {
+          "column": "weight_kg",
+          "expected": {
+            "applied_in": "apply-safe",
+            "repair": "unit_scale"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "UNRESOLVED_UNIT_SCALE"
+          },
+          "factor": "0.001",
+          "kind": "unit_grams"
+        },
+        {
+          "column": "currency",
+          "currencies": [
+            "EUR",
+            "GBP",
+            "USD"
+          ],
+          "expected": {
+            "normalization": "amount_usd via fixed-2026q1"
+          },
+          "kind": "currency_mix"
+        }
+      ],
+      "file": "orders_2026-03.json",
+      "format": "json",
+      "row_defects": [
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 12
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 17
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Apparel"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Apparrel",
+          "row": 23
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 38
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 105
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 163
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 170
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 172
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 182
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 195
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 201
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 263
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 320
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 343
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Home"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "HOME",
+          "row": 354
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 376
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 383
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 391
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 420
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 440
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 471
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 483
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 493
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 508
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 518
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 522
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Apparel"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Apparrel",
+          "row": 541
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_unknown",
+          "raw": "Gift Cards",
+          "row": 547
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Home & Garden",
+          "row": 555
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 558
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Grocery"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Grocey",
+          "row": 572
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_unknown",
+          "raw": "Gift Cards",
+          "row": 594
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 608
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Grocery"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Grocey",
+          "row": 609
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Home"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "HOME",
+          "row": 611
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 615
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 622
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Toys"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Toy",
+          "row": 654
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 672
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 684
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Grocery"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Grocey",
+          "row": 698
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Home"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "HOME",
+          "row": 737
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Apparel"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Apparrel",
+          "row": 783
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 820
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 838
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 859
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 876
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 883
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Electronic",
+          "row": 887
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Home"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "HOME",
+          "row": 888
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_unknown",
+          "raw": "Gift Cards",
+          "row": 901
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "AMBIGUOUS_CATEGORY"
+          },
+          "kind": "category_ambiguous",
+          "raw": "Elec",
+          "row": 910
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Grocery"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Grocey",
+          "row": 955
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 962
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 966
+        },
+        {
+          "column": "category",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_unknown",
+          "raw": "Gift Cards",
+          "row": 1018
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 1039
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 1040
+        },
+        {
+          "column": "quantity",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "NULL_REQUIRED"
+          },
+          "kind": "null_quantity",
+          "raw": null,
+          "row": 1056
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Apparel"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "Apparrel",
+          "row": 1064
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Electronics"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "electronics",
+          "row": 1075
+        },
+        {
+          "column": "category",
+          "expected": {
+            "cleaned": {
+              "category": "Home"
+            },
+            "outcome": "accepted"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "INVALID_CATEGORY"
+          },
+          "kind": "category_variant",
+          "raw": "HOME",
+          "row": 1084
+        }
+      ],
+      "rows": 1100
+    },
+    "2026-04": {
+      "column_defects": [],
+      "file": "orders_2026-04.xlsx",
+      "format": "xlsx",
+      "row_defects": [
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-16",
+          "row": 42
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-10",
+          "row": 54
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 69
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-07",
+          "row": 88
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 124
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-05",
+          "row": 130
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-28",
+          "row": 144
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-24",
+          "row": 186
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 222
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 307
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-01",
+          "row": 324
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-09",
+          "row": 340
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-29",
+          "row": 364
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-07",
+          "row": 399
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-01",
+          "row": 403
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-02",
+          "row": 436
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-06",
+          "row": 448
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-19",
+          "row": 456
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-25",
+          "row": 490
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-07",
+          "row": 491
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": "   ",
+          "row": 517
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-21",
+          "row": 542
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-31",
+          "row": 571
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-25",
+          "row": 620
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": "   ",
+          "row": 625
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-10",
+          "row": 627
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-23",
+          "row": 637
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-03",
+          "row": 641
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 662
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-05",
+          "row": 676
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-03",
+          "row": 693
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-09",
+          "row": 705
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-11",
+          "row": 745
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-13",
+          "row": 765
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-11",
+          "row": 788
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-08",
+          "row": 799
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-07",
+          "row": 830
+        },
+        {
+          "column": "order_id",
+          "expected": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "expected_propose": {
+            "outcome": "quarantined",
+            "reason": "MISSING_ID"
+          },
+          "kind": "missing_order_id",
+          "raw": null,
+          "row": 859
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-04",
+          "row": 868
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-22",
+          "row": 917
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-05",
+          "row": 921
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-01",
+          "row": 947
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-24",
+          "row": 960
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-02",
+          "row": 972
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-16",
+          "row": 978
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-10",
+          "row": 990
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-02",
+          "row": 1007
+        },
+        {
+          "column": "order_date",
+          "expected": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "expected_propose": {
+            "condition": "2026-01 processed earlier in the same run",
+            "outcome": "accepted",
+            "restates_period": "2026-01"
+          },
+          "kind": "late_arrival",
+          "raw": "2026-01-25",
+          "row": 1029
+        }
+      ],
+      "rows": 1040
+    }
+  },
+  "generator": "datarefinery.fixtures",
+  "row_numbering": "1-based data record index, header excluded",
+  "seed": 20260101,
+  "synthetic": true
+}

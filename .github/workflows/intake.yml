@@ -1,0 +1,36 @@
+name: Intake
+
+# Validates `type:run` issues and dispatches the deterministic run workflow for authorized
+# requests. Issue text is read from the event file by Python, never interpolated into shell.
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions: {}
+
+concurrency:
+  group: intake-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    if: contains(github.event.issue.labels.*.name, 'type:run')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - name: Validate and dispatch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: uv run --frozen python -m harness intake --event "$GITHUB_EVENT_PATH"

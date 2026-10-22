@@ -1,0 +1,38 @@
+{
+  "project": "data-refinery",
+  "display_name": "Data Refinery",
+  "owner": "mrrishit909",
+  "repo": "data-refinery",
+  "pages_url": "https://mrrishit909.github.io/data-refinery/",
+  "schema_version": "1.0",
+  "package": "datarefinery",
+  "state_branch": "state",
+  "default_branch": "main",
+  "limits": {
+    "max_runs_per_month": 40,
+    "max_open_requests": 5,
+    "max_run_bytes": 2000000,
+    "max_retained_run_dirs": 30,
+    "max_index_entries": 500,
+    "max_snapshot_runs": 8,
+    "compute_timeout_minutes": 15,
+    "stale_running_minutes": 90,
+    "max_repair_rounds": 3,
+    "inference_budget_usd": 1.0,
+    "max_reconcile_actions": 5
+  },
+  "form": [
+    {"label": "Batches", "param": "batches", "type": "checkbox_list",
+     "choices": {"2026-01 (CSV, clean baseline)": "2026-01", "2026-02 (CSV, renamed column, mixed dates, duplicates)": "2026-02",
+                 "2026-03 (JSON, currencies, unit change, categories, nulls)": "2026-03",
+                 "2026-04 (XLSX, late arrivals, missing identifiers)": "2026-04"}},
+    {"label": "Repair mode", "param": "repair_mode", "type": "str"}
+  ],
+  "constants": {"contract": "orders.v1", "fx_table": "fixed-2026q1"},
+  "scheduled_request": {
+    "batches": ["2026-01", "2026-02", "2026-03", "2026-04"],
+    "contract": "orders.v1",
+    "repair_mode": "apply-safe",
+    "fx_table": "fixed-2026q1"
+  }
+}

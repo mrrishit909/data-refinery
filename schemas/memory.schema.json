@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "memory.schema.json",
+  "title": "Curated memory entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "topic", "finding", "supporting_run_ids", "evidence_links", "scope", "confidence", "date",
+               "revalidate_when", "expires_on", "supersedes", "status"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^mem-[0-9a-f]{10}$"},
+    "topic": {"type": "string", "minLength": 3, "maxLength": 120},
+    "finding": {"type": "string", "minLength": 10, "maxLength": 600},
+    "supporting_run_ids": {"type": "array", "minItems": 1, "maxItems": 50, "items": {"type": "string"}},
+    "evidence_links": {"type": "array", "minItems": 1, "maxItems": 20,
+                       "items": {"type": "string", "pattern": "^https://github\\.com/"}},
+    "scope": {"enum": ["research-finding", "data-quality", "operations", "performance", "frontend"]},
+    "confidence": {"enum": ["low", "medium", "high"]},
+    "date": {"type": "string", "format": "date"},
+    "revalidate_when": {"type": "string", "minLength": 5, "maxLength": 200},
+    "expires_on": {"type": ["string", "null"], "format": "date"},
+    "supersedes": {"type": "array", "items": {"type": "string", "pattern": "^mem-[0-9a-f]{10}$"}},
+    "superseded_by": {"type": "string", "pattern": "^mem-[0-9a-f]{10}$"},
+    "status": {"enum": ["active", "superseded", "retired"]}
+  }
+}

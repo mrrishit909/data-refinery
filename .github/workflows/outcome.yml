@@ -1,0 +1,159 @@
+name: Outcome Verification Loop
+
+# Local-harness equivalent of outcome verification (not a native Claude feature):
+# deterministic hard gates + live browser evidence + optional independent grader, then a
+# release record. The grader job holds inference credentials, runs read-only tools over
+# evidence files only, and never executes repository or generated code.
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  browser:
+    name: Live-site browser evidence (390 / 768 / 1440)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - working-directory: frontend
+        run: npm ci && npx playwright install --with-deps chromium
+      - working-directory: frontend
+        env:
+          E2E_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          E2E_EVIDENCE_DIR: ${{ github.workspace }}/evidence/e2e
+        run: npm run e2e
+      - if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: outcome-browser-evidence
+          path: evidence/e2e
+          retention-days: 14
+          if-no-files-found: warn
+
+  grade:
+    name: Independent grader (optional, read-only)
+    needs: browser
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      available: ${{ steps.creds.outputs.available }}
+    steps:
+      - id: creds
+        name: Inference credentials configured?
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY$CLAUDE_CODE_OAUTH_TOKEN" ]; then echo "available=true" >> "$GITHUB_OUTPUT"
+          else echo "available=false" >> "$GITHUB_OUTPUT"; echo "No inference secret configured; grader skipped."; fi
+      - if: steps.creds.outputs.available == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            rubric
+            schemas/grader.schema.json
+            docs/DESIGN_CONTRACT.md
+      - if: steps.creds.outputs.available == 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: outcome-browser-evidence
+          path: evidence/e2e
+      - if: steps.creds.outputs.available == 'true'
+        name: Grade screenshots against the subjective rubric
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.292 >/dev/null
+          prompt="You are an independent visual grader. You did not build this site. Read rubric/outcome-rubric.json \
+          (the 'subjective' list only), docs/DESIGN_CONTRACT.md and the screenshots under evidence/e2e/screens. \
+          Score each subjective criterion 1-5 with a short rationale that cites the screenshot paths you used. \
+          Do not change any file. Hard gates are decided elsewhere and you cannot affect them."
+          claude -p "$prompt" --bare --no-session-persistence --max-budget-usd 1.00 \
+            --allowedTools "Read" "Glob" --output-format json \
+            --json-schema "$(cat schemas/grader.schema.json)" > grader-raw.json
+          python3 - <<'PY'
+          import json
+          raw = json.load(open("grader-raw.json"))
+          scores = raw.get("structured_output") or json.loads(raw["result"])
+          scores["grader"] = {"model": "claude (via claude-code 2.1.292)", "invocation": "claude -p --bare, Read/Glob only",
+                              "usd": raw.get("total_cost_usd")}
+          json.dump(scores, open("grader.json", "w"), indent=2)
+          PY
+      - if: steps.creds.outputs.available == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: grader-output
+          path: grader.json
+          retention-days: 14
+
+  verify:
+    name: Hard gates and release record
+    needs: [browser, grade]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      issues: write
+    concurrency:
+      group: state-writer
+      queue: max
+    outputs:
+      status: ${{ steps.outcome.outputs.status }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: state
+          path: state
+          fetch-depth: 1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        continue-on-error: true
+        with:
+          name: outcome-browser-evidence
+          path: evidence/e2e
+      - if: needs.grade.outputs.available == 'true'
+        continue-on-error: true
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: grader-output
+          path: grader
+      - id: outcome
+        name: Run the loop
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GRADER_AVAILABLE: ${{ needs.grade.outputs.available }}
+        run: |
+          git -C state config user.name "github-actions[bot]"
+          git -C state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          reason=""; [ "$GRADER_AVAILABLE" = "true" ] || reason="inference credentials are not configured for this repository"
+          grader=""; [ -f grader/grader.json ] && grader=grader/grader.json
+          uv run --frozen python -m harness outcome --state-dir state --evidence-dir evidence \
+            --source-commit "$(git rev-parse HEAD)" --workflow-run-id "$GITHUB_RUN_ID" \
+            --grader-file "$grader" --grader-reason "$reason" --ledger

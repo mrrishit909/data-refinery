@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Data Refinery: every row, accounted for</title>
+    <meta name="description" content="A self-repairing data pipeline workbench: contracts, drift repair with evidence, quarantine with reasons, row reconciliation and lineage, on synthetic order batches." />
+    <meta name="theme-color" content="#29201B" />
+    <meta property="og:title" content="Data Refinery" />
+    <meta property="og:description" content="Every input row is accepted, quarantined with a reason, or merged as a duplicate, and the run proves it." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mrrishit909.github.io/data-refinery/" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%2329201B'/%3E%3Crect x='6' y='8' width='4' height='16' fill='%23FFF6E8'/%3E%3Cpath d='M10 10 C 17 10 17 9 26 9 M10 16 C 17 16 17 16 26 16 M10 22 C 17 22 17 23 26 23' stroke='%23E8D7BF' stroke-width='2.4' fill='none'/%3E%3C/svg%3E" />
+    <style>
+      html, body { margin: 0; background: #fff6e8; color: #29201b; }
+      @media (prefers-color-scheme: dark) { html, body { background: #1c1612; color: #fff6e8; } }
+      #app[data-boot] { font: 15px/1.5 "Helvetica Neue", Arial, sans-serif; padding: 48px 24px; max-width: 70ch; }
+    </style>
+  </head>
+  <body>
+    <div id="app" data-app="data-refinery" data-boot>
+      <noscript>
+        <h1>Data Refinery</h1>
+        <p>The interactive workbench needs JavaScript. Every run record and output file is also readable directly on the
+        <a href="https://github.com/mrrishit909/data-refinery/tree/state">state branch</a>.</p>
+      </noscript>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "grader.schema.json",
+  "title": "Independent grader output (subjective scores only; cannot change hard-gate results)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["grader", "scores"],
+  "properties": {
+    "grader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "invocation", "usd"],
+      "properties": {
+        "model": {"type": "string", "maxLength": 80},
+        "invocation": {"type": "string", "maxLength": 200},
+        "usd": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "scores": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "score", "rationale", "evidence_paths"],
+        "properties": {
+          "criterion": {"type": "string", "maxLength": 60},
+          "score": {"type": "integer", "minimum": 1, "maximum": 5},
+          "rationale": {"type": "string", "maxLength": 800},
+          "evidence_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "maxLength": 200}}
+        }
+      }
+    }
+  }
+}

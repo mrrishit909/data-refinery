@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "release.schema.json",
+  "title": "Release record written by the Outcome Verification Loop",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["release_id", "project", "source_commit", "run_id", "created_at", "status", "blocked_reason",
+               "defect_batch_id", "repair_round", "rubric_sha256", "findings", "subjective", "evidence_dir",
+               "workflow_run_url"],
+  "properties": {
+    "release_id": {"type": "string"},
+    "project": {"type": "string"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"},
+    "run_id": {"type": ["string", "null"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["released", "blocked"]},
+    "blocked_reason": {"type": ["string", "null"]},
+    "defect_batch_id": {"type": ["string", "null"]},
+    "repair_round": {"type": "integer", "minimum": 0},
+    "rubric_sha256": {"type": "string"},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "kind", "status", "objective", "evidence_paths", "detail", "seconds"],
+        "properties": {
+          "id": {"type": "string"}, "title": {"type": "string"}, "kind": {"type": "string"},
+          "status": {"enum": ["pass", "fail"]}, "objective": {"const": true},
+          "evidence_paths": {"type": "array", "items": {"type": "string"}},
+          "detail": {"type": "string"}, "seconds": {"type": "number"}
+        }
+      }
+    },
+    "subjective": {"type": "object"},
+    "evidence_dir": {"type": "string"},
+    "workflow_run_url": {"type": ["string", "null"]}
+  }
+}

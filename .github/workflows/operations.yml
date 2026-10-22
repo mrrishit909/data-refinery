@@ -1,0 +1,105 @@
+name: Operations
+
+# reconcile:  daily repair of interrupted runs and issue-label drift (bounded actions).
+# refresh:    weekly conservative scheduled research run (ISO-week seed, so repeats dedupe).
+# bootstrap:  idempotent setup of labels and the state branch.
+# Schedules can run late or be disabled after 60 days without activity; nothing depends on them.
+on:
+  schedule:
+    - cron: "23 5 * * *"
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      task:
+        type: choice
+        options: [reconcile, refresh, bootstrap]
+        default: reconcile
+
+permissions: {}
+
+jobs:
+  reconcile:
+    if: (github.event_name == 'schedule' && github.event.schedule == '23 5 * * *') || inputs.task == 'reconcile'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      issues: write
+      actions: read
+    concurrency:
+      group: state-writer
+      queue: max
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: state
+          path: state
+          fetch-depth: 1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git -C state config user.name "github-actions[bot]"
+          git -C state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          uv run --frozen python -m harness reconcile --state-dir state
+
+  refresh:
+    if: (github.event_name == 'schedule' && github.event.schedule == '17 6 * * 1') || inputs.task == 'refresh'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          uv run --frozen python -m harness scheduled-request --out scheduled.json
+          uv run --frozen python -m harness dispatch --request-file scheduled.json --source-type schedule
+
+  bootstrap:
+    if: inputs.task == 'bootstrap'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12 --no-dev
+      - name: Labels
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: uv run --frozen python -m harness labels
+      - name: State branch (created once, never overwritten)
+        run: |
+          if git ls-remote --exit-code --heads origin state >/dev/null; then echo "state branch exists"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --orphan state
+          git rm -rq --cached . 2>/dev/null || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          printf '%s\n' '{"schema_version": "1.0", "runs": []}' > index.json
+          printf '%s\n' "# State branch" "" "Durable run records for this project. See docs/STATE_MODEL.md on main." > README.md
+          git add index.json README.md
+          git commit -qm "Initialise state branch"
+          git push -q origin state

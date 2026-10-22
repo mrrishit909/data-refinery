@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Explore published pipeline runs
+    url: https://mrrishit909.github.io/data-refinery/
+    about: Every run, its quarantine and its lineage are browsable without signing in.

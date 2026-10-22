@@ -1,0 +1,46 @@
+[project]
+name = "data-refinery"
+version = "1.0.0"
+description = "Self-repairing analytical pipeline workbench: contracts, quarantine, reconciliation, lineage and drift repair on synthetic fixtures."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy==2.3.4",
+  "pandas==2.3.3",
+  "pydantic==2.11.7",
+  "pandera[pandas]==0.26.1",
+  "openpyxl==3.1.5",
+  "jsonschema==4.26.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest==9.1.1",
+  "ruff==0.16.10",
+]
+
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/datarefinery", "harness"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gate: hard release gate (Outcome Verification Loop runs these)"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "harness"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = ["S101", "S603", "S607", "S311", "S310"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "B", "E501"]
