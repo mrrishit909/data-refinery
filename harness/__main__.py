@@ -240,13 +240,16 @@ def cmd_verify_published(args: argparse.Namespace) -> None:
 
 
 def cmd_scheduled_request(args: argparse.Namespace) -> None:
-    """Deterministic weekly request: the seed is the ISO year-week, so a repeat in the same week is a duplicate."""
+    """Deterministic weekly request: the seed is the ISO year-week, so a repeat in the same week is a duplicate.
+    A top-level string value "{today}" becomes the current UTC date (YYYY-MM-DD)."""
     import datetime as dt
 
     req = json.loads(json.dumps(config()["scheduled_request"]))
-    year, week, _ = dt.date.today().isocalendar()
+    today = dt.datetime.now(dt.UTC).date()
+    year, week, _ = today.isocalendar()
     if req.get("dataset", {}).get("seed") == "iso_week":
         req["dataset"]["seed"] = year * 100 + week
+    req = {k: today.isoformat() if v == "{today}" else v for k, v in req.items()}
     Path(args.out).write_text(json.dumps(req, sort_keys=True))
     print(json.dumps(req, sort_keys=True))
 
