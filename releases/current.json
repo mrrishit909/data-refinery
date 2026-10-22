@@ -1,8 +1,8 @@
 {
   "blocked_reason": null,
-  "created_at": "2026-10-22T03:36:16Z",
+  "created_at": "2026-10-22T05:43:58Z",
   "defect_batch_id": null,
-  "evidence_dir": "outcomes/data-refinery-20261022T033616Z-d1bdf42/",
+  "evidence_dir": "outcomes/data-refinery-20261022T054358Z-a3379ce/",
   "findings": [
     {
       "detail": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
@@ -23,12 +23,12 @@
       "id": "pipeline-gates",
       "kind": "pytest",
       "objective": true,
-      "seconds": 12.94,
+      "seconds": 13.47,
       "status": "pass",
       "title": "Every input row accounted for, idempotent, originals preserved, no silent drops, no invented values, ambiguity flagged, lineage inspectable, repairs pass original and drifted fixtures"
     },
     {
-      "detail": "............................                                             [100%]",
+      "detail": ".............................                                            [100%]",
       "evidence_paths": [
         "harness.junit.xml",
         "harness.log"
@@ -36,7 +36,7 @@
       "id": "harness",
       "kind": "pytest",
       "objective": true,
-      "seconds": 5.3,
+      "seconds": 5.71,
       "status": "pass",
       "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
     },
@@ -48,7 +48,7 @@
       "id": "secret-scan",
       "kind": "command",
       "objective": true,
-      "seconds": 0.9,
+      "seconds": 0.32,
       "status": "pass",
       "title": "No credentials in the repository or in the live site's shipped assets"
     },
@@ -60,7 +60,7 @@
       "id": "live-site",
       "kind": "live",
       "objective": true,
-      "seconds": 0.19,
+      "seconds": 0.07,
       "status": "pass",
       "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
     },
@@ -72,7 +72,7 @@
       "id": "published-matches-state",
       "kind": "command",
       "objective": true,
-      "seconds": 2.68,
+      "seconds": 0.58,
       "status": "pass",
       "title": "Published result files are byte-identical to the accepted computation"
     },
@@ -90,16 +90,16 @@
     }
   ],
   "project": "data-refinery",
-  "release_id": "data-refinery-20261022T033616Z-d1bdf42",
+  "release_id": "data-refinery-20261022T054358Z-a3379ce",
   "repair_round": 0,
   "rubric_sha256": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
   "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
-  "source_commit": "d1bdf423cf9ed5027907ee9a2f3011809512a602",
+  "source_commit": "a3379ce149be9f661dc19c3ad13228a78e734a58",
   "status": "released",
   "subjective": {
     "reason": "inference credentials are not configured for this repository",
     "scores": [],
     "status": "not_run"
   },
-  "workflow_run_url": "https://github.com/mrrishit909/data-refinery/actions/runs/39717538774"
+  "workflow_run_url": "https://github.com/mrrishit909/data-refinery/actions/runs/39729489184"
 }
