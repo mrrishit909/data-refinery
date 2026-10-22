@@ -6,6 +6,7 @@ project.json, and never echoed back verbatim or passed to a shell.
 
 from __future__ import annotations
 
+import json
 import re
 from typing import Any
 
@@ -15,6 +16,7 @@ _INT = re.compile(r"-?\d{1,10}")
 _FLOAT = re.compile(r"-?\d{1,6}(\.\d{1,6})?")
 _STR = re.compile(r"[A-Za-z0-9 _.-]{1,64}")
 _CHECKED = re.compile(r"^- \[[xX]\] +(.+?)\s*$", re.M)
+_FENCE = re.compile(r"^```(?:json)?[ \t]*\n(.*)\n```$", re.S)
 
 
 def sections(body: str) -> dict[str, str | None]:
@@ -57,7 +59,22 @@ def _coerce(field: dict[str, Any], raw: str) -> Any:
                 raise ValueError("unknown option selected")
             picked.append(choices[label])
         return picked
+    if kind == "json":
+        # A textarea rendered as JSON (GitHub wraps it in a fenced block). Parsed as data only; the
+        # request schema decides what is allowed. Non-standard constants (NaN, Infinity) are refused.
+        fenced = _FENCE.match(raw)
+        try:
+            value = json.loads(fenced.group(1) if fenced else raw, parse_constant=_refuse_constant)
+        except ValueError:
+            raise ValueError("expected a valid JSON object") from None
+        if not isinstance(value, dict):
+            raise ValueError("expected a valid JSON object")
+        return value
     raise ValueError(f"unsupported field type {kind}")
+
+
+def _refuse_constant(name: str) -> Any:
+    raise ValueError(name)
 
 
 def to_params(body: str, form: list[dict[str, Any]], constants: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:

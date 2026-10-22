@@ -103,12 +103,32 @@ def _validator(name: str) -> Draft202012Validator:
     return Draft202012Validator(schema, format_checker=FormatChecker())
 
 
+def _rule_text(err: Any) -> str:
+    """The rule an input broke, in words, without quoting the input (errors are posted on public issues)."""
+    v, value = err.validator, err.validator_value
+    if v == "required":
+        return err.message[:200]  # names a property from the schema, not from the input
+    words = {
+        "pattern": "does not match the allowed format",
+        "format": "does not match the allowed format",
+        "enum": "is not one of the allowed values",
+        "const": "is not the allowed value",
+        "additionalProperties": "contains properties that are not allowed",
+        "uniqueItems": "contains duplicates",
+    }
+    if v in words:
+        return words[v]
+    if v in ("maxLength", "minLength", "maxItems", "minItems", "maximum", "minimum", "multipleOf", "type"):
+        return f"breaks the {v} rule ({value})"
+    return f"breaks the {v} rule"
+
+
 def schema_errors(instance: Any, schema_name: str) -> list[str]:
     errors = sorted(_validator(schema_name).iter_errors(instance), key=lambda e: list(e.absolute_path))
     out = []
     for err in errors:
         where = "/".join(str(p) for p in err.absolute_path) or "(root)"
-        out.append(f"{where}: {err.message[:200]}")
+        out.append(f"{where}: {_rule_text(err)}")
     return out
 
 
