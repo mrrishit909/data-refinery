@@ -1,0 +1,14 @@
+{
+  "engine": "f5de9269af02dd1a",
+  "params": {
+    "batches": [
+      "2026-01",
+      "2026-02",
+      "2026-03"
+    ],
+    "contract": "orders.v1",
+    "fx_table": "fixed-2026q1",
+    "repair_mode": "propose"
+  },
+  "request_id": "d19a83ed5d2da325"
+}

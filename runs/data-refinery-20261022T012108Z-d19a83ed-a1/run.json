@@ -1,0 +1,31 @@
+{
+  "attempt": 1,
+  "completed_at": null,
+  "created_at": "2026-10-22T01:21:08Z",
+  "error_summary": null,
+  "evidence_paths": [],
+  "input_manifest_hash": null,
+  "parent_run_id": null,
+  "project": "data-refinery",
+  "request_id": "d19a83ed5d2da325",
+  "request_source": {
+    "actor": "github-actions[bot]",
+    "issue_number": 1,
+    "type": "issue"
+  },
+  "resource_usage_summary": {
+    "inference": {
+      "usd": null,
+      "used": false
+    },
+    "output_bytes": null,
+    "wall_seconds": null
+  },
+  "result_paths": [],
+  "run_id": "data-refinery-20261022T012108Z-d19a83ed-a1",
+  "schema_version": "1.0",
+  "source_commit": "a896dc06e5db651dfa09b9253e84d8c2e98623f8",
+  "started_at": "2026-10-22T01:21:08Z",
+  "status": "running",
+  "workflow_run_id": 39705153197
+}
