@@ -1,0 +1,240 @@
+{
+  "batches": {
+    "2026-01": {
+      "accepted_by_category": {
+        "Apparel": 169,
+        "Electronics": 227,
+        "Grocery": 255,
+        "Home": 225,
+        "Toys": 124
+      },
+      "accepted_usd_by_period": {
+        "2026-01": "218373.98"
+      },
+      "amount_by_currency": {
+        "accepted": {
+          "USD": "218373.98"
+        },
+        "accepted_cleaned": {
+          "USD": "218373.98"
+        },
+        "balanced": true,
+        "cleaned_matches_input": true,
+        "input": {
+          "USD": "218373.98"
+        },
+        "merged": {},
+        "note": "parseable raw amounts grouped by raw currency text",
+        "quarantined": {}
+      },
+      "identity_holds": true,
+      "merged_duplicates": [],
+      "quarantine_reasons": {},
+      "restated_rows": 0,
+      "rows_accepted": 1000,
+      "rows_in": 1000,
+      "rows_merged_duplicates": 0,
+      "rows_quarantined": 0
+    },
+    "2026-02": {
+      "accepted_by_category": {},
+      "accepted_usd_by_period": {},
+      "amount_by_currency": {
+        "accepted": {},
+        "accepted_cleaned": {},
+        "balanced": true,
+        "cleaned_matches_input": true,
+        "input": {
+          "USD": "242717.35"
+        },
+        "merged": {
+          "USD": "2680.84"
+        },
+        "note": "parseable raw amounts grouped by raw currency text",
+        "quarantined": {
+          "USD": "240036.51"
+        }
+      },
+      "identity_holds": true,
+      "merged_duplicates": [
+        {
+          "_source_row": 101,
+          "duplicate_of": 33
+        },
+        {
+          "_source_row": 146,
+          "duplicate_of": 68
+        },
+        {
+          "_source_row": 165,
+          "duplicate_of": 140
+        },
+        {
+          "_source_row": 193,
+          "duplicate_of": 153
+        },
+        {
+          "_source_row": 203,
+          "duplicate_of": 61
+        },
+        {
+          "_source_row": 241,
+          "duplicate_of": 174
+        },
+        {
+          "_source_row": 344,
+          "duplicate_of": 269
+        },
+        {
+          "_source_row": 497,
+          "duplicate_of": 373
+        },
+        {
+          "_source_row": 508,
+          "duplicate_of": 451
+        },
+        {
+          "_source_row": 595,
+          "duplicate_of": 482
+        },
+        {
+          "_source_row": 604,
+          "duplicate_of": 488
+        },
+        {
+          "_source_row": 620,
+          "duplicate_of": 499
+        },
+        {
+          "_source_row": 682,
+          "duplicate_of": 591
+        },
+        {
+          "_source_row": 708,
+          "duplicate_of": 596
+        },
+        {
+          "_source_row": 805,
+          "duplicate_of": 795
+        },
+        {
+          "_source_row": 810,
+          "duplicate_of": 775
+        },
+        {
+          "_source_row": 844,
+          "duplicate_of": 765
+        },
+        {
+          "_source_row": 917,
+          "duplicate_of": 874
+        },
+        {
+          "_source_row": 921,
+          "duplicate_of": 911
+        },
+        {
+          "_source_row": 951,
+          "duplicate_of": 901
+        }
+      ],
+      "quarantine_reasons": {
+        "BAD_DATE": 182,
+        "DUPLICATE_CONFLICT": 12,
+        "NEGATIVE_AMOUNT": 3,
+        "UNKNOWN_COLUMN_SET": 1186
+      },
+      "restated_rows": 0,
+      "rows_accepted": 0,
+      "rows_in": 1206,
+      "rows_merged_duplicates": 20,
+      "rows_quarantined": 1186
+    },
+    "2026-03": {
+      "accepted_by_category": {
+        "Apparel": 12,
+        "Electronics": 11,
+        "Grocery": 13,
+        "Home": 11,
+        "Toys": 4
+      },
+      "accepted_usd_by_period": {
+        "2026-03": "7315.46"
+      },
+      "amount_by_currency": {
+        "accepted": {
+          "EUR": "2376.26",
+          "GBP": "1061.70",
+          "USD": "3400.74"
+        },
+        "accepted_cleaned": {
+          "EUR": "2376.26",
+          "GBP": "1061.70",
+          "USD": "3400.74"
+        },
+        "balanced": true,
+        "cleaned_matches_input": true,
+        "input": {
+          "EUR": "65095.51",
+          "GBP": "42692.61",
+          "USD": "109514.09"
+        },
+        "merged": {},
+        "note": "parseable raw amounts grouped by raw currency text",
+        "quarantined": {
+          "EUR": "62719.25",
+          "GBP": "41630.91",
+          "USD": "106113.35"
+        }
+      },
+      "identity_holds": true,
+      "merged_duplicates": [],
+      "quarantine_reasons": {
+        "AMBIGUOUS_CATEGORY": 13,
+        "INVALID_CATEGORY": 37,
+        "NULL_REQUIRED": 12,
+        "UNRESOLVED_UNIT_SCALE": 1047
+      },
+      "restated_rows": 0,
+      "rows_accepted": 51,
+      "rows_in": 1100,
+      "rows_merged_duplicates": 0,
+      "rows_quarantined": 1049
+    }
+  },
+  "identity": "rows_in == rows_accepted + rows_quarantined + rows_merged_duplicates",
+  "periods": {
+    "2026-01": {
+      "accepted_usd": "218373.98",
+      "closed_by": "2026-01",
+      "reported_by": [
+        "2026-01"
+      ],
+      "restatements": [],
+      "rows": 1000
+    },
+    "2026-02": {
+      "accepted_usd": "0.00",
+      "closed_by": "2026-02",
+      "reported_by": [],
+      "restatements": [],
+      "rows": 0
+    },
+    "2026-03": {
+      "accepted_usd": "7315.46",
+      "closed_by": "2026-03",
+      "reported_by": [
+        "2026-03"
+      ],
+      "restatements": [],
+      "rows": 51
+    }
+  },
+  "totals": {
+    "accepted_usd": "225689.44",
+    "rows_accepted": 1051,
+    "rows_in": 3306,
+    "rows_merged_duplicates": 20,
+    "rows_quarantined": 2235
+  }
+}

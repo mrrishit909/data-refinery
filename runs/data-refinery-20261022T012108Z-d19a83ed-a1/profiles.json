@@ -1,0 +1,1595 @@
+{
+  "batches": {
+    "2026-01": {
+      "accepted": {
+        "amount": {
+          "distinct_count": 989,
+          "inferred_type": "decimal",
+          "max": 1496.43,
+          "min": 5.15,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "scale": {
+            "median": 143.315,
+            "p05": 19.149,
+            "p95": 1059.534
+          },
+          "top_values": [
+            [
+              "143.41",
+              3
+            ],
+            [
+              "157.39",
+              2
+            ],
+            [
+              "218.94",
+              2
+            ],
+            [
+              "23.21",
+              2
+            ],
+            [
+              "24.63",
+              2
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        },
+        "category": {
+          "distinct_count": 5,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "Grocery",
+              255
+            ],
+            [
+              "Electronics",
+              227
+            ],
+            [
+              "Home",
+              225
+            ],
+            [
+              "Apparel",
+              169
+            ],
+            [
+              "Toys",
+              124
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "currency": {
+          "currencies": {
+            "USD": 1000
+          },
+          "distinct_count": 1,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "USD",
+              1000
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "customer_id": {
+          "distinct_count": 993,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "CUS-44492",
+              2
+            ],
+            [
+              "CUS-44774",
+              2
+            ],
+            [
+              "CUS-54408",
+              2
+            ],
+            [
+              "CUS-72724",
+              2
+            ],
+            [
+              "CUS-87680",
+              2
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "order_date": {
+          "date_formats": {
+            "%Y-%m-%d": 1000,
+            "%d/%m/%Y": 0,
+            "%m/%d/%Y": 0,
+            "unparsed": 0
+          },
+          "distinct_count": 31,
+          "inferred_type": "date",
+          "max": "2026-01-31",
+          "min": "2026-01-01",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "2026-01-17",
+              45
+            ],
+            [
+              "2026-01-11",
+              40
+            ],
+            [
+              "2026-01-14",
+              40
+            ],
+            [
+              "2026-01-16",
+              39
+            ],
+            [
+              "2026-01-04",
+              38
+            ]
+          ],
+          "type_shares": {
+            "date": 1.0
+          }
+        },
+        "order_id": {
+          "distinct_count": 1000,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "ORD-100001",
+              1
+            ],
+            [
+              "ORD-100002",
+              1
+            ],
+            [
+              "ORD-100003",
+              1
+            ],
+            [
+              "ORD-100004",
+              1
+            ],
+            [
+              "ORD-100005",
+              1
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "quantity": {
+          "distinct_count": 5,
+          "inferred_type": "integer",
+          "max": 5.0,
+          "min": 1.0,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "scale": {
+            "median": 3.0,
+            "p05": 1.0,
+            "p95": 5.0
+          },
+          "top_values": [
+            [
+              "3",
+              218
+            ],
+            [
+              "5",
+              203
+            ],
+            [
+              "4",
+              196
+            ],
+            [
+              "1",
+              194
+            ],
+            [
+              "2",
+              189
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        },
+        "region": {
+          "distinct_count": 4,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "South",
+              269
+            ],
+            [
+              "North",
+              247
+            ],
+            [
+              "West",
+              246
+            ],
+            [
+              "East",
+              238
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "weight_kg": {
+          "distinct_count": 861,
+          "inferred_type": "decimal",
+          "max": 24.881,
+          "min": 0.103,
+          "null_count": 52,
+          "null_rate": 0.052,
+          "rows": 1000,
+          "scale": {
+            "median": 2.0795,
+            "p05": 0.2555,
+            "p95": 20.36045
+          },
+          "top_values": [
+            [
+              "0.528",
+              4
+            ],
+            [
+              "0.793",
+              4
+            ],
+            [
+              "0.121",
+              3
+            ],
+            [
+              "0.200",
+              3
+            ],
+            [
+              "1.474",
+              3
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        }
+      },
+      "raw": {
+        "amount": {
+          "distinct_count": 989,
+          "inferred_type": "decimal",
+          "max": 1496.43,
+          "min": 5.15,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "scale": {
+            "median": 143.315,
+            "p05": 19.149,
+            "p95": 1059.534
+          },
+          "top_values": [
+            [
+              "143.41",
+              3
+            ],
+            [
+              "157.39",
+              2
+            ],
+            [
+              "218.94",
+              2
+            ],
+            [
+              "23.21",
+              2
+            ],
+            [
+              "24.63",
+              2
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        },
+        "category": {
+          "distinct_count": 5,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "Grocery",
+              255
+            ],
+            [
+              "Electronics",
+              227
+            ],
+            [
+              "Home",
+              225
+            ],
+            [
+              "Apparel",
+              169
+            ],
+            [
+              "Toys",
+              124
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "currency": {
+          "currencies": {
+            "USD": 1000
+          },
+          "distinct_count": 1,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "USD",
+              1000
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "customer_id": {
+          "distinct_count": 993,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "CUS-44492",
+              2
+            ],
+            [
+              "CUS-44774",
+              2
+            ],
+            [
+              "CUS-54408",
+              2
+            ],
+            [
+              "CUS-72724",
+              2
+            ],
+            [
+              "CUS-87680",
+              2
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "order_date": {
+          "date_formats": {
+            "%Y-%m-%d": 1000,
+            "%d/%m/%Y": 0,
+            "%m/%d/%Y": 0,
+            "unparsed": 0
+          },
+          "distinct_count": 31,
+          "inferred_type": "date",
+          "max": "2026-01-31",
+          "min": "2026-01-01",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "2026-01-17",
+              45
+            ],
+            [
+              "2026-01-11",
+              40
+            ],
+            [
+              "2026-01-14",
+              40
+            ],
+            [
+              "2026-01-16",
+              39
+            ],
+            [
+              "2026-01-04",
+              38
+            ]
+          ],
+          "type_shares": {
+            "date": 1.0
+          }
+        },
+        "order_id": {
+          "distinct_count": 1000,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "ORD-100001",
+              1
+            ],
+            [
+              "ORD-100002",
+              1
+            ],
+            [
+              "ORD-100003",
+              1
+            ],
+            [
+              "ORD-100004",
+              1
+            ],
+            [
+              "ORD-100005",
+              1
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "quantity": {
+          "distinct_count": 5,
+          "inferred_type": "integer",
+          "max": 5.0,
+          "min": 1.0,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "scale": {
+            "median": 3.0,
+            "p05": 1.0,
+            "p95": 5.0
+          },
+          "top_values": [
+            [
+              "3",
+              218
+            ],
+            [
+              "5",
+              203
+            ],
+            [
+              "4",
+              196
+            ],
+            [
+              "1",
+              194
+            ],
+            [
+              "2",
+              189
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        },
+        "region": {
+          "distinct_count": 4,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1000,
+          "top_values": [
+            [
+              "South",
+              269
+            ],
+            [
+              "North",
+              247
+            ],
+            [
+              "West",
+              246
+            ],
+            [
+              "East",
+              238
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "weight_kg": {
+          "distinct_count": 861,
+          "inferred_type": "decimal",
+          "max": 24.881,
+          "min": 0.103,
+          "null_count": 52,
+          "null_rate": 0.052,
+          "rows": 1000,
+          "scale": {
+            "median": 2.0795,
+            "p05": 0.2555,
+            "p95": 20.36045
+          },
+          "top_values": [
+            [
+              "0.528",
+              4
+            ],
+            [
+              "0.793",
+              4
+            ],
+            [
+              "0.121",
+              3
+            ],
+            [
+              "0.200",
+              3
+            ],
+            [
+              "1.474",
+              3
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        }
+      }
+    },
+    "2026-02": {
+      "accepted": {
+        "amount": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "category": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "currency": {
+          "currencies": {},
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "customer_id": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "order_date": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "order_id": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "quantity": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "region": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        },
+        "weight_kg": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 0,
+          "top_values": [],
+          "type_shares": {}
+        }
+      },
+      "raw": {
+        "amount": {
+          "distinct_count": 1168,
+          "inferred_type": "decimal",
+          "max": 1493.27,
+          "min": -1484.03,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "scale": {
+            "median": 138.355,
+            "p05": 18.715,
+            "p95": 887.8875
+          },
+          "top_values": [
+            [
+              "10.89",
+              2
+            ],
+            [
+              "105.53",
+              2
+            ],
+            [
+              "108.41",
+              2
+            ],
+            [
+              "115.69",
+              2
+            ],
+            [
+              "120.53",
+              2
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        },
+        "category": {
+          "distinct_count": 5,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "Grocery",
+              307
+            ],
+            [
+              "Electronics",
+              278
+            ],
+            [
+              "Home",
+              242
+            ],
+            [
+              "Apparel",
+              232
+            ],
+            [
+              "Toys",
+              147
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "currency": {
+          "currencies": {
+            "USD": 1206
+          },
+          "distinct_count": 1,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "USD",
+              1206
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "cust_id": {
+          "distinct_count": 1173,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "CUS-12413",
+              2
+            ],
+            [
+              "CUS-12959",
+              2
+            ],
+            [
+              "CUS-13798",
+              2
+            ],
+            [
+              "CUS-15099",
+              2
+            ],
+            [
+              "CUS-21577",
+              2
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "order_date": {
+          "date_formats": {
+            "%Y-%m-%d": 1024,
+            "%d/%m/%Y": 177,
+            "%m/%d/%Y": 85,
+            "unparsed": 5
+          },
+          "distinct_count": 61,
+          "inferred_type": "date",
+          "max": "2026-02-28",
+          "min": "2026-02-01",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "2026-02-06",
+              45
+            ],
+            [
+              "2026-02-13",
+              43
+            ],
+            [
+              "2026-02-26",
+              43
+            ],
+            [
+              "2026-02-28",
+              43
+            ],
+            [
+              "2026-02-21",
+              42
+            ]
+          ],
+          "type_shares": {
+            "date": 0.9983,
+            "string": 0.0017
+          }
+        },
+        "order_id": {
+          "distinct_count": 1180,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "ORD-200033",
+              2
+            ],
+            [
+              "ORD-200061",
+              2
+            ],
+            [
+              "ORD-200068",
+              2
+            ],
+            [
+              "ORD-200139",
+              2
+            ],
+            [
+              "ORD-200151",
+              2
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "quantity": {
+          "distinct_count": 5,
+          "inferred_type": "integer",
+          "max": 5.0,
+          "min": 1.0,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "scale": {
+            "median": 3.0,
+            "p05": 1.0,
+            "p95": 5.0
+          },
+          "top_values": [
+            [
+              "2",
+              251
+            ],
+            [
+              "5",
+              248
+            ],
+            [
+              "4",
+              237
+            ],
+            [
+              "1",
+              235
+            ],
+            [
+              "3",
+              235
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        },
+        "region": {
+          "distinct_count": 4,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1206,
+          "top_values": [
+            [
+              "South",
+              319
+            ],
+            [
+              "East",
+              309
+            ],
+            [
+              "North",
+              289
+            ],
+            [
+              "West",
+              289
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "weight_kg": {
+          "distinct_count": 1006,
+          "inferred_type": "decimal",
+          "max": 24.886,
+          "min": 0.103,
+          "null_count": 41,
+          "null_rate": 0.034,
+          "rows": 1206,
+          "scale": {
+            "median": 1.991,
+            "p05": 0.2902,
+            "p95": 20.0272
+          },
+          "top_values": [
+            [
+              "0.720",
+              4
+            ],
+            [
+              "0.196",
+              3
+            ],
+            [
+              "0.421",
+              3
+            ],
+            [
+              "0.641",
+              3
+            ],
+            [
+              "0.890",
+              3
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        }
+      }
+    },
+    "2026-03": {
+      "accepted": {
+        "amount": {
+          "distinct_count": 51,
+          "inferred_type": "decimal",
+          "max": 650.23,
+          "min": 17.09,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "scale": {
+            "median": 127.35,
+            "p05": 22.745,
+            "p95": 239.56
+          },
+          "top_values": [
+            [
+              "101.08",
+              1
+            ],
+            [
+              "101.64",
+              1
+            ],
+            [
+              "115.92",
+              1
+            ],
+            [
+              "116.87",
+              1
+            ],
+            [
+              "119.14",
+              1
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        },
+        "category": {
+          "distinct_count": 5,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "Grocery",
+              13
+            ],
+            [
+              "Apparel",
+              12
+            ],
+            [
+              "Electronics",
+              11
+            ],
+            [
+              "Home",
+              11
+            ],
+            [
+              "Toys",
+              4
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "currency": {
+          "currencies": {
+            "EUR": 15,
+            "GBP": 9,
+            "USD": 27
+          },
+          "distinct_count": 3,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "USD",
+              27
+            ],
+            [
+              "EUR",
+              15
+            ],
+            [
+              "GBP",
+              9
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "customer_id": {
+          "distinct_count": 51,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "CUS-11963",
+              1
+            ],
+            [
+              "CUS-14426",
+              1
+            ],
+            [
+              "CUS-16384",
+              1
+            ],
+            [
+              "CUS-17091",
+              1
+            ],
+            [
+              "CUS-18350",
+              1
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "order_date": {
+          "date_formats": {
+            "%Y-%m-%d": 51,
+            "%d/%m/%Y": 0,
+            "%m/%d/%Y": 0,
+            "unparsed": 0
+          },
+          "distinct_count": 26,
+          "inferred_type": "date",
+          "max": "2026-03-31",
+          "min": "2026-03-02",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "2026-03-30",
+              6
+            ],
+            [
+              "2026-03-18",
+              5
+            ],
+            [
+              "2026-03-02",
+              3
+            ],
+            [
+              "2026-03-04",
+              3
+            ],
+            [
+              "2026-03-07",
+              3
+            ]
+          ],
+          "type_shares": {
+            "date": 1.0
+          }
+        },
+        "order_id": {
+          "distinct_count": 51,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "ORD-300008",
+              1
+            ],
+            [
+              "ORD-300025",
+              1
+            ],
+            [
+              "ORD-300030",
+              1
+            ],
+            [
+              "ORD-300043",
+              1
+            ],
+            [
+              "ORD-300092",
+              1
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "quantity": {
+          "distinct_count": 5,
+          "inferred_type": "integer",
+          "max": 5.0,
+          "min": 1.0,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "scale": {
+            "median": 3.0,
+            "p05": 1.0,
+            "p95": 5.0
+          },
+          "top_values": [
+            [
+              "2",
+              13
+            ],
+            [
+              "1",
+              11
+            ],
+            [
+              "5",
+              11
+            ],
+            [
+              "4",
+              9
+            ],
+            [
+              "3",
+              7
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        },
+        "region": {
+          "distinct_count": 4,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 51,
+          "top_values": [
+            [
+              "South",
+              16
+            ],
+            [
+              "West",
+              13
+            ],
+            [
+              "East",
+              11
+            ],
+            [
+              "North",
+              11
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "weight_kg": {
+          "distinct_count": 0,
+          "inferred_type": "empty",
+          "null_count": 51,
+          "null_rate": 1.0,
+          "rows": 51,
+          "top_values": [],
+          "type_shares": {}
+        }
+      },
+      "raw": {
+        "amount": {
+          "distinct_count": 1078,
+          "inferred_type": "decimal",
+          "max": 1498.47,
+          "min": 5.01,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "scale": {
+            "median": 137.415,
+            "p05": 19.7175,
+            "p95": 819.87
+          },
+          "top_values": [
+            [
+              "142.79",
+              3
+            ],
+            [
+              "108.02",
+              2
+            ],
+            [
+              "128.82",
+              2
+            ],
+            [
+              "131.58",
+              2
+            ],
+            [
+              "157.31",
+              2
+            ]
+          ],
+          "type_shares": {
+            "decimal": 1.0
+          }
+        },
+        "category": {
+          "distinct_count": 14,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "Grocery",
+              274
+            ],
+            [
+              "Electronics",
+              266
+            ],
+            [
+              "Apparel",
+              193
+            ],
+            [
+              "Home",
+              182
+            ],
+            [
+              "Toys",
+              135
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "currency": {
+          "currencies": {
+            "EUR": 311,
+            "GBP": 230,
+            "USD": 559
+          },
+          "distinct_count": 3,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "USD",
+              559
+            ],
+            [
+              "EUR",
+              311
+            ],
+            [
+              "GBP",
+              230
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "customer_id": {
+          "distinct_count": 1093,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "CUS-11666",
+              2
+            ],
+            [
+              "CUS-27414",
+              2
+            ],
+            [
+              "CUS-44068",
+              2
+            ],
+            [
+              "CUS-76883",
+              2
+            ],
+            [
+              "CUS-79908",
+              2
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "order_date": {
+          "date_formats": {
+            "%Y-%m-%d": 1100,
+            "%d/%m/%Y": 0,
+            "%m/%d/%Y": 0,
+            "unparsed": 0
+          },
+          "distinct_count": 31,
+          "inferred_type": "date",
+          "max": "2026-03-31",
+          "min": "2026-03-01",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "2026-03-04",
+              47
+            ],
+            [
+              "2026-03-22",
+              44
+            ],
+            [
+              "2026-03-30",
+              44
+            ],
+            [
+              "2026-03-09",
+              43
+            ],
+            [
+              "2026-03-28",
+              43
+            ]
+          ],
+          "type_shares": {
+            "date": 1.0
+          }
+        },
+        "order_id": {
+          "distinct_count": 1100,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "ORD-300001",
+              1
+            ],
+            [
+              "ORD-300002",
+              1
+            ],
+            [
+              "ORD-300003",
+              1
+            ],
+            [
+              "ORD-300004",
+              1
+            ],
+            [
+              "ORD-300005",
+              1
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "quantity": {
+          "distinct_count": 5,
+          "inferred_type": "integer",
+          "max": 5.0,
+          "min": 1.0,
+          "null_count": 12,
+          "null_rate": 0.0109,
+          "rows": 1100,
+          "scale": {
+            "median": 3.0,
+            "p05": 1.0,
+            "p95": 5.0
+          },
+          "top_values": [
+            [
+              "2",
+              230
+            ],
+            [
+              "3",
+              226
+            ],
+            [
+              "5",
+              220
+            ],
+            [
+              "4",
+              207
+            ],
+            [
+              "1",
+              205
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        },
+        "region": {
+          "distinct_count": 4,
+          "inferred_type": "string",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "rows": 1100,
+          "top_values": [
+            [
+              "North",
+              280
+            ],
+            [
+              "South",
+              280
+            ],
+            [
+              "East",
+              277
+            ],
+            [
+              "West",
+              263
+            ]
+          ],
+          "type_shares": {
+            "string": 1.0
+          }
+        },
+        "weight_kg": {
+          "distinct_count": 956,
+          "inferred_type": "integer",
+          "max": 24893.0,
+          "min": 101.0,
+          "null_count": 53,
+          "null_rate": 0.0482,
+          "rows": 1100,
+          "scale": {
+            "median": 2062.0,
+            "p05": 314.9,
+            "p95": 20155.2
+          },
+          "top_values": [
+            [
+              "2762",
+              4
+            ],
+            [
+              "1468",
+              3
+            ],
+            [
+              "1479",
+              3
+            ],
+            [
+              "220",
+              3
+            ],
+            [
+              "2479",
+              3
+            ]
+          ],
+          "type_shares": {
+            "integer": 1.0
+          }
+        }
+      }
+    }
+  }
+}

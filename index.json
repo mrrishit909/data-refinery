@@ -2,14 +2,14 @@
   "runs": [
     {
       "attempt": 1,
-      "completed_at": null,
+      "completed_at": "2026-10-22T01:21:45Z",
       "created_at": "2026-10-22T01:21:08Z",
-      "headline": null,
+      "headline": "3,306 rows in: 1,051 accepted, 2,235 quarantined, 20 merged; 0 repairs applied, 3 need a human.",
       "issue": 1,
       "request_id": "d19a83ed5d2da325",
       "run_id": "data-refinery-20261022T012108Z-d19a83ed-a1",
       "source": "issue",
-      "status": "running"
+      "status": "completed"
     },
     {
       "attempt": 1,

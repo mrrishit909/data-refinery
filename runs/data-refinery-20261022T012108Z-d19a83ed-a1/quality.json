@@ -1,0 +1,90 @@
+{
+  "batches": {
+    "2026-01": {
+      "after_repair": {
+        "accepted_share": 1.0,
+        "completeness": 1.0,
+        "late_share": 0.0,
+        "rows_accepted": 1000,
+        "rows_in": 1000,
+        "rows_merged_duplicates": 0,
+        "rows_quarantined": 0,
+        "timeliness": 1.0,
+        "uniqueness": 1.0,
+        "validity": 1.0
+      },
+      "before_repair": {
+        "accepted_share": 1.0,
+        "completeness": 1.0,
+        "late_share": 0.0,
+        "rows_accepted": 1000,
+        "rows_in": 1000,
+        "rows_merged_duplicates": 0,
+        "rows_quarantined": 0,
+        "timeliness": 1.0,
+        "uniqueness": 1.0,
+        "validity": 1.0
+      }
+    },
+    "2026-02": {
+      "after_repair": {
+        "accepted_share": 0.0,
+        "completeness": 0.875,
+        "late_share": null,
+        "rows_accepted": 0,
+        "rows_in": 1206,
+        "rows_merged_duplicates": 20,
+        "rows_quarantined": 1186,
+        "timeliness": null,
+        "uniqueness": 0.9735,
+        "validity": 0.0
+      },
+      "before_repair": {
+        "accepted_share": 0.0,
+        "completeness": 0.875,
+        "late_share": null,
+        "rows_accepted": 0,
+        "rows_in": 1206,
+        "rows_merged_duplicates": 20,
+        "rows_quarantined": 1186,
+        "timeliness": null,
+        "uniqueness": 0.9735,
+        "validity": 0.0
+      }
+    },
+    "2026-03": {
+      "after_repair": {
+        "accepted_share": 0.0464,
+        "completeness": 0.9986,
+        "late_share": 0.0,
+        "rows_accepted": 51,
+        "rows_in": 1100,
+        "rows_merged_duplicates": 0,
+        "rows_quarantined": 1049,
+        "timeliness": 1.0,
+        "uniqueness": 1.0,
+        "validity": 0.0464
+      },
+      "before_repair": {
+        "accepted_share": 0.0464,
+        "completeness": 0.9986,
+        "late_share": 0.0,
+        "rows_accepted": 51,
+        "rows_in": 1100,
+        "rows_merged_duplicates": 0,
+        "rows_quarantined": 1049,
+        "timeliness": 1.0,
+        "uniqueness": 1.0,
+        "validity": 0.0464
+      }
+    }
+  },
+  "definitions": {
+    "after_repair": "the batch processed with the repairs applied in this run's mode",
+    "before_repair": "the batch processed with no repairs applied (what propose mode produces)",
+    "completeness": "present required cells / (rows x required columns), after renames and trimming",
+    "timeliness": "1 - late_share, where late_share = accepted rows restating a closed period / accepted",
+    "uniqueness": "1 - (merged duplicates + rows in conflicting duplicate groups) / rows_in",
+    "validity": "share of non-merged rows with no contract reason code (duplicate codes excluded)"
+  }
+}
