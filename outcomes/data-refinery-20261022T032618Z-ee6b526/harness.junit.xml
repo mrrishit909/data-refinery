@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="28" time="5.129" timestamp="2026-10-22T03:26:09.862756+00:00" hostname="runnervm8k3b6"><testcase classname="tests.harness.test_intake" name="test_sections_handles_no_response" time="0.001" /><testcase classname="tests.harness.test_intake" name="test_owner_request_dispatches_exact_params" time="0.003" /><testcase classname="tests.harness.test_intake" name="test_non_owner_blocked_regardless_of_labels" time="0.000" /><testcase classname="tests.harness.test_intake" name="test_approval_only_from_owner" time="0.000" /><testcase classname="tests.harness.test_intake" name="test_injection_in_free_text_is_rejected" time="0.000" /><testcase classname="tests.harness.test_intake" name="test_unknown_mode_fails_schema" time="0.000" /><testcase classname="tests.harness.test_intake" name="test_no_batch_selected_is_invalid" time="0.000" /><testcase classname="tests.harness.test_intake" name="test_ignores_issues_without_run_label" time="0.000" /><testcase classname="tests.harness.test_outcome_memory" name="test_rubric_matches_lock" time="0.000" /><testcase classname="tests.harness.test_outcome_memory" name="test_failing_gate_blocks_release_and_rounds_are_bounded" time="0.359" /><testcase classname="tests.harness.test_outcome_memory" name="test_guard_rejects_protected_subjects" time="0.006" /><testcase classname="tests.harness.test_outcome_memory" name="test_propose_dedupes_and_supersedes" time="0.002" /><testcase classname="tests.harness.test_outcome_memory" name="test_expired_lessons_are_proposed_for_retirement" time="0.001" /><testcase classname="tests.harness.test_outcome_memory" name="test_rubric_hard_gates_are_well_formed" time="0.000" /><testcase classname="tests.harness.test_outcome_memory" name="test_evidence_is_allowlisted_capped_and_old_screenshots_pruned" time="0.294" /><testcase classname="tests.harness.test_project_hooks" name="test_hooks_on_real_outputs" time="3.049" /><testcase classname="tests.harness.test_project_hooks" name="test_request_problems_orders_batches" time="0.000" /><testcase classname="tests.harness.test_state_and_runs" name="test_cas_retry_keeps_both_writers" time="0.152" /><testcase classname="tests.harness.test_state_and_runs" name="test_immutable_paths_refuse_different_content" time="0.115" /><testcase classname="tests.harness.test_state_and_runs" name="test_state_machine_rejects_illegal_transitions" time="0.000" /><testcase classname="tests.harness.test_state_and_runs" name="test_admit_publish_duplicate_and_latest" time="0.307" /><testcase classname="tests.harness.test_state_and_runs" name="test_engine_fingerprint_reads_the_checked_out_tree" time="0.006" /><testcase classname="tests.harness.test_state_and_runs" name="test_failed_attempt_is_retained_and_retry_links_parent" time="0.193" /><testcase classname="tests.harness.test_state_and_runs" name="test_invalid_outputs_fail_the_run_without_publishing_results" time="0.156" /><testcase classname="tests.harness.test_state_and_runs" name="test_rerun_of_same_workflow_supersedes_dead_attempt" time="0.141"><failure message="subprocess.CalledProcessError: Command '['git', 'fetch', '--quiet', '--depth=1', 'origin', 'state']' returned non-zero exit status 128.">state = &lt;harness.state.StateRepo object at 0x7f1f7d4c17f0&gt;
+fake_hooks = namespace(PUBLIC_FILES=['manifest.json', 'results.json'], validate_outputs=&lt;function fake_hooks.&lt;locals&gt;.&lt;lambda&gt; at 0...ooks.&lt;locals&gt;.&lt;lambda&gt; at 0x7f1f6c5b3d80&gt;, memory_candidates=&lt;function fake_hooks.&lt;locals&gt;.&lt;lambda&gt; at 0x7f1f6c5b3380&gt;)
+
+    def test_rerun_of_same_workflow_supersedes_dead_attempt(state, fake_hooks):
+        first = admit(state, PARAMS, SRC, 401, "d" * 40, now=T0)
+        again = admit(state, PARAMS, SRC, 401, "d" * 40, now=T0 + timedelta(minutes=30))
+        assert again["decision"] == "run" and again["attempt"] == 2
+&gt;       state.sync()
+
+tests/harness/test_state_and_runs.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+harness/state.py:36: in sync
+    self.git("fetch", "--quiet", "--depth=1", self.remote, self.branch)
+harness/state.py:33: in git
+    return subprocess.run(["git", *args], cwd=self.path, check=check, capture_output=True, text=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['git', 'fetch', '--quiet', '--depth=1', 'origin', 'state'],)
+kwargs = {'cwd': PosixPath('/tmp/pytest-of-runner/pytest-1/test_rerun_of_same_workflow_su0/work'), 'text': True, 'stdout': -1, 'stderr': -1}
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output &amp; stderr attributes if those streams
+        were captured.
+    
+        If timeout is given, and the process takes too long, a TimeoutExpired
+        exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+&gt;               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['git', 'fetch', '--quiet', '--depth=1', 'origin', 'state']' returned non-zero exit status 128.
+
+/usr/lib/python3.12/subprocess.py:571: CalledProcessError</failure></testcase><testcase classname="tests.harness.test_state_and_runs" name="test_monthly_ceiling_blocks" time="0.128" /><testcase classname="tests.harness.test_state_and_runs" name="test_latest_pointer_requires_completed" time="0.001" /><testcase classname="tests.harness.test_state_and_runs" name="test_invalid_request_never_writes" time="0.046" /></testsuite></testsuites>

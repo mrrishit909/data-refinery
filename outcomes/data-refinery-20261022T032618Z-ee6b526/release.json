@@ -1,0 +1,105 @@
+{
+  "blocked_reason": "hard gates failing: harness",
+  "created_at": "2026-10-22T03:26:18Z",
+  "defect_batch_id": "49f756463ad9",
+  "evidence_dir": "outcomes/data-refinery-20261022T032618Z-ee6b526/",
+  "findings": [
+    {
+      "detail": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
+      "evidence_paths": [],
+      "id": "rubric-integrity",
+      "kind": "integrity",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Rubric matches its review lock"
+    },
+    {
+      "detail": "........                                                                 [100%]",
+      "evidence_paths": [
+        "pipeline-gates.junit.xml",
+        "pipeline-gates.log"
+      ],
+      "id": "pipeline-gates",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 13.08,
+      "status": "pass",
+      "title": "Every input row accounted for, idempotent, originals preserved, no silent drops, no invented values, ambiguity flagged, lineage inspectable, repairs pass original and drifted fixtures"
+    },
+    {
+      "detail": "FAILED tests/harness/test_state_and_runs.py::test_rerun_of_same_workflow_supersedes_dead_attempt - subprocess.CalledProcessError: Command '['git', 'fetch', '--quiet', '--depth=1', 'origin', 'state']' returned non-zero exit status 128.",
+      "evidence_paths": [
+        "harness.junit.xml",
+        "harness.log"
+      ],
+      "id": "harness",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 5.48,
+      "status": "fail",
+      "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
+    },
+    {
+      "detail": "secret scan: 0 finding(s)",
+      "evidence_paths": [
+        "secret-scan.log"
+      ],
+      "id": "secret-scan",
+      "kind": "command",
+      "objective": true,
+      "seconds": 1.05,
+      "status": "pass",
+      "title": "No credentials in the repository or in the live site's shipped assets"
+    },
+    {
+      "detail": "live site and snapshot reachable; snapshot matches state",
+      "evidence_paths": [
+        "live-site.json"
+      ],
+      "id": "live-site",
+      "kind": "live",
+      "objective": true,
+      "seconds": 0.19,
+      "status": "pass",
+      "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
+    },
+    {
+      "detail": "checked 15 published files for data-refinery-20261022T021411Z-b9b61d3d-a1; mismatches: none",
+      "evidence_paths": [
+        "published-matches-state.log"
+      ],
+      "id": "published-matches-state",
+      "kind": "command",
+      "objective": true,
+      "seconds": 1.82,
+      "status": "pass",
+      "title": "Published result files are byte-identical to the accepted computation"
+    },
+    {
+      "detail": "36 passed, 0 failed",
+      "evidence_paths": [
+        "e2e/summary.json"
+      ],
+      "id": "browser",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Live-site browser checks at 390, 768 and 1440 px (states, interactions, keyboard, reduced motion, dark theme, axe, overflow, console)"
+    }
+  ],
+  "project": "data-refinery",
+  "release_id": "data-refinery-20261022T032618Z-ee6b526",
+  "repair_round": 1,
+  "rubric_sha256": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
+  "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+  "source_commit": "ee6b52641b4df35cc7ededb4b29e11c63fbfbdde",
+  "status": "blocked",
+  "subjective": {
+    "reason": "inference credentials are not configured for this repository",
+    "scores": [],
+    "status": "not_run"
+  },
+  "workflow_run_url": "https://github.com/mrrishit909/data-refinery/actions/runs/39716333502"
+}
