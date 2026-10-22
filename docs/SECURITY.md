@@ -20,7 +20,8 @@
 - No `pull_request_target`. Pull requests run CI with read-only permissions and no secrets.
 - Third-party actions are pinned to full commit SHAs (tag noted in a comment).
 - Dependencies install from lockfiles (`uv.lock` with `uv sync --frozen`, `package-lock.json`
-  with `npm ci`).
+  with `npm ci`). The one exception is the optional Claude Code CLI, installed globally by exact version
+  (`@anthropic-ai/claude-code@2.1.292`) in a step without secrets, only when an inference secret exists.
 - Every job has `timeout-minutes`; state writers serialize through `state-writer`.
 
 ## Credentials
@@ -30,7 +31,9 @@
   JS and CSS.
 - The only secret-bearing job is the optional grader in `outcome.yml`. It runs only when the
   repository has `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN`, uses `claude -p --bare` with
-  the `Read` and `Glob` tools only, a `--max-budget-usd` cap, over screenshots and the rubric;
+  only the `Read` and `Glob` tools (`--tools`), Read allowed only under `evidence/`, `rubric/` and the
+  design contract, a `--max-budget-usd` cap, over screenshots and the rubric; the pinned CLI is installed
+  in a separate step that has no secret in its environment;
   it never executes repository or generated code. Without the secret it is skipped and the
   release record says so.
 - Visitors are never asked for tokens. The site has no write path; durable requests go through

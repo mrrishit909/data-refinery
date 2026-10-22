@@ -76,24 +76,28 @@ jobs:
           name: outcome-browser-evidence
           path: evidence/e2e
       - if: steps.creds.outputs.available == 'true'
+        name: Install the pinned Claude Code CLI (no secrets in this step's environment)
+        run: npm install -g @anthropic-ai/claude-code@2.1.292 >/dev/null
+      - if: steps.creds.outputs.available == 'true'
         name: Grade screenshots against the subjective rubric
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
-          npm install -g @anthropic-ai/claude-code@2.1.292 >/dev/null
           prompt="You are an independent visual grader. You did not build this site. Read rubric/outcome-rubric.json \
           (the 'subjective' list only), docs/DESIGN_CONTRACT.md and the screenshots under evidence/e2e/screens. \
           Score each subjective criterion 1-5 with a short rationale that cites the screenshot paths you used. \
           Do not change any file. Hard gates are decided elsewhere and you cannot affect them."
           claude -p "$prompt" --bare --no-session-persistence --max-budget-usd 1.00 \
-            --allowedTools "Read" "Glob" --output-format json \
+            --tools "Read,Glob" \
+            --allowedTools "Read(./evidence/**)" "Read(./rubric/**)" "Read(./docs/DESIGN_CONTRACT.md)" "Read(./schemas/grader.schema.json)" "Glob" \
+            --output-format json \
             --json-schema "$(cat schemas/grader.schema.json)" > grader-raw.json
           python3 - <<'PY'
           import json
           raw = json.load(open("grader-raw.json"))
           scores = raw.get("structured_output") or json.loads(raw["result"])
-          scores["grader"] = {"model": "claude (via claude-code 2.1.292)", "invocation": "claude -p --bare, Read/Glob only",
+          scores["grader"] = {"model": "claude (via claude-code 2.1.292)", "invocation": "claude -p --bare, Read (evidence, rubric, contract only) and Glob",
                               "usd": raw.get("total_cost_usd")}
           json.dump(scores, open("grader.json", "w"), indent=2)
           PY
