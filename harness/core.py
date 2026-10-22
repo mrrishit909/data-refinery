@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from functools import cache
@@ -68,9 +69,27 @@ def parse_iso(text: str) -> datetime:
     return datetime.strptime(text, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=UTC)
 
 
-def request_id(project: str, params: dict[str, Any]) -> str:
-    """Idempotency key: identical parameters for the same project are the same request."""
-    return hashlib.sha256(dumps({"project": project, "params": params}).encode()).hexdigest()[:16]
+def request_id(project: str, params: dict[str, Any], engine: str | None = None) -> str:
+    """Idempotency key: identical parameters on the same engine version are the same request."""
+    key: dict[str, Any] = {"project": project, "params": params}
+    if engine:
+        key["engine"] = engine
+    return hashlib.sha256(dumps(key).encode()).hexdigest()[:16]
+
+
+def engine_fingerprint(commit: str = "HEAD") -> str | None:
+    """Git tree hashes of project.json `engine_paths` (code, fixtures, lockfile): a request made after
+    any of them changed is a new request, never a duplicate of results computed by older code."""
+    paths = config().get("engine_paths", [])
+    if not paths:
+        return None
+    trees = []
+    for path in paths:
+        out = subprocess.run(["git", "rev-parse", f"{commit}:{path}"], cwd=ROOT, capture_output=True, text=True)
+        if out.returncode != 0:
+            raise RuntimeError(f"engine path {path!r} not found at {commit}")
+        trees.append(f"{path} {out.stdout.strip()}")
+    return hashlib.sha256("\n".join(trees).encode()).hexdigest()[:16]
 
 
 def run_id(project: str, created_at: datetime, req_id: str, attempt: int) -> str:

@@ -68,12 +68,12 @@ def sanitize(text: str, limit: int = 2000) -> str:
 
 
 def admit(state: StateRepo, params: dict[str, Any], source: dict[str, Any], workflow_run_id: int | None,
-          source_commit: str, now: datetime | None = None) -> dict[str, Any]:
+          source_commit: str, now: datetime | None = None, engine: str | None = None) -> dict[str, Any]:
     cfg = config()
     errors = request_errors(params)
     if errors:
         return {"decision": "invalid", "errors": errors}
-    req_id = request_id(cfg["project"], params)
+    req_id = request_id(cfg["project"], params, engine)
     params_hash = sha256_json(params)
     now = now or utcnow()
     limits = cfg["limits"]
@@ -129,7 +129,7 @@ def admit(state: StateRepo, params: dict[str, Any], source: dict[str, Any], work
         put_run_record(root, record)
         put_request(root, req_id, params_hash, record)
         upsert_index(root, record)
-        write_json(root, f"runs/{rid}/request.json", {"params": params, "request_id": req_id})
+        write_json(root, f"runs/{rid}/request.json", {"params": params, "request_id": req_id, "engine": engine})
         return {"decision": "run" if record["status"] == "running" else "blocked", "run_id": rid,
                 "request_id": req_id, "attempt": attempt, "reason": record["error_summary"]}
 

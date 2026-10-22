@@ -16,7 +16,7 @@ clone: every operation is a workflow or an API call.
 - **Anyone else:** open the same form. It is labelled `job:blocked` until the owner reviews it
   and adds `job:approved`.
 
-Identical parameters are one request: a repeat links to the existing run instead of computing
+Identical parameters on the same engine version are one request: a repeat links to the existing run instead of computing
 again. A failed request can be retried (new attempt, max 3) by submitting it again.
 
 ## What each workflow does

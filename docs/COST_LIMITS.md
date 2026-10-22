@@ -37,7 +37,8 @@ check. No paid billing was enabled and no plan was changed.
 
 - Reconciler: daily (cheap: reads state, at most 5 corrective actions).
 - Pipeline refresh: weekly, the full four-batch apply-safe request. The fixtures are fixed, so after
-  the first run each refresh is a duplicate and does nothing unless the code changed the request id.
+  the first run each refresh is a duplicate and does nothing unless the engine code, fixtures,
+  contracts or lockfile changed (they are part of the request id).
 
 ## Not used
 

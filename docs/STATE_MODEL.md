@@ -28,8 +28,10 @@ releases/history.json          last 100 release attempts (released and blocked)
 
 ## Identifiers
 
-- `request_id` = first 16 hex of sha256(canonical JSON of {project, params}). Identical parameters
-  are the same request (idempotency key), whoever asks.
+- `request_id` = first 16 hex of sha256(canonical JSON of {project, params, engine}), where
+  `engine` hashes the git trees of `engine_paths` in `project.json` (engine code, fixtures, lockfile).
+  Identical parameters on the same engine are the same request (idempotency key), whoever asks;
+  after an engine change the same parameters compute afresh instead of returning older results.
 - `run_id` = `<project>-<created UTC YYYYmmddTHHMMSSZ>-<request_id[:8]>-a<attempt>`.
 - `input_manifest_hash` = sha256 of canonical {params, source file sha256 list, contract sha256,
   package version}, written by the compute step into `manifest.json` and copied into the run record.

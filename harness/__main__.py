@@ -72,12 +72,13 @@ def _source(args: argparse.Namespace) -> dict:
 
 
 def cmd_admit(args: argparse.Namespace) -> None:
+    from .core import engine_fingerprint
     from .runs import admit
     from .state import StateRepo
 
     params = json.loads(os.environ["REQUEST_JSON"])
     result = admit(StateRepo(Path(args.state_dir)), params, _source(args), int(args.workflow_run_id),
-                   args.source_commit)
+                   args.source_commit, engine=engine_fingerprint())
     Path(args.result).write_text(pretty(result))
     _out(decision=result["decision"], run_id=result.get("run_id", ""), request_id=result.get("request_id", ""))
     _summary(f"### Admission\n\n```json\n{pretty(result)}```")

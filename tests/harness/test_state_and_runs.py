@@ -2,7 +2,7 @@ import json
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from harness.core import IllegalTransition, ImmutableConflict, transition
+from harness.core import IllegalTransition, ImmutableConflict, engine_fingerprint, transition
 from harness.runs import admit, publish
 from harness.state import read_json, set_latest, write_immutable
 
@@ -57,6 +57,14 @@ def test_admit_publish_duplicate_and_latest(state, fake_hooks, tmp_path):
     assert state.head() == head
     dup = admit(state, PARAMS, SRC, 103, "a" * 40, now=T0 + timedelta(minutes=7))
     assert dup["decision"] == "duplicate" and not dup.get("in_progress")
+    # The same parameters on changed engine code are a new request, never a stale duplicate.
+    fresh = admit(state, PARAMS, SRC, 104, "a" * 40, now=T0 + timedelta(minutes=8), engine="0123456789abcdef")
+    assert fresh["decision"] == "run" and fresh["request_id"] != first["request_id"]
+
+
+def test_engine_fingerprint_reads_the_checked_out_tree():
+    fp = engine_fingerprint()
+    assert fp is not None and len(fp) == 16 and int(fp, 16) >= 0
 
 
 def test_failed_attempt_is_retained_and_retry_links_parent(state, fake_hooks, tmp_path):

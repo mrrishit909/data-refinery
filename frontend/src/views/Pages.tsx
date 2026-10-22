@@ -171,7 +171,7 @@ export function RequestView({ config }: { config: AppConfig }) {
       </p>
       <ol className="dr-steps">
         <li><span>The intake workflow validates the form against the request schema and labels the issue requested, or blocked with the reason.</span></li>
-        <li><span>Identical parameters link to the existing run instead of computing again.</span></li>
+        <li><span>Identical parameters on the current engine link to the existing run instead of computing again.</span></li>
         <li><span>The run processes the batches on a GitHub-hosted runner, validates its outputs and writes them to the state branch.</span></li>
         <li><span>The site redeploys and the issue gets a link to the result, with the evidence kept either way.</span></li>
       </ol>

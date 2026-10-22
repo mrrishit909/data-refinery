@@ -7,6 +7,7 @@
   "schema_version": "1.0",
   "package": "datarefinery",
   "state_branch": "state",
+  "engine_paths": ["src", "fixtures", "contracts", "uv.lock"],
   "default_branch": "main",
   "limits": {
     "max_runs_per_month": 40,
