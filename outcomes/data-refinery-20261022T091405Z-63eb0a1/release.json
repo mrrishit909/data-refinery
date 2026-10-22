@@ -1,0 +1,105 @@
+{
+  "blocked_reason": null,
+  "created_at": "2026-10-22T09:14:05Z",
+  "defect_batch_id": null,
+  "evidence_dir": "outcomes/data-refinery-20261022T091405Z-63eb0a1/",
+  "findings": [
+    {
+      "detail": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
+      "evidence_paths": [],
+      "id": "rubric-integrity",
+      "kind": "integrity",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Rubric matches its review lock"
+    },
+    {
+      "detail": "........                                                                 [100%]",
+      "evidence_paths": [
+        "pipeline-gates.junit.xml",
+        "pipeline-gates.log"
+      ],
+      "id": "pipeline-gates",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 9.74,
+      "status": "pass",
+      "title": "Every input row accounted for, idempotent, originals preserved, no silent drops, no invented values, ambiguity flagged, lineage inspectable, repairs pass original and drifted fixtures"
+    },
+    {
+      "detail": ".............................                                            [100%]",
+      "evidence_paths": [
+        "harness.junit.xml",
+        "harness.log"
+      ],
+      "id": "harness",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 4.92,
+      "status": "pass",
+      "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
+    },
+    {
+      "detail": "secret scan: 0 finding(s)",
+      "evidence_paths": [
+        "secret-scan.log"
+      ],
+      "id": "secret-scan",
+      "kind": "command",
+      "objective": true,
+      "seconds": 0.56,
+      "status": "pass",
+      "title": "No credentials in the repository or in the live site's shipped assets"
+    },
+    {
+      "detail": "live site and snapshot reachable; snapshot matches state",
+      "evidence_paths": [
+        "live-site.json"
+      ],
+      "id": "live-site",
+      "kind": "live",
+      "objective": true,
+      "seconds": 0.17,
+      "status": "pass",
+      "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
+    },
+    {
+      "detail": "checked 15 published files for data-refinery-20261022T021411Z-b9b61d3d-a1; mismatches: none",
+      "evidence_paths": [
+        "published-matches-state.log"
+      ],
+      "id": "published-matches-state",
+      "kind": "command",
+      "objective": true,
+      "seconds": 2.23,
+      "status": "pass",
+      "title": "Published result files are byte-identical to the accepted computation"
+    },
+    {
+      "detail": "36 passed, 0 failed",
+      "evidence_paths": [
+        "e2e/summary.json"
+      ],
+      "id": "browser",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Live-site browser checks at 390, 768 and 1440 px (states, interactions, keyboard, reduced motion, dark theme, axe, overflow, console)"
+    }
+  ],
+  "project": "data-refinery",
+  "release_id": "data-refinery-20261022T091405Z-63eb0a1",
+  "repair_round": 0,
+  "rubric_sha256": "sha256:b59f37e2cda9fc036263c3abf10130c6abf555e8f2be2613701f12a6b3b28bd3",
+  "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+  "source_commit": "63eb0a1694a96d4793eecc702553c69c78010c62",
+  "status": "released",
+  "subjective": {
+    "reason": "inference credentials are not configured for this repository",
+    "scores": [],
+    "status": "not_run"
+  },
+  "workflow_run_url": "https://github.com/mrrishit909/data-refinery/actions/runs/39753357369"
+}

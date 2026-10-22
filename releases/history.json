@@ -1,6 +1,13 @@
 {
   "releases": [
     {
+      "created_at": "2026-10-22T09:14:05Z",
+      "release_id": "data-refinery-20261022T091405Z-63eb0a1",
+      "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+      "source_commit": "63eb0a1694a96d4793eecc702553c69c78010c62",
+      "status": "released"
+    },
+    {
       "created_at": "2026-10-22T08:20:05Z",
       "release_id": "data-refinery-20261022T082005Z-6f2bb34",
       "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
