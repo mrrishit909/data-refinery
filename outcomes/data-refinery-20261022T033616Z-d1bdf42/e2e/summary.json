@@ -1,0 +1,225 @@
+{
+  "target": "https://mrrishit909.github.io/data-refinery/",
+  "status": "passed",
+  "passed": 36,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "title": "overview: accounting equation, flow, batch rack; accessible, no overflow",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3946
+    },
+    {
+      "title": "overview: accounting equation, flow, batch rack; accessible, no overflow",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3964
+    },
+    {
+      "title": "batch rack filters the equation to one batch",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1095
+    },
+    {
+      "title": "batch rack filters the equation to one batch",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1082
+    },
+    {
+      "title": "stations: navigate the rail or stepper, back button restores the previous station",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 953
+    },
+    {
+      "title": "stations: navigate the rail or stepper, back button restores the previous station",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1071
+    },
+    {
+      "title": "quarantine: reason filter, pagination, inspector opens and closes",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2847
+    },
+    {
+      "title": "quarantine: reason filter, pagination, inspector opens and closes",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3322
+    },
+    {
+      "title": "drift: repair evidence in the inspector, before/after toggle",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1885
+    },
+    {
+      "title": "drift: repair evidence in the inspector, before/after toggle",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1880
+    },
+    {
+      "title": "lineage: tracing an output column highlights its path",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1326
+    },
+    {
+      "title": "lineage: tracing an output column highlights its path",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1373
+    },
+    {
+      "title": "preview: a renamed column is detected in the browser; non-CSV is rejected",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1839
+    },
+    {
+      "title": "preview: a renamed column is detected in the browser; non-CSV is rejected",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 2087
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 925
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1833
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3406
+    },
+    {
+      "title": "reduced motion: no running animations, equation complete",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 808
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3383
+    },
+    {
+      "title": "reduced motion: no running animations, equation complete",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 729
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3179
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1534
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3891
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1561
+    },
+    {
+      "title": "overview: accounting equation, flow, batch rack; accessible, no overflow",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 3190
+    },
+    {
+      "title": "batch rack filters the equation to one batch",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 646
+    },
+    {
+      "title": "stations: navigate the rail or stepper, back button restores the previous station",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 668
+    },
+    {
+      "title": "quarantine: reason filter, pagination, inspector opens and closes",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2419
+    },
+    {
+      "title": "drift: repair evidence in the inspector, before/after toggle",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1877
+    },
+    {
+      "title": "lineage: tracing an output column highlights its path",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1170
+    },
+    {
+      "title": "preview: a renamed column is detected in the browser; non-CSV is rejected",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1286
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1444
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2619
+    },
+    {
+      "title": "reduced motion: no running animations, equation complete",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 543
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 3444
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1108
+    }
+  ]
+}
