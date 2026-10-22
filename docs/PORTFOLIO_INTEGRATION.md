@@ -51,4 +51,4 @@ function.
 Isolation: every CSS rule is scoped under `.dr-root` and tokens are defined on that element, not
 `:root`. Listeners (hashchange in hash mode, media queries, resize and intersection observers) are
 registered in React effects and removed on unmount. Fonts are loaded only by the standalone site;
-an embedded copy uses the host's fonts or the stylesheet's serif and condensed fallbacks.
+an embedded copy uses the host's fonts or the stylesheet's system sans and monospace fallbacks.

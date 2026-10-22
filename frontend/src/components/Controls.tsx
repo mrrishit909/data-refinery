@@ -123,20 +123,3 @@ export function ErrorState({ title, error, onRetry }: { title: string; error: Er
     </div>
   );
 }
-
-export function EmptyState({ requestHref }: { requestHref: string }) {
-  return (
-    <div className="dr-state">
-      <h1 className="dr-h1">No completed runs yet.</h1>
-      <p className="dr-prose">
-        The lab publishes a run only after its computation finished and its outputs passed validation. The first
-        one will appear here with every strategy it tested, accepted or not.
-      </p>
-      <div className="dr-toolbar">
-        <a className="dr-btn dr-btn-primary" href={requestHref}>
-          How to request a run
-        </a>
-      </div>
-    </div>
-  );
-}
