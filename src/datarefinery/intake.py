@@ -38,8 +38,18 @@ def _text(value: object) -> str | None:
     return str(value)
 
 
+def _decode(data: bytes) -> str:
+    try:
+        return data.decode("utf-8-sig")  # a leading BOM is accepted for CSV and JSON alike
+    except UnicodeDecodeError as err:
+        raise IntakeError(f"not valid UTF-8 at byte {err.start}") from err
+
+
 def _csv(data: bytes) -> tuple[list[str], list[list[str | None]]]:
-    rows = list(csv.reader(io.StringIO(data.decode("utf-8-sig"), newline="")))
+    try:
+        rows = list(csv.reader(io.StringIO(_decode(data), newline="")))
+    except csv.Error as err:
+        raise IntakeError(f"unreadable CSV: {err}") from err
     if not rows:
         raise IntakeError("empty CSV")
     header, body = rows[0], rows[1:]
@@ -49,9 +59,24 @@ def _csv(data: bytes) -> tuple[list[str], list[list[str | None]]]:
     return header, body
 
 
+def _unique_keys(pairs: list[tuple[str, object]]) -> dict:
+    seen = {}
+    for k, v in pairs:
+        if k in seen:
+            # One raw record cannot hold two values for a key without picking one, so the file is rejected.
+            raise IntakeError(f"JSON object repeats key {k!r}")
+        seen[k] = v
+    return seen
+
+
 def _json(data: bytes) -> tuple[list[str], list[list[str | None]]]:
     # Numbers stay as their literal text so 12.50 is not silently turned into 12.5.
-    records = json.loads(data.decode("utf-8"), parse_float=str, parse_int=str)
+    try:
+        records = json.loads(_decode(data), parse_float=str, parse_int=str, object_pairs_hook=_unique_keys)
+    except (ValueError, RecursionError) as err:
+        if isinstance(err, IntakeError):
+            raise
+        raise IntakeError(f"unreadable JSON: {err}") from err
     if not isinstance(records, list) or not all(isinstance(r, dict) for r in records):
         raise IntakeError("JSON batch must be an array of objects")
     header: list[str] = []
@@ -66,16 +91,29 @@ def _json(data: bytes) -> tuple[list[str], list[list[str | None]]]:
 
 
 def _xlsx(data: bytes) -> tuple[list[str], list[list[str | None]]]:
-    wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
+    """Formulas are not evaluated: a formula cell's raw value is its formula text (data_only=False)."""
+    try:
+        wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=False)
+    except Exception as err:  # any parser failure on an untrusted file is an input error
+        raise IntakeError(f"unreadable XLSX: {err}") from err
     try:
         if len(wb.sheetnames) > MAX_SHEETS:
             raise IntakeError(f"XLSX has {len(wb.sheetnames)} sheets, max {MAX_SHEETS}")
-        rows = [[_text(v) for v in row] for row in wb[wb.sheetnames[0]].iter_rows(values_only=True)]
+        ws = wb[wb.sheetnames[0]]
+        ws.reset_dimensions()  # a stale <dimension> record must not truncate the sheet
+        rows = [[_text(v) for v in row] for row in ws.iter_rows(values_only=True)]
+    except IntakeError:
+        raise
+    except Exception as err:
+        raise IntakeError(f"unreadable XLSX: {err}") from err
     finally:
         wb.close()
     if not rows:
         raise IntakeError("empty XLSX sheet")
-    return [str(h) for h in rows[0]], rows[1:]
+    header, body = rows[0], rows[1:]
+    while header and header[-1] is None and all(r[len(header) - 1] is None for r in body):
+        header, body = header[:-1], [r[:len(header) - 1] for r in body]  # formatted but empty trailing column
+    return header, body
 
 
 def read_batch(path: Path) -> tuple[pd.DataFrame, dict]:

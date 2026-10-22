@@ -10,17 +10,29 @@ from difflib import SequenceMatcher
 import numpy as np
 import pandas as pd
 
-from .contract import INTEGER, ISO_SHAPE, NUMBER, Column, Contract, is_iso_date, normalize_cell, parse_date
+from .contract import (
+    INTEGER,
+    ISO_SHAPE,
+    NUMBER,
+    Column,
+    Contract,
+    is_iso_date,
+    normalize_cell,
+    parse_date,
+    parse_number,
+)
 
-SLASH_SHAPE = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$")
+SLASH_SHAPE = re.compile(r"^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$")
 RENAME_MIN_VALUE_MATCH = 0.99
 RENAME_MIN_NAME_SIMILARITY = 0.5
 UNIT_MEDIAN_TOLERANCE = 0.1  # log10 units, about +/-26%
 UNIT_TAIL_TOLERANCE = 0.2
 SCALE_WARN_RATIO = 2.0
-CATEGORY_RULE_CONFIDENCE = {"case": 0.99, "plural": 0.97, "typo": 0.9, "abbreviation": 0.4, "composite": 0.3,
-                            "typo_multiple": 0.3, "unmapped": 0.0}
+CATEGORY_RULE_CONFIDENCE = {"case": 0.99, "plural": 0.97, "typo": 0.9, "substitution": 0.5, "abbreviation": 0.4,
+                            "composite": 0.3, "typo_multiple": 0.3, "unmapped": 0.0}
 SAFE_CATEGORY_RULES = {"case", "plural", "typo"}
+AMBIGUOUS_RULES = {"substitution", "abbreviation", "composite", "typo_multiple"}
+RENAME_KINDS = {"missing_column", "extra_column", "rename_candidate"}
 
 
 def rnd(x: float, places: int = 6) -> float:
@@ -68,11 +80,13 @@ def profile_column(series: pd.Series, date_formats: list[str]) -> dict:
         "type_shares": {t: rnd(c / k, 4) for t, c in sorted(shares.items())} if k else {},
         "top_values": [[v, c] for v, c in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:5]],
     }
-    if inferred in ("integer", "decimal"):
-        nums = np.array([float(v) for v in values])
+    # The scale summary uses every value that reads as a number, so one junk cell cannot hide a unit change.
+    nums = np.array([x for x in (parse_number(v) for v in values) if x is not None])
+    if len(nums):
         p05, med, p95 = np.percentile(nums, [5, 50, 95])
-        out.update(min=rnd(nums.min()), max=rnd(nums.max()),
-                   scale={"p05": rnd(p05), "median": rnd(med), "p95": rnd(p95)})
+        out.update(numeric_values=len(nums), scale={"p05": rnd(p05), "median": rnd(med), "p95": rnd(p95)})
+        if inferred in ("integer", "decimal"):
+            out.update(min=rnd(nums.min()), max=rnd(nums.max()))
     if shares["date"]:
         fmts = {"%Y-%m-%d": 0, **{f: 0 for f in date_formats}}
         unparsed = 0
@@ -120,6 +134,15 @@ def value_match_share(col: Column, values: list[str]) -> float:
     return ok / len(values)
 
 
+def name_tokens(name: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", name.lower())
+
+
+def one_insert_or_delete(a: str, b: str) -> bool:
+    short, long = sorted((a, b), key=len)
+    return len(long) - len(short) == 1 and any(long[:i] + long[i + 1:] == short for i in range(len(long)))
+
+
 def levenshtein(a: str, b: str) -> int:
     prev = list(range(len(b) + 1))
     for i, ca in enumerate(a, start=1):
@@ -131,7 +154,11 @@ def levenshtein(a: str, b: str) -> int:
 
 
 def classify_label(value: str, targets: list[str]) -> dict:
-    """Rule ladder for an enum label outside the contract. Only case, plural and unique 1-edit typos are safe."""
+    """Rule ladder for an enum label outside the contract.
+
+    Safe: case, plural, and a unique one-letter insertion or deletion (a doubled or dropped letter). A one-letter
+    substitution is not safe because it readily forms a different word (Tops is not Toys).
+    """
     low = value.casefold()
     folded = {t.casefold(): t for t in targets}
     tokens = re.findall(r"[a-z0-9]+", low)
@@ -148,7 +175,11 @@ def classify_label(value: str, targets: list[str]) -> dict:
     dists = sorted((levenshtein(low, f), t) for f, t in folded.items())
     close = [t for d, t in dists if d == 1]
     if len(low) >= 4 and len(close) == 1 and dists[1][0] >= 3:
-        return result("typo", close[0], close)
+        if one_insert_or_delete(low, close[0].casefold()):
+            return result("typo", close[0], close)
+        return result("substitution", None, close,
+                      f"'{value}' differs from {close[0]} by one substituted letter; a substitution can form a "
+                      "different word, so the meaning is not certain.")
     if len(close) > 1:
         return result("typo_multiple", None, close,
                       f"'{value}' is one edit away from several contract categories ({', '.join(close)}).")
@@ -181,7 +212,7 @@ def _scale_baseline(col: Column, baseline: dict | None) -> tuple[dict | None, st
 
 
 def detect_drift(batch: str, frame: pd.DataFrame, profile: dict, contract: Contract,
-                 baseline: dict | None) -> list[dict]:
+                 baseline: dict | None, first: int = 1) -> list[dict]:
     """baseline: {"batch", "profile"} built from the previous processed batch's accepted rows, or None."""
     findings = []
     names = contract.names
@@ -216,8 +247,9 @@ def detect_drift(batch: str, frame: pd.DataFrame, profile: dict, contract: Contr
                                          {"format_counts": p["date_formats"], "baseline_format_counts": prior}))
         if col.numeric and "scale" in p:
             ref, source = _scale_baseline(col, baseline)
-            if ref and ref.get("median"):
-                ratios = {k: rnd(p["scale"][k] / ref[k], 4) for k in ("p05", "median", "p95") if ref.get(k)}
+            ratios = {k: float(f"{p['scale'][k] / ref[k]:.6g}") for k in ("p05", "median", "p95")
+                      if ref and ref.get(k, 0) > 0 and p["scale"][k] > 0}
+            if "median" in ratios:
                 conversions = {u: rnd(1 / float(f), 6) for u, f in col.unit_conversions.items()}
                 matched = [u for u, r in conversions.items()
                            if abs(math.log10(ratios["median"]) - math.log10(r)) <= UNIT_MEDIAN_TOLERANCE]
@@ -245,7 +277,7 @@ def detect_drift(batch: str, frame: pd.DataFrame, profile: dict, contract: Contr
             findings.append(_finding(batch, "currency_mix", "currency", "info",
                                      f"currencies present: {', '.join(current)}",
                                      {"currencies": profile["currency"]["currencies"], "baseline_currencies": prior}))
-    for n, f in enumerate(findings, start=1):
+    for n, f in enumerate(findings, start=first):
         f["id"] = f"D-{batch}-{n:02d}"
     return findings
 
@@ -256,39 +288,60 @@ def _repair(batch: str, kind: str, detail: dict, evidence: dict, confidence: flo
             "confidence_basis": basis, "auto_applicable": auto, "ambiguity": ambiguity, "finding": finding["id"]}
 
 
-def _date_repair(batch: str, finding: dict, frame: pd.DataFrame, col: Column) -> dict | None:
-    values = [v for v in present(frame[col.name]) if not is_iso_date(v)]
-    parsed = {f: [parse_date(v, f) for v in values] for f in col.alternate_formats}
-    parseable = [i for i in range(len(values)) if any(parsed[f][i] for f in parsed)]
-    if not parseable:
-        return None
-    period = batch
+def date_candidates(values: list[str], formats: list[str], period: str) -> dict:
+    """How each declared alternate format reads the non-ISO values, and where the results land.
+
+    safe_format is set only when exactly one format parses every value that any format parses AND every result
+    falls in the batch month; otherwise day-first and month-first readings cannot be told apart safely.
+    """
+    vals = [v for v in values if not is_iso_date(v)]
+    parsed = {f: [parse_date(v, f) for v in vals] for f in formats}
+    parseable = [i for i in range(len(vals)) if any(parsed[f][i] for f in formats)]
     candidates = {}
-    for f, results in parsed.items():
-        hits = [results[i] for i in parseable if results[i]]
-        candidates[f] = {"parsed": len(hits), "coverage": rnd(len(hits) / len(parseable), 4),
-                         "in_batch_month_share": rnd(sum(h[:7] == period for h in hits) / len(hits), 4) if hits else 0}
-    full = [f for f, c in candidates.items() if c["parsed"] == len(parseable)]
-    runner_up = max((c["coverage"] for f, c in candidates.items() if f not in full[:1]), default=0.0)
-    malformed = [v for i, v in enumerate(values) if i not in set(parseable)]
-    evidence = {"non_canonical_values": len(values), "parseable_by_some_format": len(parseable),
-                "malformed_values": len(malformed), "malformed_examples": sorted(set(malformed))[:5],
+    for f in formats:
+        hits = [parsed[f][i] for i in parseable if parsed[f][i]]
+        in_month = sum(h[:7] == period for h in hits)
+        candidates[f] = {"parsed": len(hits), "coverage": rnd(len(hits) / len(parseable), 4) if parseable else 0.0,
+                         "in_batch_month": in_month,
+                         "in_batch_month_share": rnd(in_month / len(hits), 4) if hits else 0.0}
+    full = [f for f in formats if parseable and candidates[f]["parsed"] == len(parseable)]
+    safe = full[0] if len(full) == 1 and candidates[full[0]]["in_batch_month"] == len(parseable) else None
+    keep = set(parseable)
+    return {"values": vals, "parseable": len(parseable), "full": full, "safe_format": safe,
+            "malformed": [v for i, v in enumerate(vals) if i not in keep], "candidates": candidates}
+
+
+def _date_repair(batch: str, finding: dict, frame: pd.DataFrame, col: Column) -> dict | None:
+    dc = date_candidates(present(frame[col.name]), col.alternate_formats, batch)
+    if not dc["parseable"]:
+        return None
+    candidates = dc["candidates"]
+    evidence = {"non_canonical_values": len(dc["values"]), "parseable_by_some_format": dc["parseable"],
+                "malformed_values": len(dc["malformed"]), "malformed_examples": sorted(set(dc["malformed"]))[:5],
                 "candidates": candidates}
-    if len(full) == 1:
-        return _repair(batch, "date_format", {"column": col.name, "format": full[0], "to_format": col.format,
-                                              "rows_affected": len(parseable)},
-                       evidence, 0.5 + 0.5 * (1 - runner_up), True, None, finding,
+    best = dc["safe_format"] or max(candidates, key=lambda f: (candidates[f]["coverage"], f))
+    detail = {"column": col.name, "format": best, "to_format": col.format,
+              "rows_affected": candidates[best]["parsed"],
+              "guard": "applied only when this is the only declared format that parses every parseable non-ISO "
+                       "value and every result falls in the batch month"}
+    if dc["safe_format"]:
+        runner_up = max((c["coverage"] for f, c in candidates.items() if f != best), default=0.0)
+        return _repair(batch, "date_format", detail, evidence, 0.5 + 0.5 * (1 - runner_up), True, None, finding,
                        "0.5 + 0.5 x (1 - coverage of the best competing format)")
-    reason = (f"formats {', '.join(full)} each parse every parseable value; day and month cannot be told apart"
-              if full else "no declared format parses every parseable value")
-    best = max(candidates, key=lambda f: (candidates[f]["coverage"], f))
-    return _repair(batch, "date_format", {"column": col.name, "format": best, "to_format": col.format,
-                                          "rows_affected": candidates[best]["parsed"]},
-                   evidence, 0.5 * candidates[best]["coverage"], False, reason, finding,
+    if len(dc["full"]) > 1:
+        reason = f"formats {', '.join(dc['full'])} each parse every parseable value; day and month cannot be told apart"
+    elif dc["full"]:
+        outside = candidates[best]["parsed"] - candidates[best]["in_batch_month"]
+        reason = (f"{best} parses every value but puts {outside} of {candidates[best]['parsed']} dates outside "
+                  f"{batch}; the batch likely mixes day-first and month-first dates")
+    else:
+        reason = "no declared format parses every parseable value"
+    return _repair(batch, "date_format", detail, evidence, 0.5 * candidates[best]["coverage"], False, reason, finding,
                    "0.5 x coverage of the best format (ambiguous)")
 
 
-def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contract: Contract) -> list[dict]:
+def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contract: Contract,
+                    first: int = 1) -> list[dict]:
     repairs = []
     renames = [f for f in findings if f["kind"] == "rename_candidate"]
     for f in renames:
@@ -298,16 +351,23 @@ def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contr
                   and g["evidence"]["value_match_share"] >= RENAME_MIN_VALUE_MATCH]
         strong = (ev["value_match_share"] >= RENAME_MIN_VALUE_MATCH
                   and ev["name_similarity"] >= RENAME_MIN_NAME_SIMILARITY)
-        auto = strong and not rivals
+        src_tokens, dst_tokens = name_tokens(ev["source_column"]), name_tokens(f["column"])
+        qualifiers = [t for t in src_tokens if t not in dst_tokens] if set(dst_tokens) < set(src_tokens) else []
+        implied = [u for u in contract.col(f["column"]).unit_conversions if u in src_tokens]
+        auto = strong and not rivals and not qualifiers
         if auto:
             reason = None
         elif rivals:
             reason = "more than one column matches"
+        elif qualifiers:
+            reason = (f"{ev['source_column']} adds {', '.join(qualifiers)} to {f['column']}; a qualified column "
+                      f"usually holds a different quantity, so it is not assumed to be {f['column']}")
         else:
             reason = (f"value match {ev['value_match_share']} or name similarity {ev['name_similarity']} "
                       "is below the safe threshold")
         repairs.append(_repair(batch, "rename", {"from": ev["source_column"], "to": f["column"]},
-                               {**ev, "competing_candidates": len(rivals)},
+                               {**ev, "competing_candidates": len(rivals), "qualifier_tokens": qualifiers,
+                                "implied_unit": implied[0] if implied else None},
                                ev["value_match_share"] * (0.5 + 0.5 * ev["name_similarity"]), auto, reason, f,
                                "value match share x (0.5 + 0.5 x name similarity)"))
     for f in findings:
@@ -322,13 +382,20 @@ def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contr
             expected = math.log10(ev["declared_conversions"][unit])
             dev = {k: rnd(abs(math.log10(r) - expected), 4) for k, r in ev["ratios"].items()}
             tails = [dev[k] for k in ("p05", "p95") if k in dev]
-            auto = dev["median"] <= UNIT_MEDIAN_TOLERANCE and all(d <= UNIT_TAIL_TOLERANCE for d in tails)
-            base_median = ev["baseline_scale"]["median"] * ev["declared_conversions"][unit]
+            auto = (dev["median"] <= UNIT_MEDIAN_TOLERANCE and len(tails) == 2
+                    and all(d <= UNIT_TAIL_TOLERANCE for d in tails))
+            ref = ev["baseline_scale"]
+            base_median = ref["median"] * ev["declared_conversions"][unit]
             guard = {"median_min": rnd(base_median * 10 ** -UNIT_MEDIAN_TOLERANCE, 4),
                      "median_max": rnd(base_median * 10 ** UNIT_MEDIAN_TOLERANCE, 4)}
+            # A converted value far outside the baseline distribution suggests the row was already in the target
+            # unit (mixed units), so such rows are held instead of being rescaled.
+            plausible = {"min": rnd(ref.get("p05", ref["median"]) / 10, 6),
+                         "max": rnd(ref.get("p95", ref["median"]) * 10, 6)}
             repairs.append(_repair(batch, "unit_scale",
                                    {"column": col.name, "from_unit": unit, "to_unit": col.unit,
-                                    "factor": str(col.unit_conversions[unit]), "guard": guard},
+                                    "factor": str(col.unit_conversions[unit]), "guard": guard,
+                                    "plausible_after": plausible},
                                    {**ev, "log10_deviation": dev}, 1 - min(1.0, max(dev.values()) / 0.3), auto,
                                    None if auto else "the scale ratio is not a clean match for the declared unit",
                                    f, "1 - max log10 deviation from the declared factor / 0.3"))
@@ -345,6 +412,35 @@ def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contr
                                                            for t in col.values}},
                                        c["confidence"], auto, c["ambiguity"], f,
                                        "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)"))
-    for n, r in enumerate(repairs, start=1):
+    for n, r in enumerate(repairs, start=first):
         r["id"] = f"R-{batch}-{n:02d}"
     return repairs
+
+
+def analyse_batch(batch: str, frame: pd.DataFrame, profile: dict, contract: Contract,
+                  baseline: dict | None) -> tuple[list[dict], list[dict]]:
+    """Drift findings and repair proposals, with column checks re-run on columns that a safe rename would map.
+
+    A rename whose source name implies a declared unit (weight_g) stays safe only if the unit check on the mapped
+    column independently proposes a safe conversion from that unit.
+    """
+    findings = detect_drift(batch, frame, profile, contract, baseline)
+    repairs = propose_repairs(batch, frame, findings, contract)
+    safe = {r["detail"]["from"]: r["detail"]["to"] for r in repairs if r["kind"] == "rename" and r["auto_applicable"]}
+    if safe:
+        renamed = frame.rename(columns=safe)
+        more = [f for f in detect_drift(batch, renamed, profile_frame(renamed, contract), contract, baseline,
+                                        first=len(findings) + 1)
+                if f["column"] in safe.values() and f["kind"] not in RENAME_KINDS]
+        findings += more
+        repairs += propose_repairs(batch, renamed, more, contract, first=len(repairs) + 1)
+    for r in repairs:
+        unit = r["evidence"].get("implied_unit") if r["kind"] == "rename" else None
+        if unit and r["auto_applicable"]:
+            agrees = any(u["kind"] == "unit_scale" and u["auto_applicable"] and u["detail"]["from_unit"] == unit
+                         and u["detail"]["column"] == r["detail"]["to"] for u in repairs)
+            if not agrees:
+                r["auto_applicable"] = False
+                r["ambiguity"] = (f"the name {r['detail']['from']} implies {unit}, but the values do not show a clean "
+                                  f"{unit} scale; mapping it to {r['detail']['to']} needs a human")
+    return findings, repairs

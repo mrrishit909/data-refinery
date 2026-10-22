@@ -44,7 +44,9 @@ def read_raw(path):
         body = [[r.get(k) for k in header] for r in records]
     else:
         wb = openpyxl.load_workbook(path, read_only=True)
-        rows = [list(r) for r in wb.active.iter_rows(values_only=True)]
+        ws = wb.active
+        ws.reset_dimensions()  # do not trust a stored <dimension> record
+        rows = [list(r) for r in ws.iter_rows(values_only=True)]
         wb.close()
         header, body = rows[0], rows[1:]
     return {n: dict(zip(header, row)) for n, row in enumerate(body, start=1)}

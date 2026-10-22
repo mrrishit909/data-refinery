@@ -10,7 +10,9 @@ from pathlib import Path
 
 from .contract import ROOT, load_contract
 
-MAX_TOTAL_BYTES = 1_500_000
+# One run's outputs, enforced by pipeline.run before anything is written. The harness caps a whole run directory at
+# 2,000,000 bytes (project.json max_run_bytes); the remainder is left for files the harness adds.
+MAX_TOTAL_BYTES = 1_900_000
 JSON_KEYS = {
     "manifest.json": ["params", "sources", "contract_version", "fx_table", "package_version", "input_manifest_hash"],
     "profiles.json": ["batches"],
@@ -149,8 +151,15 @@ def render_report(params: dict, recon: dict, repairs: list[dict], ambiguities: l
         "- One contract (`orders.v1`); there is no schema evolution or contract negotiation.",
         "- Category repairs are lexical rules (case, plural, single-edit typo). There is no semantic model, so "
         "anything else is left to a human.",
-        "- Unit-scale drift is judged against the previous accepted batch, or the contract's declared reference when "
-        "no earlier batch is in the request.",
+        "- Unit-scale drift is judged per batch against the previous accepted batch, or the contract's declared "
+        "reference when no earlier batch is in the request. A minority of rows in another unit inside an otherwise "
+        "consistent batch is not detected; converted values far outside the baseline are held as "
+        "UNRESOLVED_UNIT_SCALE.",
+        "- Day-first or month-first dates are converted only when exactly one declared format reads every non-ISO "
+        "value and every result falls in the batch month; otherwise those rows are held as BAD_DATE, including "
+        "genuine late arrivals written that way.",
+        "- Spreadsheet formulas are not evaluated (their text is the raw value); JSON objects that repeat a key, "
+        "files that are not UTF-8, and runs whose outputs would exceed the per-run byte budget are rejected.",
         "- Duplicates are detected within a batch and against ids accepted earlier in the same run only.",
         "",
     ]

@@ -41,6 +41,6 @@ accounted for: `rows in = accepted + quarantined + merged duplicates`.
 
 Synthetic fixtures only (durable runs never take uploads); one contract (`orders.v1`) and one
 fixed, synthetic FX table; repairs cover renames, date formats, unit scale and unambiguous
-category variants, and never guess business meaning (category rules are lexical only); duplicates are detected within a run, not across runs; intake is bounded to four batches, 5,000
-rows and 2 MB per file and one XLSX sheet. The optional AI grader runs only if the owner adds an
+category variants, and never guess business meaning (category rules are lexical only, and a one-letter substitution is never auto-applied); unit detection works per batch, so a minority of rows in another unit inside an otherwise consistent batch is not flagged; duplicates are detected within a run, not across runs; a JSON record that repeats a key rejects its file; intake is bounded to four batches, 5,000
+rows and 2 MB per file and one XLSX sheet, and a request whose outputs would exceed 1.9 MB is rejected before anything is written. The optional AI grader runs only if the owner adds an
 inference secret; release records state whether it ran.

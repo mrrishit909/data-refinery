@@ -19,9 +19,12 @@ CONTRACTS_DIR = ROOT / "contracts"
 FIXTURES_DIR = ROOT / "fixtures"
 SCHEMAS_DIR = ROOT / "schemas"
 
-NUMBER = re.compile(r"^-?\d+(\.\d+)?$")
-INTEGER = re.compile(r"^-?\d+$")
-ISO_SHAPE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# ASCII only: \d would also accept fullwidth and other Unicode digits.
+NUMBER = re.compile(r"^-?[0-9]+(\.[0-9]+)?$")
+INTEGER = re.compile(r"^-?[0-9]+$")
+ISO_SHAPE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+# Integer parts longer than this cannot be checked exactly as float64/Int64, so they are rejected as out of range.
+MAX_INTEGER_DIGITS = 15
 
 
 class Column(BaseModel):
@@ -34,6 +37,7 @@ class Column(BaseModel):
     pattern: str | None = None
     format: str | None = None
     alternate_formats: list[str] = []
+    year_range: list[int] = []
     scale: int | None = None
     min: Decimal | None = None
     exclusive_min: Decimal | None = None
@@ -119,11 +123,24 @@ def is_iso_date(value: str) -> bool:
 
 
 def parse_date(value: str, fmt: str) -> str | None:
-    """Strict parse under one declared format; returns the canonical ISO string or None."""
+    """Strict parse under one declared format; returns the canonical ISO string or None. ASCII digits only."""
+    if not value.isascii():
+        return None
     try:
         return datetime.strptime(value, fmt).date().isoformat()
     except ValueError:
         return None
+
+
+def too_many_digits(value: str) -> bool:
+    return len(value.lstrip("-").split(".")[0].lstrip("0")) > MAX_INTEGER_DIGITS
+
+
+def parse_number(value: str | None) -> float | None:
+    """A bounded numeric reading for profiling and guards; None when the text is not a plain decimal."""
+    if value is None or not NUMBER.match(value) or too_many_digits(value):
+        return None
+    return float(value)
 
 
 def normalize_cell(col: Column, value: str | None, date_format: str | None = None, factor: Decimal | None = None,
@@ -137,18 +154,26 @@ def normalize_cell(col: Column, value: str | None, date_format: str | None = Non
         return None, None, False
     if col.type == "date":
         if is_iso_date(value):
-            return value, None, False
-        parsed = parse_date(value, date_format) if date_format else None
-        return (parsed, None, True) if parsed else (None, "BAD_DATE", False)
+            parsed, by_repair = value, False
+        else:
+            parsed, by_repair = (parse_date(value, date_format) if date_format else None), True
+        if parsed is None or (col.year_range and not col.year_range[0] <= int(parsed[:4]) <= col.year_range[1]):
+            return None, "BAD_DATE", False
+        return parsed, None, by_repair
     if col.type == "enum":
         if value not in col.values and category_map and value in category_map:
             return category_map[value], None, True
         return value, None, False
+    if col.numeric and (INTEGER.match(value) if col.type == "integer" else NUMBER.match(value)) \
+            and too_many_digits(value):
+        return None, "OUT_OF_RANGE", False
     if col.type == "integer":
         return (str(int(value)), None, False) if INTEGER.match(value) else (None, "BAD_NUMBER", False)
     if col.numeric:
         if not NUMBER.match(value):
             return None, "BAD_NUMBER", False
+        if factor is None and len(value.partition(".")[2]) > (col.scale or 0):
+            return None, "BAD_NUMBER", False  # more decimal places than the contract scale, even trailing zeros
         number = Decimal(value) * factor if factor is not None else Decimal(value)
         quantum = Decimal(1).scaleb(-(col.scale or 0))
         fixed = number.quantize(quantum)

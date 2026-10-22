@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
@@ -15,10 +16,9 @@ import pandas as pd
 from jsonschema import Draft202012Validator
 
 from . import __version__
-from .analysis import classify_label, detect_drift, profile_frame, propose_repairs, rnd
+from .analysis import AMBIGUOUS_RULES, analyse_batch, classify_label, date_candidates, profile_frame, rnd
 from .contract import (
     FIXTURES_DIR,
-    NUMBER,
     SCHEMAS_DIR,
     Contract,
     FxTable,
@@ -29,9 +29,10 @@ from .contract import (
     load_contract,
     load_fx,
     normalize_cell,
+    parse_number,
 )
-from .intake import find_source, read_batch
-from .outputs import render_report
+from .intake import IntakeError, find_source, read_batch
+from .outputs import MAX_TOTAL_BYTES, render_report
 
 LINEAGE_COLUMNS = ["_batch", "_source_file", "_source_row"]
 DERIVED_COLUMNS = ["amount_usd", "restates_period"]
@@ -47,17 +48,21 @@ REASON_CODES = {
     "AMBIGUOUS_CATEGORY": "category whose meaning is undetermined; never auto-mapped",
     "INVALID_ENUM": "enum value outside the contract",
     "NEGATIVE_AMOUNT": "amount below zero",
-    "OUT_OF_RANGE": "number outside the contract range",
+    "OUT_OF_RANGE": "number outside the contract range, or more than 15 integer digits",
     "DUPLICATE_CONFLICT": "order_id repeated with different content; every copy is quarantined",
     "DUPLICATE_PRIOR_BATCH": "order_id already accepted from an earlier batch in this run",
     "UNKNOWN_COLUMN_SET": "a required contract column is absent and no rename was applied",
-    "UNRESOLVED_UNIT_SCALE": "column looks like a different unit and the conversion was not applied",
+    "UNRESOLVED_UNIT_SCALE": "column looks like a different unit and the conversion was not applied, or the "
+                             "value is implausible after conversion",
 }
-AMBIGUOUS_RULES = {"abbreviation", "composite", "typo_multiple"}
 
 
 class RequestError(ValueError):
     pass
+
+
+class OutputBudgetError(IntakeError):
+    """The request's inputs would produce more output than one run may hold."""
 
 
 def request_problems(params: dict) -> list[str]:
@@ -93,7 +98,8 @@ def _message(code: str, column: str | None, value, contract: Contract) -> str:
     text = {
         "MISSING_ID": "order_id is blank",
         "BAD_PATTERN": f"{column} {v} does not match {col.pattern if col else ''}",
-        "BAD_DATE": f"{column} {v} is not an ISO date",
+        "BAD_DATE": f"{column} {v} is not an ISO date"
+                    + (f" in years {col.year_range[0]}-{col.year_range[1]}" if col and col.year_range else ""),
         "BAD_NUMBER": f"{column} {v} is not a number with at most {col.scale or 0} decimals" if col else "",
         "NULL_REQUIRED": f"{column} is null",
         "INVALID_CATEGORY": f"{column} {v} is not a contract category",
@@ -101,7 +107,10 @@ def _message(code: str, column: str | None, value, contract: Contract) -> str:
         "INVALID_ENUM": f"{column} {v} is not an allowed value",
         "NEGATIVE_AMOUNT": f"amount {v} is negative",
         "OUT_OF_RANGE": f"{column} {v} is out of range",
+        "UNRESOLVED_UNIT_SCALE": f"{column} {v} is implausible after unit conversion; its unit is unclear",
     }.get(code, "")
+    if isinstance(value, str) and value.startswith("="):
+        text += " (unevaluated spreadsheet formula)"
     return text
 
 
@@ -111,11 +120,13 @@ def _trim(v):
 
 def process_batch(batch: str, raw: pd.DataFrame, source_file: str, contract: Contract, fx: FxTable,
                   repairs: list[dict], detected_units: dict[str, str], prior_ids: dict[str, str],
-                  closed_periods: set[str]) -> BatchResult:
+                  closed_periods: set[str], unmapped: dict[str, str] | None = None) -> BatchResult:
     """Transform one raw batch with the given repairs and route every row to accepted, quarantined or merged.
 
     repairs: repairs to apply (each checks its own guard against this batch). detected_units: column -> unit for
     detected unit shifts; unless a unit_scale repair converted that column, rows with a value there are quarantined.
+    unmapped: rename candidates (source column -> contract column); if the contract column ends up unmapped, rows
+    with a value in the source column are quarantined instead of silently losing that value.
     """
     n = len(raw)
     rows = list(raw.index)
@@ -156,15 +167,30 @@ def process_batch(batch: str, raw: pd.DataFrame, source_file: str, contract: Con
 
     date_fmt: dict[str, tuple[str, str]] = {}
     for r in active("date_format"):
-        if column_sources.get(r["detail"]["column"]):
-            date_fmt.setdefault(r["detail"]["column"], (r["detail"]["format"], r["id"]))
+        col = r["detail"]["column"]
+        if not column_sources.get(col) or col in date_fmt:
+            skipped.append({"repair": r["id"], "reason": f"column {col} absent or already has a date repair"})
+            continue
+        dc = date_candidates([v for v in trimmed[col] if v is not None], contract.col(col).alternate_formats, batch)
+        if dc["safe_format"] == r["detail"]["format"]:
+            date_fmt[col] = (r["detail"]["format"], r["id"])
+        elif not dc["parseable"]:
+            skipped.append({"repair": r["id"], "reason": f"no non-ISO {col} values that a declared format reads"})
+        else:
+            skipped.append({"repair": r["id"], "reason": f"guard not met: {r['detail']['format']} is not the only "
+                                                         f"declared format that reads every non-ISO {col} value "
+                                                         f"into {batch}"})
     factors: dict[str, tuple[Decimal, str]] = {}
+    plausible: dict[str, dict] = {}
     for r in active("unit_scale"):
         col = r["detail"]["column"]
-        nums = [float(v) for v in trimmed.get(col, []) if v is not None and NUMBER.match(v)]
+        nums = [x for x in (parse_number(v) for v in trimmed.get(col, [])) if x is not None]
         g = r["detail"]["guard"]
-        if nums and g["median_min"] <= median(nums) <= g["median_max"]:
+        if col in factors or not column_sources.get(col):
+            skipped.append({"repair": r["id"], "reason": f"column {col} absent or already converted"})
+        elif nums and g["median_min"] <= median(nums) <= g["median_max"]:
             factors[col] = (Decimal(r["detail"]["factor"]), r["id"])
+            plausible[col] = r["detail"].get("plausible_after", {})
         else:
             skipped.append({"repair": r["id"], "reason": f"guard not met: {col} median outside "
                                                          f"[{g['median_min']}, {g['median_max']}]"})
@@ -185,6 +211,9 @@ def process_batch(batch: str, raw: pd.DataFrame, source_file: str, contract: Con
         out = []
         for i, v in enumerate(trimmed[col.name]):
             value, error, by_repair = normalize_cell(col, v, fmt, factor, cmap)
+            band = plausible.get(col.name)
+            if by_repair and factor is not None and band and not band["min"] <= float(value) <= band["max"]:
+                value, error = None, "UNRESOLVED_UNIT_SCALE"
             out.append(value)
             if error:
                 cell_errors[(rows[i], col.name)] = error
@@ -217,13 +246,18 @@ def process_batch(batch: str, raw: pd.DataFrame, source_file: str, contract: Con
         else:
             label = f"category_map {d['from']!r} -> {d['to']}"
         step(label, "repair", [d["column"]], changed=per_repair[rid], repair=rid)
+    settled = set(applied) | {x["repair"] for x in skipped}
+    for r in repairs:
+        if r["id"] not in settled:
+            skipped.append({"repair": r["id"], "reason": "not applicable to this batch"})
     canon = pd.DataFrame(canonical, index=raw.index, dtype=object)
 
-    # Exact duplicates: identical raw records. Conflicts: same non-blank order_id, different content.
+    # Exact duplicates: identical raw records after the declared trim and blank-to-null rule (so copies that differ
+    # only in surrounding whitespace are duplicates, not conflicts). Conflicts: same order_id, different content.
     merged: dict[int, int] = {}
     first_seen: dict[tuple, int] = {}
     for rec in raw.itertuples(index=True, name=None):
-        key = rec[1:]
+        key = tuple(_trim(v) for v in rec[1:])
         if key in first_seen:
             merged[rec[0]] = first_seen[key]
         else:
@@ -251,6 +285,13 @@ def process_batch(batch: str, raw: pd.DataFrame, source_file: str, contract: Con
         for r in live:
             reasons[r].append({"code": "UNKNOWN_COLUMN_SET", "column": None,
                                "message": f"required column(s) {', '.join(missing_required)} absent"})
+    for src, target in sorted((unmapped or {}).items()):
+        if src not in raw.columns or column_sources.get(target) or target in missing_required:
+            continue
+        for r in live:
+            if _trim(raw.at[r, src]) is not None:
+                reasons[r].append({"code": "UNKNOWN_COLUMN_SET", "column": src,
+                                   "message": f"column {src} may hold {target} but was not mapped"})
     position = {r: i for i, r in enumerate(rows)}
     for (row, col), code in sorted(cell_errors.items()):
         if row not in merged:
@@ -337,15 +378,20 @@ def _quarantine_rows(result: BatchResult) -> list[dict]:
     return out
 
 
-def _money_by_currency(result: BatchResult, rows: list[int]) -> dict[str, str]:
+def _raw_amount(result: BatchResult, row: int, contract: Contract) -> str | None:
+    """The row's raw amount under the contract's numeric parse (sign kept), or None when it does not parse."""
+    src = result.column_sources.get("amount")
+    value, error, _ = normalize_cell(contract.col("amount"), _trim(result.raw.at[row, src]) if src else None)
+    return None if error else value
+
+
+def _money_by_currency(result: BatchResult, rows: list[int], contract: Contract, cleaned: bool = False) -> dict:
+    """Amounts grouped by raw currency text: raw parses, or (cleaned=True) the accepted canonical amounts."""
     totals: dict[str, Decimal] = defaultdict(Decimal)
-    amount_src = result.column_sources.get("amount")
     currency_src = result.column_sources.get("currency")
-    if not amount_src:
-        return {}
     for r in rows:
-        a = _trim(result.raw.at[r, amount_src])
-        if a is not None and NUMBER.match(a):
+        a = result.canonical.at[r, "amount"] if cleaned else _raw_amount(result, r, contract)
+        if a is not None:
             cur = _trim(result.raw.at[r, currency_src]) if currency_src else None
             totals[cur or "(null)"] += Decimal(a)
     return {k: format(v, "f") for k, v in sorted(totals.items())}
@@ -479,10 +525,20 @@ def _self_checks(results: list[BatchResult], manifests: list[dict], paths: list[
     checks.append({"id": "accepted_rows_satisfy_contract", "passed": not failures,
                    "detail": f"pandera re-validation of all accepted rows with uniqueness enforced: "
                              f"{len(failures)} failures"})
-    checks.append({"id": "idempotency", "passed": True,
-                   "detail": "outputs contain no timestamps, absolute paths or random state; two runs of the same "
-                             "request are byte-identical (asserted by tests/datarefinery test_idempotent, not by "
-                             "this run)"})
+    unstable = []
+    for res in results:
+        if not res.accepted:
+            continue
+        before = res.canonical.loc[res.accepted, contract.names].reset_index(drop=True)
+        again = process_batch(res.batch, before.set_axis(pd.RangeIndex(1, len(before) + 1)), res.source_file,
+                              contract, fx, [], {}, {}, set())
+        after = again.canonical.loc[again.accepted, contract.names].reset_index(drop=True)
+        if len(again.accepted) != len(before) or not after.equals(before):
+            unstable.append(res.batch)
+    checks.append({"id": "idempotency", "passed": not unstable,
+                   "detail": "accepted rows re-processed as a fresh batch with no repairs are all accepted again "
+                             "with identical values (cleaned output is a fixed point)"
+                             + (f"; unstable batches: {unstable}" if unstable else "")})
     return checks
 
 
@@ -508,17 +564,26 @@ def _update_periods(periods: dict[str, dict], res: BatchResult) -> None:
                                           "before_usd": format(before, "f"), "after_usd": entry["accepted_usd"]})
 
 
-def _write_csv(path: Path, columns: list[str], rows: list[dict]) -> None:
-    with path.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh, lineterminator="\n")
-        w.writerow(columns)
-        for row in rows:
-            w.writerow(["" if row[c] is None else row[c] for c in columns])
+def _csv_bytes(columns: list[str], rows: list[dict]) -> bytes:
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator="\n")
+    w.writerow(columns)
+    for row in rows:
+        w.writerow(["" if row[c] is None else row[c] for c in columns])
+    return buf.getvalue().encode("utf-8")
 
 
-def _write_json(path: Path, obj) -> None:
-    path.write_text(json.dumps(obj, sort_keys=True, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
-                    encoding="utf-8")
+def _json_bytes(obj) -> bytes:
+    return (json.dumps(obj, sort_keys=True, indent=2, ensure_ascii=False, allow_nan=False) + "\n").encode("utf-8")
+
+
+def _resolution_code(r: dict) -> str:
+    """The reason code that rows affected by a repair carry while the repair is not applied."""
+    if r["kind"] == "category_map":
+        if r["detail"]["column"] != "category":
+            return "INVALID_ENUM"
+        return "AMBIGUOUS_CATEGORY" if r["detail"]["rule"] in AMBIGUOUS_RULES else "INVALID_CATEGORY"
+    return {"date_format": "BAD_DATE", "rename": "UNKNOWN_COLUMN_SET", "unit_scale": "UNRESOLVED_UNIT_SCALE"}[r["kind"]]
 
 
 def _canonical_hash(obj) -> str:
@@ -526,10 +591,9 @@ def _canonical_hash(obj) -> str:
                                                  ensure_ascii=False).encode()).hexdigest()
 
 
-def _prepare_outdir(outdir: Path) -> None:
+def _check_outdir(outdir: Path) -> None:
     if outdir.exists() and (not outdir.is_dir() or any(outdir.iterdir())):
         raise RequestError(f"output directory {outdir.name} exists and is not empty")
-    outdir.mkdir(parents=True, exist_ok=True)
 
 
 def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
@@ -538,7 +602,7 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
     if problems:
         raise RequestError("; ".join(problems))
     outdir = Path(outdir)
-    _prepare_outdir(outdir)
+    _check_outdir(outdir)
     contract = load_contract(params["contract"])
     fx = load_fx(params["fx_table"])
     mode = params["repair_mode"]
@@ -554,13 +618,13 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
         manifests.append(manifest)
         paths.append(path)
         raw_profile = profile_frame(raw, contract)
-        findings = detect_drift(batch, raw, raw_profile, contract, baseline)
-        repairs = propose_repairs(batch, raw, findings, contract)
+        findings, repairs = analyse_batch(batch, raw, raw_profile, contract, baseline)
         to_apply = [r for r in repairs if r["auto_applicable"]] if mode == "apply-safe" else []
         unit_cols = {r["detail"]["column"]: r["detail"]["from_unit"] for r in repairs if r["kind"] == "unit_scale"}
-        pre = process_batch(batch, raw, path.name, contract, fx, [], unit_cols, prior_ids, closed)
-        res = process_batch(batch, raw, path.name, contract, fx, to_apply, unit_cols, prior_ids, closed) \
-            if to_apply else pre
+        candidates = {r["detail"]["from"]: r["detail"]["to"] for r in repairs if r["kind"] == "rename"}
+        pre = process_batch(batch, raw, path.name, contract, fx, [], unit_cols, prior_ids, closed, candidates)
+        res = process_batch(batch, raw, path.name, contract, fx, to_apply, unit_cols, prior_ids, closed,
+                            candidates) if to_apply else pre
         for r in repairs:
             r["applied"] = r["id"] in res.applied
         all_repairs += repairs
@@ -584,13 +648,17 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
     recon_batches = {}
     for res in results:
         m = len(res.raw)
-        money = {"input": _money_by_currency(res, list(res.raw.index)),
-                 "accepted": _money_by_currency(res, res.accepted),
-                 "quarantined": _money_by_currency(res, res.quarantined),
-                 "merged": _money_by_currency(res, sorted(res.merged))}
+        # accepted uses the cleaned amounts while the other parts use raw parses, so the balance fails if any
+        # accepted amount differs from its source.
+        money = {"input": _money_by_currency(res, list(res.raw.index), contract),
+                 "accepted": _money_by_currency(res, res.accepted, contract, cleaned=True),
+                 "quarantined": _money_by_currency(res, res.quarantined, contract),
+                 "merged": _money_by_currency(res, sorted(res.merged), contract)}
         currencies = sorted(set().union(*money.values()))
         balanced = all(Decimal(money["input"].get(c, "0")) == sum(Decimal(money[k].get(c, "0"))
                        for k in ("accepted", "quarantined", "merged")) for c in currencies)
+        mismatched = sum(_raw_amount(res, r, contract) != res.canonical.at[r, "amount"] for r in res.accepted)
+        unparseable = sum(_raw_amount(res, r, contract) is None for r in res.raw.index)
         cleaned_sum: dict[str, Decimal] = defaultdict(Decimal)
         usd: dict[str, Decimal] = defaultdict(Decimal)
         for r in res.accepted:
@@ -604,8 +672,11 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
             "rows_merged_duplicates": len(res.merged),
             "identity_holds": m == len(res.accepted) + len(res.quarantined) + len(res.merged),
             "amount_by_currency": {**money, "balanced": balanced, "accepted_cleaned": cleaned_fmt,
-                                   "cleaned_matches_input": cleaned_fmt == money["accepted"],
-                                   "note": "parseable raw amounts grouped by raw currency text"},
+                                   "cleaned_matches_input": mismatched == 0,
+                                   "unparseable_amount_rows": unparseable,
+                                   "note": "grouped by raw currency text; input, quarantined and merged sum raw "
+                                           "amounts that pass the contract parse, accepted sums cleaned amounts; "
+                                           "accepted_cleaned groups cleaned amounts by contract currency"},
             "accepted_usd_by_period": {k: format(v, "f") for k, v in sorted(usd.items())},
             "accepted_by_category": dict(sorted(Counter(res.canonical.loc[res.accepted, "category"]).items())),
             "quarantine_reasons": dict(sorted(Counter(c for r in res.quarantined
@@ -626,9 +697,7 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
     for r in all_repairs:
         if r["auto_applicable"]:
             continue
-        code = {"category_map": "AMBIGUOUS_CATEGORY" if r["detail"]["rule"] in AMBIGUOUS_RULES else
-                "INVALID_CATEGORY", "date_format": "BAD_DATE", "rename": "UNKNOWN_COLUMN_SET",
-                "unit_scale": "UNRESOLVED_UNIT_SCALE"}[r["kind"]]
+        code = _resolution_code(r)
         ambiguities.append({"id": f"A-{r['id'][2:]}", "repair": r["id"], "batch": r["batch"], "kind": r["kind"],
                             "column": r["detail"].get("column", r["detail"].get("to")),
                             "value": r["detail"].get("from"), "rows": r["detail"].get("rows_affected"),
@@ -668,25 +737,34 @@ def run(params: dict, outdir: Path, fixtures_dir: Path = FIXTURES_DIR) -> dict:
     lineage = _lineage(results, manifests, contract, fx)
     checks = _self_checks(results, manifests, paths, fx, contract)
 
-    _write_json(outdir / "manifest.json", manifest)
-    _write_json(outdir / "profiles.json", {"batches": profiles})
-    _write_json(outdir / "drift.json", {"batches": drift})
-    _write_json(outdir / "repairs.json", {"repair_mode": mode, "repairs": all_repairs,
-                                          "summary": {"proposed": len(all_repairs),
-                                                      "auto_applicable": sum(r["auto_applicable"] for r in all_repairs),
-                                                      "applied": sum(r["applied"] for r in all_repairs)}})
-    _write_json(outdir / "ambiguities.json", {"ambiguities": ambiguities})
-    _write_json(outdir / "plan.json", plan)
-    _write_csv(outdir / "cleaned.csv", [*contract.names, *DERIVED_COLUMNS, *LINEAGE_COLUMNS], cleaned_rows)
-    _write_csv(outdir / "quarantine.csv", QUARANTINE_COLUMNS, quarantine_rows)
-    _write_json(outdir / "reconciliation.json", reconciliation)
-    _write_json(outdir / "lineage.json", lineage)
-    _write_json(outdir / "quality.json", quality)
-    _write_json(outdir / "samples.json", samples)
-    _write_json(outdir / "checks.json", {"all_passed": all(c["passed"] for c in checks), "checks": checks,
-                                         "reason_codes": REASON_CODES})
-    (outdir / "report.md").write_text(render_report(params, reconciliation, all_repairs, ambiguities, checks),
-                                      encoding="utf-8")
+    files = {
+        "manifest.json": _json_bytes(manifest),
+        "profiles.json": _json_bytes({"batches": profiles}),
+        "drift.json": _json_bytes({"batches": drift}),
+        "repairs.json": _json_bytes({"repair_mode": mode, "repairs": all_repairs,
+                                     "summary": {"proposed": len(all_repairs),
+                                                 "auto_applicable": sum(r["auto_applicable"] for r in all_repairs),
+                                                 "applied": sum(r["applied"] for r in all_repairs)}}),
+        "ambiguities.json": _json_bytes({"ambiguities": ambiguities}),
+        "plan.json": _json_bytes(plan),
+        "cleaned.csv": _csv_bytes([*contract.names, *DERIVED_COLUMNS, *LINEAGE_COLUMNS], cleaned_rows),
+        "quarantine.csv": _csv_bytes(QUARANTINE_COLUMNS, quarantine_rows),
+        "reconciliation.json": _json_bytes(reconciliation),
+        "lineage.json": _json_bytes(lineage),
+        "quality.json": _json_bytes(quality),
+        "samples.json": _json_bytes(samples),
+        "checks.json": _json_bytes({"all_passed": all(c["passed"] for c in checks), "checks": checks,
+                                    "reason_codes": REASON_CODES}),
+        "report.md": render_report(params, reconciliation, all_repairs, ambiguities, checks).encode("utf-8"),
+    }
+    total = sum(len(b) for b in files.values())
+    if total > MAX_TOTAL_BYTES:
+        raise OutputBudgetError(f"these batches would produce {total} bytes of output, over the {MAX_TOTAL_BYTES} "
+                                "byte per-run budget; request fewer or smaller batches")
+    _check_outdir(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    for name, data in files.items():
+        (outdir / name).write_bytes(data)
     return {"repair_mode": mode, "batches": {b: {k: v[k] for k in ("rows_in", "rows_accepted", "rows_quarantined",
                                                                      "rows_merged_duplicates")}
                                              for b, v in recon_batches.items()},

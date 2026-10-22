@@ -143,7 +143,7 @@ export function Inspector({ selection, run, onClose }: { selection: Selection; r
           {Object.entries(r.evidence).map(([k, v]) => (
             <div key={k} style={{ display: "contents" }}>
               <dt>{k.replace(/_/g, " ")}</dt>
-              <dd className="dr-mono">{typeof v === "object" ? JSON.stringify(v) : String(v)}</dd>
+              <dd className="dr-mono">{v === null || v === undefined ? "none" : typeof v === "object" ? JSON.stringify(v) : String(v)}</dd>
             </div>
           ))}
         </dl>

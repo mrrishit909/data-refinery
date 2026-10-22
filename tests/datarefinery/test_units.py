@@ -161,6 +161,7 @@ def test_drift_unit_scale_thousandfold_is_safe():
     ("electronics", "case", "Electronics"), ("HOME", "case", "Home"), ("Toy", "plural", "Toys"),
     ("Electronic", "plural", "Electronics"), ("Apparrel", "typo", "Apparel"), ("Grocey", "typo", "Grocery"),
     ("Elec", "abbreviation", None), ("Home & Garden", "composite", None), ("Gift Cards", "unmapped", None),
+    ("Tops", "substitution", None),
 ])
 def test_category_rules(label, rule, target):
     c = classify_label(label, CATEGORIES)

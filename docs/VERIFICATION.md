@@ -16,6 +16,18 @@ including blocked ones, is in `releases/history.json`, with findings and small e
 | published-matches-state | every published result file of the latest run is byte-identical to the state branch | `python -m harness verify-published` |
 | browser | 12 checks x 3 widths (390, 768, 1440), all 36 must pass, against the live site: accounting equation and flow, every pipeline station by deep link, batch rack, quarantine reason filters and pagination, inspector open and close (sheet on narrow screens), before / after toggle, lineage column tracing, CSV preview with a generated file, navigation and back button, skip link and focus, reduced motion, dark theme (axe plus a direct check that the primary action's text and fill differ), loading / empty / error-retry / stale states; axe (WCAG 2.2 AA serious and critical), horizontal overflow, console errors and failed same-origin requests | Playwright, `frontend/tests/e2e/site.spec.ts` |
 
+## Independent adversarial review
+
+A separate data-quality adversary (an agent that did not build the engine) attacked the pipeline's
+claims with crafted inputs and recorded each confirmed defect as a strict-xfail test in
+`tests/datarefinery/test_dr_adversarial.py`. It confirmed 20 defects (DR-01 to DR-20), two of them
+blockers: any non-automatic repair other than a category map crashed the run, and an XLSX file with a
+stale dimension record silently dropped rows (the gates' own reader shared that blind spot). 19 are
+fixed and their tests now pass as plain regression tests; DR-20a (a minority of rows in a different
+unit inside one batch) remains a strict xfail and a documented limitation. Eight further tests guard
+claims that held (byte-identical replay across hash seeds, no numeric coercion, half-up FX rounding,
+first-period restatement, cross-batch duplicates, CSV edge cases).
+
 ## Subjective review (separate from gates)
 
 The rubric's subjective criteria (hierarchy, typography, spacing, palette, motion, responsive
