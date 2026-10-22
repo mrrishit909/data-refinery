@@ -1,0 +1,44 @@
+{
+  "ambiguities": [
+    {
+      "batch": "2026-03",
+      "candidates": [
+        "Electronics"
+      ],
+      "column": "category",
+      "id": "A-2026-03-02",
+      "kind": "category_map",
+      "reason": "'Elec' is only a prefix of Electronics; a truncated label can also abbreviate a category outside the contract, so the data does not determine its meaning.",
+      "repair": "R-2026-03-02",
+      "resolution": "not auto-applied in any mode; affected rows are quarantined as AMBIGUOUS_CATEGORY until a human decides",
+      "rows": 7,
+      "value": "Elec"
+    },
+    {
+      "batch": "2026-03",
+      "candidates": [],
+      "column": "category",
+      "id": "A-2026-03-04",
+      "kind": "category_map",
+      "reason": "'Gift Cards' matches no contract category by case, plural, single-edit typo, prefix or token.",
+      "repair": "R-2026-03-04",
+      "resolution": "not auto-applied in any mode; affected rows are quarantined as INVALID_CATEGORY until a human decides",
+      "rows": 4,
+      "value": "Gift Cards"
+    },
+    {
+      "batch": "2026-03",
+      "candidates": [
+        "Home"
+      ],
+      "column": "category",
+      "id": "A-2026-03-07",
+      "kind": "category_map",
+      "reason": "'Home & Garden' combines Home with other terms (garden) that have no contract category; it is broader than Home and may belong elsewhere.",
+      "repair": "R-2026-03-07",
+      "resolution": "not auto-applied in any mode; affected rows are quarantined as AMBIGUOUS_CATEGORY until a human decides",
+      "rows": 6,
+      "value": "Home & Garden"
+    }
+  ]
+}

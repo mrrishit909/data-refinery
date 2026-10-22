@@ -1,0 +1,709 @@
+{
+  "batches": {
+    "2026-01": {
+      "applied_repairs": [],
+      "proposed_not_applied": [],
+      "skipped_repairs": [],
+      "steps": [
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "file": "orders_2026-01.csv"
+          },
+          "id": "step:2026-01:01:intake",
+          "kind": "base",
+          "name": "intake",
+          "order": 1,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "ignored_extra_columns": [],
+            "missing_optional": [],
+            "missing_required": []
+          },
+          "id": "step:2026-01:02:conform_columns",
+          "kind": "base",
+          "name": "conform_columns",
+          "order": 2,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {},
+          "id": "step:2026-01:03:trim_blank_to_null",
+          "kind": "base",
+          "name": "trim_blank_to_null",
+          "order": 3,
+          "repair": null,
+          "rows_changed": 52,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "parse_errors": {},
+            "reformatted": {}
+          },
+          "id": "step:2026-01:04:parse_declared_types",
+          "kind": "base",
+          "name": "parse_declared_types",
+          "order": 4,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "order_id"
+          ],
+          "detail": {
+            "conflict_rows": 0,
+            "merged": 0
+          },
+          "id": "step:2026-01:05:deduplicate",
+          "kind": "route",
+          "name": "deduplicate",
+          "order": 5,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "engine": "pandera",
+            "quarantined": 0
+          },
+          "id": "step:2026-01:06:validate_contract",
+          "kind": "route",
+          "name": "validate_contract",
+          "order": 6,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "amount_usd"
+          ],
+          "detail": {
+            "fx_table": "fixed-2026q1"
+          },
+          "id": "step:2026-01:07:currency_normalize",
+          "kind": "derive",
+          "name": "currency_normalize",
+          "order": 7,
+          "repair": null,
+          "rows_changed": 1000,
+          "rows_in": 1000,
+          "rows_out": 1000
+        },
+        {
+          "columns": [
+            "restates_period"
+          ],
+          "detail": {
+            "closed_periods": []
+          },
+          "id": "step:2026-01:08:flag_late_arrivals",
+          "kind": "derive",
+          "name": "flag_late_arrivals",
+          "order": 8,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1000,
+          "rows_out": 1000
+        }
+      ]
+    },
+    "2026-02": {
+      "applied_repairs": [
+        "R-2026-02-01",
+        "R-2026-02-02"
+      ],
+      "proposed_not_applied": [],
+      "skipped_repairs": [],
+      "steps": [
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "file": "orders_2026-02.csv"
+          },
+          "id": "step:2026-02:01:intake",
+          "kind": "base",
+          "name": "intake",
+          "order": 1,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "customer_id"
+          ],
+          "detail": {},
+          "id": "step:2026-02:02:rename",
+          "kind": "repair",
+          "name": "rename cust_id -> customer_id",
+          "order": 2,
+          "repair": "R-2026-02-01",
+          "rows_changed": 1206,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "ignored_extra_columns": [],
+            "missing_optional": [],
+            "missing_required": []
+          },
+          "id": "step:2026-02:03:conform_columns",
+          "kind": "base",
+          "name": "conform_columns",
+          "order": 3,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {},
+          "id": "step:2026-02:04:trim_blank_to_null",
+          "kind": "base",
+          "name": "trim_blank_to_null",
+          "order": 4,
+          "repair": null,
+          "rows_changed": 41,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "parse_errors": {
+              "order_date": 5
+            },
+            "reformatted": {}
+          },
+          "id": "step:2026-02:05:parse_declared_types",
+          "kind": "base",
+          "name": "parse_declared_types",
+          "order": 5,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "order_date"
+          ],
+          "detail": {},
+          "id": "step:2026-02:06:date_format",
+          "kind": "repair",
+          "name": "date_format %d/%m/%Y -> ISO",
+          "order": 6,
+          "repair": "R-2026-02-02",
+          "rows_changed": 177,
+          "rows_in": 1206,
+          "rows_out": 1206
+        },
+        {
+          "columns": [
+            "order_id"
+          ],
+          "detail": {
+            "conflict_rows": 12,
+            "merged": 20
+          },
+          "id": "step:2026-02:07:deduplicate",
+          "kind": "route",
+          "name": "deduplicate",
+          "order": 7,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1206,
+          "rows_out": 1186
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "engine": "pandera",
+            "quarantined": 20
+          },
+          "id": "step:2026-02:08:validate_contract",
+          "kind": "route",
+          "name": "validate_contract",
+          "order": 8,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1186,
+          "rows_out": 1166
+        },
+        {
+          "columns": [
+            "amount_usd"
+          ],
+          "detail": {
+            "fx_table": "fixed-2026q1"
+          },
+          "id": "step:2026-02:09:currency_normalize",
+          "kind": "derive",
+          "name": "currency_normalize",
+          "order": 9,
+          "repair": null,
+          "rows_changed": 1166,
+          "rows_in": 1166,
+          "rows_out": 1166
+        },
+        {
+          "columns": [
+            "restates_period"
+          ],
+          "detail": {
+            "closed_periods": [
+              "2026-01"
+            ]
+          },
+          "id": "step:2026-02:10:flag_late_arrivals",
+          "kind": "derive",
+          "name": "flag_late_arrivals",
+          "order": 10,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1166,
+          "rows_out": 1166
+        }
+      ]
+    },
+    "2026-03": {
+      "applied_repairs": [
+        "R-2026-03-10",
+        "R-2026-03-01",
+        "R-2026-03-03",
+        "R-2026-03-05",
+        "R-2026-03-06",
+        "R-2026-03-08",
+        "R-2026-03-09"
+      ],
+      "proposed_not_applied": [
+        "R-2026-03-02",
+        "R-2026-03-04",
+        "R-2026-03-07"
+      ],
+      "skipped_repairs": [],
+      "steps": [
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "file": "orders_2026-03.json"
+          },
+          "id": "step:2026-03:01:intake",
+          "kind": "base",
+          "name": "intake",
+          "order": 1,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "ignored_extra_columns": [],
+            "missing_optional": [],
+            "missing_required": []
+          },
+          "id": "step:2026-03:02:conform_columns",
+          "kind": "base",
+          "name": "conform_columns",
+          "order": 2,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {},
+          "id": "step:2026-03:03:trim_blank_to_null",
+          "kind": "base",
+          "name": "trim_blank_to_null",
+          "order": 3,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "parse_errors": {},
+            "reformatted": {}
+          },
+          "id": "step:2026-03:04:parse_declared_types",
+          "kind": "base",
+          "name": "parse_declared_types",
+          "order": 4,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "weight_kg"
+          ],
+          "detail": {},
+          "id": "step:2026-03:05:unit_scale",
+          "kind": "repair",
+          "name": "unit_scale weight_kg x0.001",
+          "order": 5,
+          "repair": "R-2026-03-10",
+          "rows_changed": 1047,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:06:category_map",
+          "kind": "repair",
+          "name": "category_map 'Apparrel' -> Apparel",
+          "order": 6,
+          "repair": "R-2026-03-01",
+          "rows_changed": 4,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:07:category_map",
+          "kind": "repair",
+          "name": "category_map 'Electronic' -> Electronics",
+          "order": 7,
+          "repair": "R-2026-03-03",
+          "rows_changed": 6,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:08:category_map",
+          "kind": "repair",
+          "name": "category_map 'Grocey' -> Grocery",
+          "order": 8,
+          "repair": "R-2026-03-05",
+          "rows_changed": 4,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:09:category_map",
+          "kind": "repair",
+          "name": "category_map 'HOME' -> Home",
+          "order": 9,
+          "repair": "R-2026-03-06",
+          "rows_changed": 5,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:10:category_map",
+          "kind": "repair",
+          "name": "category_map 'Toy' -> Toys",
+          "order": 10,
+          "repair": "R-2026-03-08",
+          "rows_changed": 6,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "category"
+          ],
+          "detail": {},
+          "id": "step:2026-03:11:category_map",
+          "kind": "repair",
+          "name": "category_map 'electronics' -> Electronics",
+          "order": 11,
+          "repair": "R-2026-03-09",
+          "rows_changed": 8,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "order_id"
+          ],
+          "detail": {
+            "conflict_rows": 0,
+            "merged": 0
+          },
+          "id": "step:2026-03:12:deduplicate",
+          "kind": "route",
+          "name": "deduplicate",
+          "order": 12,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1100
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "engine": "pandera",
+            "quarantined": 29
+          },
+          "id": "step:2026-03:13:validate_contract",
+          "kind": "route",
+          "name": "validate_contract",
+          "order": 13,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1100,
+          "rows_out": 1071
+        },
+        {
+          "columns": [
+            "amount_usd"
+          ],
+          "detail": {
+            "fx_table": "fixed-2026q1"
+          },
+          "id": "step:2026-03:14:currency_normalize",
+          "kind": "derive",
+          "name": "currency_normalize",
+          "order": 14,
+          "repair": null,
+          "rows_changed": 1071,
+          "rows_in": 1071,
+          "rows_out": 1071
+        },
+        {
+          "columns": [
+            "restates_period"
+          ],
+          "detail": {
+            "closed_periods": [
+              "2026-01",
+              "2026-02"
+            ]
+          },
+          "id": "step:2026-03:15:flag_late_arrivals",
+          "kind": "derive",
+          "name": "flag_late_arrivals",
+          "order": 15,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1071,
+          "rows_out": 1071
+        }
+      ]
+    },
+    "2026-04": {
+      "applied_repairs": [],
+      "proposed_not_applied": [],
+      "skipped_repairs": [],
+      "steps": [
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "file": "orders_2026-04.xlsx"
+          },
+          "id": "step:2026-04:01:intake",
+          "kind": "base",
+          "name": "intake",
+          "order": 1,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1040,
+          "rows_out": 1040
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "ignored_extra_columns": [],
+            "missing_optional": [],
+            "missing_required": []
+          },
+          "id": "step:2026-04:02:conform_columns",
+          "kind": "base",
+          "name": "conform_columns",
+          "order": 2,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1040,
+          "rows_out": 1040
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {},
+          "id": "step:2026-04:03:trim_blank_to_null",
+          "kind": "base",
+          "name": "trim_blank_to_null",
+          "order": 3,
+          "repair": null,
+          "rows_changed": 2,
+          "rows_in": 1040,
+          "rows_out": 1040
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "parse_errors": {},
+            "reformatted": {}
+          },
+          "id": "step:2026-04:04:parse_declared_types",
+          "kind": "base",
+          "name": "parse_declared_types",
+          "order": 4,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1040,
+          "rows_out": 1040
+        },
+        {
+          "columns": [
+            "order_id"
+          ],
+          "detail": {
+            "conflict_rows": 0,
+            "merged": 0
+          },
+          "id": "step:2026-04:05:deduplicate",
+          "kind": "route",
+          "name": "deduplicate",
+          "order": 5,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1040,
+          "rows_out": 1040
+        },
+        {
+          "columns": [
+            "*"
+          ],
+          "detail": {
+            "engine": "pandera",
+            "quarantined": 8
+          },
+          "id": "step:2026-04:06:validate_contract",
+          "kind": "route",
+          "name": "validate_contract",
+          "order": 6,
+          "repair": null,
+          "rows_changed": 0,
+          "rows_in": 1040,
+          "rows_out": 1032
+        },
+        {
+          "columns": [
+            "amount_usd"
+          ],
+          "detail": {
+            "fx_table": "fixed-2026q1"
+          },
+          "id": "step:2026-04:07:currency_normalize",
+          "kind": "derive",
+          "name": "currency_normalize",
+          "order": 7,
+          "repair": null,
+          "rows_changed": 1032,
+          "rows_in": 1032,
+          "rows_out": 1032
+        },
+        {
+          "columns": [
+            "restates_period"
+          ],
+          "detail": {
+            "closed_periods": [
+              "2026-01",
+              "2026-02",
+              "2026-03"
+            ]
+          },
+          "id": "step:2026-04:08:flag_late_arrivals",
+          "kind": "derive",
+          "name": "flag_late_arrivals",
+          "order": 8,
+          "repair": null,
+          "rows_changed": 40,
+          "rows_in": 1032,
+          "rows_out": 1032
+        }
+      ]
+    }
+  },
+  "repair_mode": "apply-safe"
+}

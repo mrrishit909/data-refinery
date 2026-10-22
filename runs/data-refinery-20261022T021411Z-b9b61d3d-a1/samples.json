@@ -1,0 +1,3240 @@
+{
+  "batches": {
+    "2026-01": [
+      {
+        "_source_row": 1,
+        "cleaned": {
+          "amount": "249.34",
+          "amount_usd": "249.34",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-50716",
+          "order_date": "2026-01-17",
+          "order_id": "ORD-100001",
+          "quantity": "3",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "1.981"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "249.34",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-50716",
+          "order_date": "2026-01-17",
+          "order_id": "ORD-100001",
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": "1.981"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 2,
+        "cleaned": {
+          "amount": "146.78",
+          "amount_usd": "146.78",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-30907",
+          "order_date": "2026-01-08",
+          "order_id": "ORD-100002",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "11.016"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "146.78",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-30907",
+          "order_date": "2026-01-08",
+          "order_id": "ORD-100002",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "11.016"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 3,
+        "cleaned": {
+          "amount": "182.24",
+          "amount_usd": "182.24",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-68640",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100003",
+          "quantity": "1",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "2.957"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "182.24",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-68640",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100003",
+          "quantity": "1",
+          "region": "North",
+          "weight_kg": "2.957"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 4,
+        "cleaned": {
+          "amount": "232.96",
+          "amount_usd": "232.96",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-84529",
+          "order_date": "2026-01-16",
+          "order_id": "ORD-100004",
+          "quantity": "3",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "0.872"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "232.96",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-84529",
+          "order_date": "2026-01-16",
+          "order_id": "ORD-100004",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "0.872"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 5,
+        "cleaned": {
+          "amount": "158.71",
+          "amount_usd": "158.71",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-15109",
+          "order_date": "2026-01-14",
+          "order_id": "ORD-100005",
+          "quantity": "4",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "2.133"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "158.71",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-15109",
+          "order_date": "2026-01-14",
+          "order_id": "ORD-100005",
+          "quantity": "4",
+          "region": "South",
+          "weight_kg": "2.133"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 6,
+        "cleaned": {
+          "amount": "197.54",
+          "amount_usd": "197.54",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-57517",
+          "order_date": "2026-01-30",
+          "order_id": "ORD-100006",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "2.040"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "197.54",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-57517",
+          "order_date": "2026-01-30",
+          "order_id": "ORD-100006",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "2.040"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 7,
+        "cleaned": {
+          "amount": "24.23",
+          "amount_usd": "24.23",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-52208",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-100007",
+          "quantity": "4",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "0.243"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "24.23",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-52208",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-100007",
+          "quantity": "4",
+          "region": "East",
+          "weight_kg": "0.243"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 8,
+        "cleaned": {
+          "amount": "423.66",
+          "amount_usd": "423.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-91504",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-100008",
+          "quantity": "1",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "16.967"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "423.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-91504",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-100008",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "16.967"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 9,
+        "cleaned": {
+          "amount": "144.75",
+          "amount_usd": "144.75",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-44897",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100009",
+          "quantity": "3",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "1.508"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "144.75",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-44897",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100009",
+          "quantity": "3",
+          "region": "South",
+          "weight_kg": "1.508"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 10,
+        "cleaned": {
+          "amount": "211.66",
+          "amount_usd": "211.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-25080",
+          "order_date": "2026-01-15",
+          "order_id": "ORD-100010",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "0.154"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "211.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-25080",
+          "order_date": "2026-01-15",
+          "order_id": "ORD-100010",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "0.154"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 11,
+        "cleaned": {
+          "amount": "137.61",
+          "amount_usd": "137.61",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-36596",
+          "order_date": "2026-01-31",
+          "order_id": "ORD-100011",
+          "quantity": "3",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.888"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "137.61",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-36596",
+          "order_date": "2026-01-31",
+          "order_id": "ORD-100011",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "1.888"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 12,
+        "cleaned": {
+          "amount": "99.86",
+          "amount_usd": "99.86",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-76218",
+          "order_date": "2026-01-13",
+          "order_id": "ORD-100012",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "0.760"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "99.86",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-76218",
+          "order_date": "2026-01-13",
+          "order_id": "ORD-100012",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "0.760"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 13,
+        "cleaned": {
+          "amount": "184.19",
+          "amount_usd": "184.19",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-10993",
+          "order_date": "2026-01-07",
+          "order_id": "ORD-100013",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "5.189"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "184.19",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-10993",
+          "order_date": "2026-01-07",
+          "order_id": "ORD-100013",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "5.189"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 14,
+        "cleaned": {
+          "amount": "101.00",
+          "amount_usd": "101.00",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-91475",
+          "order_date": "2026-01-04",
+          "order_id": "ORD-100014",
+          "quantity": "3",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "20.059"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "101.00",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-91475",
+          "order_date": "2026-01-04",
+          "order_id": "ORD-100014",
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": "20.059"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 15,
+        "cleaned": {
+          "amount": "10.55",
+          "amount_usd": "10.55",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-99096",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100015",
+          "quantity": "2",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "2.368"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "10.55",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-99096",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100015",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "2.368"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 16,
+        "cleaned": {
+          "amount": "71.66",
+          "amount_usd": "71.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-42007",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100016",
+          "quantity": "5",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "10.982"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "71.66",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-42007",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100016",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "10.982"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 17,
+        "cleaned": {
+          "amount": "186.46",
+          "amount_usd": "186.46",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-88408",
+          "order_date": "2026-01-14",
+          "order_id": "ORD-100017",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "23.171"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "186.46",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-88408",
+          "order_date": "2026-01-14",
+          "order_id": "ORD-100017",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "23.171"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 18,
+        "cleaned": {
+          "amount": "215.25",
+          "amount_usd": "215.25",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-83330",
+          "order_date": "2026-01-08",
+          "order_id": "ORD-100018",
+          "quantity": "5",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "0.443"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "215.25",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-83330",
+          "order_date": "2026-01-08",
+          "order_id": "ORD-100018",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "0.443"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 19,
+        "cleaned": {
+          "amount": "241.41",
+          "amount_usd": "241.41",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-15275",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100019",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "0.885"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "241.41",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-15275",
+          "order_date": "2026-01-22",
+          "order_id": "ORD-100019",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "0.885"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 20,
+        "cleaned": {
+          "amount": "1311.33",
+          "amount_usd": "1311.33",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-69920",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100020",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "1.339"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "1311.33",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-69920",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-100020",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "1.339"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 21,
+        "cleaned": {
+          "amount": "202.42",
+          "amount_usd": "202.42",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-83870",
+          "order_date": "2026-01-19",
+          "order_id": "ORD-100021",
+          "quantity": "5",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "0.284"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "202.42",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-83870",
+          "order_date": "2026-01-19",
+          "order_id": "ORD-100021",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "0.284"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 22,
+        "cleaned": {
+          "amount": "96.98",
+          "amount_usd": "96.98",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-31864",
+          "order_date": "2026-01-31",
+          "order_id": "ORD-100022",
+          "quantity": "2",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.894"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "96.98",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-31864",
+          "order_date": "2026-01-31",
+          "order_id": "ORD-100022",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "1.894"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 23,
+        "cleaned": {
+          "amount": "122.07",
+          "amount_usd": "122.07",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-72044",
+          "order_date": "2026-01-02",
+          "order_id": "ORD-100023",
+          "quantity": "3",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "1.901"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "122.07",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-72044",
+          "order_date": "2026-01-02",
+          "order_id": "ORD-100023",
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": "1.901"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 24,
+        "cleaned": {
+          "amount": "194.54",
+          "amount_usd": "194.54",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-80591",
+          "order_date": "2026-01-20",
+          "order_id": "ORD-100024",
+          "quantity": "3",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.173"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "194.54",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-80591",
+          "order_date": "2026-01-20",
+          "order_id": "ORD-100024",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "1.173"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 25,
+        "cleaned": {
+          "amount": "204.41",
+          "amount_usd": "204.41",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-54947",
+          "order_date": "2026-01-04",
+          "order_id": "ORD-100025",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "204.41",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-54947",
+          "order_date": "2026-01-04",
+          "order_id": "ORD-100025",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": ""
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      }
+    ],
+    "2026-02": [
+      {
+        "_source_row": 1,
+        "cleaned": {
+          "amount": "153.78",
+          "amount_usd": "153.78",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-82013",
+          "order_date": "2026-02-21",
+          "order_id": "ORD-200001",
+          "quantity": "1",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.652"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "153.78",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-82013",
+          "order_date": "2026-02-21",
+          "order_id": "ORD-200001",
+          "quantity": "1",
+          "region": "East",
+          "weight_kg": "1.652"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01"
+        ],
+        "tags": [
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 2,
+        "cleaned": {
+          "amount": "127.34",
+          "amount_usd": "127.34",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-66134",
+          "order_date": "2026-02-24",
+          "order_id": "ORD-200002",
+          "quantity": "1",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "1.803"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "127.34",
+          "category": "Grocery",
+          "currency": "USD",
+          "cust_id": "CUS-66134",
+          "order_date": "2026-02-24",
+          "order_id": "ORD-200002",
+          "quantity": "1",
+          "region": "South",
+          "weight_kg": "1.803"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01"
+        ],
+        "tags": [
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 3,
+        "cleaned": {
+          "amount": "185.93",
+          "amount_usd": "185.93",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-13516",
+          "order_date": "2026-02-21",
+          "order_id": "ORD-200003",
+          "quantity": "1",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "1.166"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "185.93",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-13516",
+          "order_date": "21/02/2026",
+          "order_id": "ORD-200003",
+          "quantity": "1",
+          "region": "South",
+          "weight_kg": "1.166"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01",
+          "R-2026-02-02"
+        ],
+        "tags": [
+          "repair:date_format",
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 4,
+        "cleaned": {
+          "amount": "166.51",
+          "amount_usd": "166.51",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-59479",
+          "order_date": "2026-02-10",
+          "order_id": "ORD-200004",
+          "quantity": "2",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "7.915"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "166.51",
+          "category": "Grocery",
+          "currency": "USD",
+          "cust_id": "CUS-59479",
+          "order_date": "2026-02-10",
+          "order_id": "ORD-200004",
+          "quantity": "2",
+          "region": "West",
+          "weight_kg": "7.915"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01"
+        ],
+        "tags": [
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 5,
+        "cleaned": {
+          "amount": "44.70",
+          "amount_usd": "44.70",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-48226",
+          "order_date": "2026-02-07",
+          "order_id": "ORD-200005",
+          "quantity": "4",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "44.70",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-48226",
+          "order_date": "2026-02-07",
+          "order_id": "ORD-200005",
+          "quantity": "4",
+          "region": "North",
+          "weight_kg": ""
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01"
+        ],
+        "tags": [
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 13,
+        "cleaned": {
+          "amount": "1493.27",
+          "amount_usd": "1493.27",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-76468",
+          "order_date": "2026-02-17",
+          "order_id": "ORD-200013",
+          "quantity": "4",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "0.177"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "1493.27",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-76468",
+          "order_date": "17/02/2026",
+          "order_id": "ORD-200013",
+          "quantity": "4",
+          "region": "West",
+          "weight_kg": "0.177"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01",
+          "R-2026-02-02"
+        ],
+        "tags": [
+          "repair:date_format",
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 16,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "41.02",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-29658",
+          "order_date": "2026-02-30",
+          "order_id": "ORD-200016",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "1.181"
+        },
+        "reasons": [
+          {
+            "code": "BAD_DATE",
+            "column": "order_date",
+            "message": "order_date '2026-02-30' is not an ISO date in years 2000-2099"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:BAD_DATE"
+        ]
+      },
+      {
+        "_source_row": 17,
+        "cleaned": {
+          "amount": "1137.40",
+          "amount_usd": "1137.40",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-48057",
+          "order_date": "2026-02-09",
+          "order_id": "ORD-200017",
+          "quantity": "4",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "0.331"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "1137.40",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-48057",
+          "order_date": "09/02/2026",
+          "order_id": "ORD-200017",
+          "quantity": "4",
+          "region": "North",
+          "weight_kg": "0.331"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01",
+          "R-2026-02-02"
+        ],
+        "tags": [
+          "repair:date_format",
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 29,
+        "cleaned": {
+          "amount": "120.28",
+          "amount_usd": "120.28",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-35143",
+          "order_date": "2026-02-02",
+          "order_id": "ORD-200029",
+          "quantity": "5",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "2.399"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "120.28",
+          "category": "Grocery",
+          "currency": "USD",
+          "cust_id": "CUS-35143",
+          "order_date": "02/02/2026",
+          "order_id": "ORD-200029",
+          "quantity": "5",
+          "region": "South",
+          "weight_kg": "2.399"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-02-01",
+          "R-2026-02-02"
+        ],
+        "tags": [
+          "repair:date_format",
+          "repair:rename"
+        ]
+      },
+      {
+        "_source_row": 73,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "195.11",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-99156",
+          "order_date": "31/02/2026",
+          "order_id": "ORD-200073",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "2.127"
+        },
+        "reasons": [
+          {
+            "code": "BAD_DATE",
+            "column": "order_date",
+            "message": "order_date '31/02/2026' is not an ISO date in years 2000-2099"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:BAD_DATE"
+        ]
+      },
+      {
+        "_source_row": 101,
+        "cleaned": null,
+        "duplicate_of": 33,
+        "outcome": "merged",
+        "raw": {
+          "amount": "172.53",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-22387",
+          "order_date": "2026-02-26",
+          "order_id": "ORD-200033",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "1.928"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "merged_duplicate"
+        ]
+      },
+      {
+        "_source_row": 146,
+        "cleaned": null,
+        "duplicate_of": 68,
+        "outcome": "merged",
+        "raw": {
+          "amount": "218.40",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-46680",
+          "order_date": "2026-02-10",
+          "order_id": "ORD-200068",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "1.717"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "merged_duplicate"
+        ]
+      },
+      {
+        "_source_row": 165,
+        "cleaned": null,
+        "duplicate_of": 140,
+        "outcome": "merged",
+        "raw": {
+          "amount": "85.13",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-53966",
+          "order_date": "2026-02-01",
+          "order_id": "ORD-200139",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "7.831"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "merged_duplicate"
+        ]
+      },
+      {
+        "_source_row": 193,
+        "cleaned": null,
+        "duplicate_of": 153,
+        "outcome": "merged",
+        "raw": {
+          "amount": "82.26",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-12959",
+          "order_date": "2026-02-01",
+          "order_id": "ORD-200151",
+          "quantity": "3",
+          "region": "South",
+          "weight_kg": "2.578"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "merged_duplicate"
+        ]
+      },
+      {
+        "_source_row": 198,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "95.47",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-51078",
+          "order_date": "2026-02-24",
+          "order_id": "ORD-200194",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "2.227"
+        },
+        "reasons": [
+          {
+            "code": "DUPLICATE_CONFLICT",
+            "column": "order_id",
+            "message": "order_id 'ORD-200194' appears 2 times with different content"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:DUPLICATE_CONFLICT"
+        ]
+      },
+      {
+        "_source_row": 203,
+        "cleaned": null,
+        "duplicate_of": 61,
+        "outcome": "merged",
+        "raw": {
+          "amount": "190.70",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-74027",
+          "order_date": "2026-02-12",
+          "order_id": "ORD-200061",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "1.973"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "merged_duplicate"
+        ]
+      },
+      {
+        "_source_row": 250,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "195.90",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-53364",
+          "order_date": "2026-02-08",
+          "order_id": "ORD-200244",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "11.447"
+        },
+        "reasons": [
+          {
+            "code": "DUPLICATE_CONFLICT",
+            "column": "order_id",
+            "message": "order_id 'ORD-200244' appears 2 times with different content"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:DUPLICATE_CONFLICT"
+        ]
+      },
+      {
+        "_source_row": 281,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "105.51",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-51078",
+          "order_date": "2026-02-24",
+          "order_id": "ORD-200194",
+          "quantity": "3",
+          "region": "South",
+          "weight_kg": "2.227"
+        },
+        "reasons": [
+          {
+            "code": "DUPLICATE_CONFLICT",
+            "column": "order_id",
+            "message": "order_id 'ORD-200194' appears 2 times with different content"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:DUPLICATE_CONFLICT"
+        ]
+      },
+      {
+        "_source_row": 335,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "161.73",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-82290",
+          "order_date": "2026-02-20",
+          "order_id": "ORD-200328",
+          "quantity": "1",
+          "region": "South",
+          "weight_kg": "1.506"
+        },
+        "reasons": [
+          {
+            "code": "DUPLICATE_CONFLICT",
+            "column": "order_id",
+            "message": "order_id 'ORD-200328' appears 2 times with different content"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:DUPLICATE_CONFLICT"
+        ]
+      },
+      {
+        "_source_row": 420,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "202.40",
+          "category": "Grocery",
+          "currency": "USD",
+          "cust_id": "CUS-88018",
+          "order_date": "not a date",
+          "order_id": "ORD-200411",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "13.197"
+        },
+        "reasons": [
+          {
+            "code": "BAD_DATE",
+            "column": "order_date",
+            "message": "order_date 'not a date' is not an ISO date in years 2000-2099"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:BAD_DATE"
+        ]
+      },
+      {
+        "_source_row": 672,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "-227.53",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-18255",
+          "order_date": "2026-02-02",
+          "order_id": "ORD-200656",
+          "quantity": "1",
+          "region": "South",
+          "weight_kg": "1.064"
+        },
+        "reasons": [
+          {
+            "code": "NEGATIVE_AMOUNT",
+            "column": "amount",
+            "message": "amount '-227.53' is negative"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NEGATIVE_AMOUNT"
+        ]
+      },
+      {
+        "_source_row": 851,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "231.27",
+          "category": "Home",
+          "currency": "USD",
+          "cust_id": "CUS-52865",
+          "order_date": "2026-02-31",
+          "order_id": "ORD-200830",
+          "quantity": "2",
+          "region": "North",
+          "weight_kg": "1.799"
+        },
+        "reasons": [
+          {
+            "code": "BAD_DATE",
+            "column": "order_date",
+            "message": "order_date '2026-02-31' is not an ISO date in years 2000-2099"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:BAD_DATE"
+        ]
+      },
+      {
+        "_source_row": 870,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "185.65",
+          "category": "Grocery",
+          "currency": "USD",
+          "cust_id": "CUS-20448",
+          "order_date": "TBD",
+          "order_id": "ORD-200849",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "1.192"
+        },
+        "reasons": [
+          {
+            "code": "BAD_DATE",
+            "column": "order_date",
+            "message": "order_date 'TBD' is not an ISO date in years 2000-2099"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:BAD_DATE"
+        ]
+      },
+      {
+        "_source_row": 873,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "-151.72",
+          "category": "Apparel",
+          "currency": "USD",
+          "cust_id": "CUS-23519",
+          "order_date": "2026-02-04",
+          "order_id": "ORD-200852",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "2.932"
+        },
+        "reasons": [
+          {
+            "code": "NEGATIVE_AMOUNT",
+            "column": "amount",
+            "message": "amount '-151.72' is negative"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NEGATIVE_AMOUNT"
+        ]
+      },
+      {
+        "_source_row": 916,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "-1484.03",
+          "category": "Electronics",
+          "currency": "USD",
+          "cust_id": "CUS-39944",
+          "order_date": "2026-02-13",
+          "order_id": "ORD-200895",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "2.699"
+        },
+        "reasons": [
+          {
+            "code": "NEGATIVE_AMOUNT",
+            "column": "amount",
+            "message": "amount '-1484.03' is negative"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NEGATIVE_AMOUNT"
+        ]
+      }
+    ],
+    "2026-03": [
+      {
+        "_source_row": 1,
+        "cleaned": {
+          "amount": "39.94",
+          "amount_usd": "43.14",
+          "category": "Grocery",
+          "currency": "EUR",
+          "customer_id": "CUS-65251",
+          "order_date": "2026-03-06",
+          "order_id": "ORD-300001",
+          "quantity": "5",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "12.463"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "39.94",
+          "category": "Grocery",
+          "currency": "EUR",
+          "customer_id": "CUS-65251",
+          "order_date": "2026-03-06",
+          "order_id": "ORD-300001",
+          "quantity": "5",
+          "region": "South",
+          "weight_kg": "12463"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale",
+          "fx:EUR"
+        ]
+      },
+      {
+        "_source_row": 2,
+        "cleaned": {
+          "amount": "37.69",
+          "amount_usd": "40.71",
+          "category": "Electronics",
+          "currency": "EUR",
+          "customer_id": "CUS-98331",
+          "order_date": "2026-03-29",
+          "order_id": "ORD-300002",
+          "quantity": "3",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "2.061"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "37.69",
+          "category": "Electronics",
+          "currency": "EUR",
+          "customer_id": "CUS-98331",
+          "order_date": "2026-03-29",
+          "order_id": "ORD-300002",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "2061"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale",
+          "fx:EUR"
+        ]
+      },
+      {
+        "_source_row": 3,
+        "cleaned": {
+          "amount": "406.19",
+          "amount_usd": "406.19",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-93742",
+          "order_date": "2026-03-19",
+          "order_id": "ORD-300003",
+          "quantity": "1",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "21.126"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "406.19",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-93742",
+          "order_date": "2026-03-19",
+          "order_id": "ORD-300003",
+          "quantity": "1",
+          "region": "North",
+          "weight_kg": "21126"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale"
+        ]
+      },
+      {
+        "_source_row": 4,
+        "cleaned": {
+          "amount": "172.14",
+          "amount_usd": "185.91",
+          "category": "Toys",
+          "currency": "EUR",
+          "customer_id": "CUS-48487",
+          "order_date": "2026-03-18",
+          "order_id": "ORD-300004",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "0.432"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "172.14",
+          "category": "Toys",
+          "currency": "EUR",
+          "customer_id": "CUS-48487",
+          "order_date": "2026-03-18",
+          "order_id": "ORD-300004",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "432"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale",
+          "fx:EUR"
+        ]
+      },
+      {
+        "_source_row": 5,
+        "cleaned": {
+          "amount": "97.14",
+          "amount_usd": "97.14",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-23408",
+          "order_date": "2026-03-22",
+          "order_id": "ORD-300005",
+          "quantity": "3",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": "1.462"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "97.14",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-23408",
+          "order_date": "2026-03-22",
+          "order_id": "ORD-300005",
+          "quantity": "3",
+          "region": "South",
+          "weight_kg": "1462"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale"
+        ]
+      },
+      {
+        "_source_row": 8,
+        "cleaned": {
+          "amount": "57.45",
+          "amount_usd": "72.96",
+          "category": "Toys",
+          "currency": "GBP",
+          "customer_id": "CUS-94019",
+          "order_date": "2026-03-30",
+          "order_id": "ORD-300008",
+          "quantity": "4",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "57.45",
+          "category": "Toys",
+          "currency": "GBP",
+          "customer_id": "CUS-94019",
+          "order_date": "2026-03-30",
+          "order_id": "ORD-300008",
+          "quantity": "4",
+          "region": "South",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "fx:GBP"
+        ]
+      },
+      {
+        "_source_row": 12,
+        "cleaned": {
+          "amount": "95.07",
+          "amount_usd": "102.68",
+          "category": "Electronics",
+          "currency": "EUR",
+          "customer_id": "CUS-14769",
+          "order_date": "2026-03-31",
+          "order_id": "ORD-300012",
+          "quantity": "3",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "2.668"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "95.07",
+          "category": "Electronic",
+          "currency": "EUR",
+          "customer_id": "CUS-14769",
+          "order_date": "2026-03-31",
+          "order_id": "ORD-300012",
+          "quantity": "3",
+          "region": "East",
+          "weight_kg": "2668"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-03",
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:category_map",
+          "repair:unit_scale",
+          "fx:EUR"
+        ]
+      },
+      {
+        "_source_row": 17,
+        "cleaned": {
+          "amount": "1045.33",
+          "amount_usd": "1327.57",
+          "category": "Toys",
+          "currency": "GBP",
+          "customer_id": "CUS-89761",
+          "order_date": "2026-03-19",
+          "order_id": "ORD-300017",
+          "quantity": "1",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "16.586"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "1045.33",
+          "category": "Toy",
+          "currency": "GBP",
+          "customer_id": "CUS-89761",
+          "order_date": "2026-03-19",
+          "order_id": "ORD-300017",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "16586"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-08",
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:category_map",
+          "repair:unit_scale",
+          "fx:GBP"
+        ]
+      },
+      {
+        "_source_row": 18,
+        "cleaned": {
+          "amount": "23.69",
+          "amount_usd": "25.59",
+          "category": "Apparel",
+          "currency": "EUR",
+          "customer_id": "CUS-64548",
+          "order_date": "2026-03-14",
+          "order_id": "ORD-300018",
+          "quantity": "1",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "0.789"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "23.69",
+          "category": "Apparel",
+          "currency": "EUR",
+          "customer_id": "CUS-64548",
+          "order_date": "2026-03-14",
+          "order_id": "ORD-300018",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "789"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale",
+          "fx:EUR"
+        ]
+      },
+      {
+        "_source_row": 23,
+        "cleaned": {
+          "amount": "19.80",
+          "amount_usd": "19.80",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-24101",
+          "order_date": "2026-03-28",
+          "order_id": "ORD-300023",
+          "quantity": "4",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.895"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "19.80",
+          "category": "Apparrel",
+          "currency": "USD",
+          "customer_id": "CUS-24101",
+          "order_date": "2026-03-28",
+          "order_id": "ORD-300023",
+          "quantity": "4",
+          "region": "East",
+          "weight_kg": "1895"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-01",
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:category_map",
+          "repair:unit_scale"
+        ]
+      },
+      {
+        "_source_row": 24,
+        "cleaned": {
+          "amount": "152.43",
+          "amount_usd": "193.59",
+          "category": "Toys",
+          "currency": "GBP",
+          "customer_id": "CUS-65700",
+          "order_date": "2026-03-21",
+          "order_id": "ORD-300024",
+          "quantity": "2",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "0.349"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "152.43",
+          "category": "Toys",
+          "currency": "GBP",
+          "customer_id": "CUS-65700",
+          "order_date": "2026-03-21",
+          "order_id": "ORD-300024",
+          "quantity": "2",
+          "region": "North",
+          "weight_kg": "349"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:unit_scale",
+          "fx:GBP"
+        ]
+      },
+      {
+        "_source_row": 25,
+        "cleaned": {
+          "amount": "157.31",
+          "amount_usd": "157.31",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-93935",
+          "order_date": "2026-03-30",
+          "order_id": "ORD-300025",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "157.31",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-93935",
+          "order_date": "2026-03-30",
+          "order_id": "ORD-300025",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 38,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "224.37",
+          "category": "Home & Garden",
+          "currency": "USD",
+          "customer_id": "CUS-11822",
+          "order_date": "2026-03-02",
+          "order_id": "ORD-300038",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": null
+        },
+        "reasons": [
+          {
+            "code": "AMBIGUOUS_CATEGORY",
+            "column": "category",
+            "message": "category 'Home & Garden' has an ambiguous meaning"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:AMBIGUOUS_CATEGORY"
+        ]
+      },
+      {
+        "_source_row": 43,
+        "cleaned": {
+          "amount": "21.76",
+          "amount_usd": "21.76",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-20765",
+          "order_date": "2026-03-02",
+          "order_id": "ORD-300043",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "21.76",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-20765",
+          "order_date": "2026-03-02",
+          "order_id": "ORD-300043",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 105,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "173.31",
+          "category": "Home & Garden",
+          "currency": "USD",
+          "customer_id": "CUS-93475",
+          "order_date": "2026-03-18",
+          "order_id": "ORD-300105",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "862"
+        },
+        "reasons": [
+          {
+            "code": "AMBIGUOUS_CATEGORY",
+            "column": "category",
+            "message": "category 'Home & Garden' has an ambiguous meaning"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:AMBIGUOUS_CATEGORY"
+        ]
+      },
+      {
+        "_source_row": 120,
+        "cleaned": {
+          "amount": "66.08",
+          "amount_usd": "66.08",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-89479",
+          "order_date": "2026-03-09",
+          "order_id": "ORD-300120",
+          "quantity": "5",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "66.08",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-89479",
+          "order_date": "2026-03-09",
+          "order_id": "ORD-300120",
+          "quantity": "5",
+          "region": "South",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 129,
+        "cleaned": {
+          "amount": "115.92",
+          "amount_usd": "115.92",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-29888",
+          "order_date": "2026-03-04",
+          "order_id": "ORD-300129",
+          "quantity": "2",
+          "region": "South",
+          "restates_period": "",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "115.92",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-29888",
+          "order_date": "2026-03-04",
+          "order_id": "ORD-300129",
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 163,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "137.35",
+          "category": "Elec",
+          "currency": "EUR",
+          "customer_id": "CUS-64729",
+          "order_date": "2026-03-27",
+          "order_id": "ORD-300163",
+          "quantity": "4",
+          "region": "West",
+          "weight_kg": "2612"
+        },
+        "reasons": [
+          {
+            "code": "AMBIGUOUS_CATEGORY",
+            "column": "category",
+            "message": "category 'Elec' has an ambiguous meaning"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:AMBIGUOUS_CATEGORY"
+        ]
+      },
+      {
+        "_source_row": 172,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "228.73",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-34641",
+          "order_date": "2026-03-20",
+          "order_id": "ORD-300172",
+          "quantity": null,
+          "region": "East",
+          "weight_kg": "4813"
+        },
+        "reasons": [
+          {
+            "code": "NULL_REQUIRED",
+            "column": "quantity",
+            "message": "quantity is null"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NULL_REQUIRED"
+        ]
+      },
+      {
+        "_source_row": 182,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "168.07",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-81019",
+          "order_date": "2026-03-20",
+          "order_id": "ORD-300182",
+          "quantity": null,
+          "region": "South",
+          "weight_kg": "7508"
+        },
+        "reasons": [
+          {
+            "code": "NULL_REQUIRED",
+            "column": "quantity",
+            "message": "quantity is null"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NULL_REQUIRED"
+        ]
+      },
+      {
+        "_source_row": 201,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "196.34",
+          "category": "Grocery",
+          "currency": "EUR",
+          "customer_id": "CUS-81942",
+          "order_date": "2026-03-21",
+          "order_id": "ORD-300201",
+          "quantity": null,
+          "region": "East",
+          "weight_kg": "1321"
+        },
+        "reasons": [
+          {
+            "code": "NULL_REQUIRED",
+            "column": "quantity",
+            "message": "quantity is null"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:NULL_REQUIRED"
+        ]
+      },
+      {
+        "_source_row": 263,
+        "cleaned": {
+          "amount": "29.37",
+          "amount_usd": "29.37",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-49660",
+          "order_date": "2026-03-10",
+          "order_id": "ORD-300263",
+          "quantity": "4",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "0.482"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "29.37",
+          "category": "Toy",
+          "currency": "USD",
+          "customer_id": "CUS-49660",
+          "order_date": "2026-03-10",
+          "order_id": "ORD-300263",
+          "quantity": "4",
+          "region": "West",
+          "weight_kg": "482"
+        },
+        "reasons": [],
+        "repairs": [
+          "R-2026-03-08",
+          "R-2026-03-10"
+        ],
+        "tags": [
+          "repair:category_map",
+          "repair:unit_scale"
+        ]
+      },
+      {
+        "_source_row": 547,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "6.10",
+          "category": "Gift Cards",
+          "currency": "EUR",
+          "customer_id": "CUS-74636",
+          "order_date": "2026-03-16",
+          "order_id": "ORD-300547",
+          "quantity": "4",
+          "region": "West",
+          "weight_kg": "1923"
+        },
+        "reasons": [
+          {
+            "code": "INVALID_CATEGORY",
+            "column": "category",
+            "message": "category 'Gift Cards' is not a contract category"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:INVALID_CATEGORY"
+        ]
+      },
+      {
+        "_source_row": 594,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "325.28",
+          "category": "Gift Cards",
+          "currency": "USD",
+          "customer_id": "CUS-53425",
+          "order_date": "2026-03-11",
+          "order_id": "ORD-300594",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "1394"
+        },
+        "reasons": [
+          {
+            "code": "INVALID_CATEGORY",
+            "column": "category",
+            "message": "category 'Gift Cards' is not a contract category"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:INVALID_CATEGORY"
+        ]
+      },
+      {
+        "_source_row": 901,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "87.91",
+          "category": "Gift Cards",
+          "currency": "GBP",
+          "customer_id": "CUS-36972",
+          "order_date": "2026-03-17",
+          "order_id": "ORD-300901",
+          "quantity": "1",
+          "region": "North",
+          "weight_kg": "846"
+        },
+        "reasons": [
+          {
+            "code": "INVALID_CATEGORY",
+            "column": "category",
+            "message": "category 'Gift Cards' is not a contract category"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:INVALID_CATEGORY"
+        ]
+      }
+    ],
+    "2026-04": [
+      {
+        "_source_row": 1,
+        "cleaned": {
+          "amount": "225.23",
+          "amount_usd": "225.23",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-38182",
+          "order_date": "2026-04-06",
+          "order_id": "ORD-400001",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "2.861"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "225.23",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-38182",
+          "order_date": "2026-04-06",
+          "order_id": "ORD-400001",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "2.861"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 2,
+        "cleaned": {
+          "amount": "209.08",
+          "amount_usd": "209.08",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-29724",
+          "order_date": "2026-04-05",
+          "order_id": "ORD-400002",
+          "quantity": "5",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "2.133"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "209.08",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-29724",
+          "order_date": "2026-04-05",
+          "order_id": "ORD-400002",
+          "quantity": "5",
+          "region": "West",
+          "weight_kg": "2.133"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 3,
+        "cleaned": {
+          "amount": "165.95",
+          "amount_usd": "165.95",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-68821",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400003",
+          "quantity": "1",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "0.643"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "165.95",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-68821",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400003",
+          "quantity": "1",
+          "region": "East",
+          "weight_kg": "0.643"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 4,
+        "cleaned": {
+          "amount": "144.04",
+          "amount_usd": "144.04",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-14144",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400004",
+          "quantity": "2",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.640"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "144.04",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-14144",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400004",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "1.640"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 5,
+        "cleaned": {
+          "amount": "97.15",
+          "amount_usd": "97.15",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-91114",
+          "order_date": "2026-04-10",
+          "order_id": "ORD-400005",
+          "quantity": "5",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "1.197"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "97.15",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-91114",
+          "order_date": "2026-04-10",
+          "order_id": "ORD-400005",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "1.197"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 6,
+        "cleaned": {
+          "amount": "11.58",
+          "amount_usd": "11.58",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-30104",
+          "order_date": "2026-04-06",
+          "order_id": "ORD-400006",
+          "quantity": "1",
+          "region": "West",
+          "restates_period": "",
+          "weight_kg": "10.314"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "11.58",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-30104",
+          "order_date": "2026-04-06",
+          "order_id": "ORD-400006",
+          "quantity": "1",
+          "region": "West",
+          "weight_kg": "10.314"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 7,
+        "cleaned": {
+          "amount": "136.97",
+          "amount_usd": "136.97",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-39621",
+          "order_date": "2026-04-02",
+          "order_id": "ORD-400007",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "2.062"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "136.97",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-39621",
+          "order_date": "2026-04-02",
+          "order_id": "ORD-400007",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "2.062"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 8,
+        "cleaned": {
+          "amount": "197.48",
+          "amount_usd": "197.48",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-18305",
+          "order_date": "2026-04-27",
+          "order_id": "ORD-400008",
+          "quantity": "2",
+          "region": "East",
+          "restates_period": "",
+          "weight_kg": "7.165"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "197.48",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-18305",
+          "order_date": "2026-04-27",
+          "order_id": "ORD-400008",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "7.165"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 9,
+        "cleaned": {
+          "amount": "108.46",
+          "amount_usd": "108.46",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-84085",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400009",
+          "quantity": "1",
+          "region": "North",
+          "restates_period": "",
+          "weight_kg": "2.019"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "108.46",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-84085",
+          "order_date": "2026-04-08",
+          "order_id": "ORD-400009",
+          "quantity": "1",
+          "region": "North",
+          "weight_kg": "2.019"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "clean"
+        ]
+      },
+      {
+        "_source_row": 42,
+        "cleaned": {
+          "amount": "63.10",
+          "amount_usd": "63.10",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-73532",
+          "order_date": "2026-01-16",
+          "order_id": "ORD-400042",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "2026-01",
+          "weight_kg": "0.382"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "63.10",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-73532",
+          "order_date": "2026-01-16",
+          "order_id": "ORD-400042",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "0.382"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 54,
+        "cleaned": {
+          "amount": "105.84",
+          "amount_usd": "105.84",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-55761",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-400054",
+          "quantity": "5",
+          "region": "North",
+          "restates_period": "2026-01",
+          "weight_kg": "0.962"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "105.84",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-55761",
+          "order_date": "2026-01-10",
+          "order_id": "ORD-400054",
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": "0.962"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 69,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "183.27",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-63462",
+          "order_date": "2026-04-09",
+          "order_id": null,
+          "quantity": "5",
+          "region": "North",
+          "weight_kg": null
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 88,
+        "cleaned": {
+          "amount": "152.91",
+          "amount_usd": "152.91",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-81039",
+          "order_date": "2026-01-07",
+          "order_id": "ORD-400088",
+          "quantity": "3",
+          "region": "West",
+          "restates_period": "2026-01",
+          "weight_kg": null
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "152.91",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-81039",
+          "order_date": "2026-01-07",
+          "order_id": "ORD-400088",
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": null
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 124,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "109.05",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-39717",
+          "order_date": "2026-04-05",
+          "order_id": null,
+          "quantity": "1",
+          "region": "East",
+          "weight_kg": "1.760"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 130,
+        "cleaned": {
+          "amount": "111.10",
+          "amount_usd": "111.10",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-94656",
+          "order_date": "2026-01-05",
+          "order_id": "ORD-400130",
+          "quantity": "1",
+          "region": "East",
+          "restates_period": "2026-01",
+          "weight_kg": "14.847"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "111.10",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-94656",
+          "order_date": "2026-01-05",
+          "order_id": "ORD-400130",
+          "quantity": "1",
+          "region": "East",
+          "weight_kg": "14.847"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 144,
+        "cleaned": {
+          "amount": "130.00",
+          "amount_usd": "130.00",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-86238",
+          "order_date": "2026-01-28",
+          "order_id": "ORD-400144",
+          "quantity": "5",
+          "region": "South",
+          "restates_period": "2026-01",
+          "weight_kg": "0.642"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "130.00",
+          "category": "Apparel",
+          "currency": "USD",
+          "customer_id": "CUS-86238",
+          "order_date": "2026-01-28",
+          "order_id": "ORD-400144",
+          "quantity": "5",
+          "region": "South",
+          "weight_kg": "0.642"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 186,
+        "cleaned": {
+          "amount": "55.20",
+          "amount_usd": "55.20",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-83376",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-400186",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "2026-01",
+          "weight_kg": "1.693"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "55.20",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-83376",
+          "order_date": "2026-01-24",
+          "order_id": "ORD-400186",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "1.693"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 222,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "15.52",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-39843",
+          "order_date": "2026-04-10",
+          "order_id": null,
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "0.972"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 307,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "147.36",
+          "category": "Toys",
+          "currency": "USD",
+          "customer_id": "CUS-51396",
+          "order_date": "2026-04-25",
+          "order_id": null,
+          "quantity": "4",
+          "region": "East",
+          "weight_kg": "1.710"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 324,
+        "cleaned": {
+          "amount": "33.88",
+          "amount_usd": "33.88",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-39458",
+          "order_date": "2026-01-01",
+          "order_id": "ORD-400324",
+          "quantity": "3",
+          "region": "North",
+          "restates_period": "2026-01",
+          "weight_kg": "8.352"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "33.88",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-39458",
+          "order_date": "2026-01-01",
+          "order_id": "ORD-400324",
+          "quantity": "3",
+          "region": "North",
+          "weight_kg": "8.352"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 340,
+        "cleaned": {
+          "amount": "119.98",
+          "amount_usd": "119.98",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-40283",
+          "order_date": "2026-01-09",
+          "order_id": "ORD-400340",
+          "quantity": "2",
+          "region": "East",
+          "restates_period": "2026-01",
+          "weight_kg": "7.272"
+        },
+        "duplicate_of": null,
+        "outcome": "accepted",
+        "raw": {
+          "amount": "119.98",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-40283",
+          "order_date": "2026-01-09",
+          "order_id": "ORD-400340",
+          "quantity": "2",
+          "region": "East",
+          "weight_kg": "7.272"
+        },
+        "reasons": [],
+        "repairs": [],
+        "tags": [
+          "late_arrival"
+        ]
+      },
+      {
+        "_source_row": 517,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "224.84",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-65210",
+          "order_date": "2026-04-02",
+          "order_id": "   ",
+          "quantity": "5",
+          "region": "East",
+          "weight_kg": "0.852"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 625,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "34.02",
+          "category": "Grocery",
+          "currency": "USD",
+          "customer_id": "CUS-91310",
+          "order_date": "2026-04-05",
+          "order_id": "   ",
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": "1.034"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 662,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "44.04",
+          "category": "Home",
+          "currency": "USD",
+          "customer_id": "CUS-49387",
+          "order_date": "2026-04-24",
+          "order_id": null,
+          "quantity": "2",
+          "region": "South",
+          "weight_kg": "0.636"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      },
+      {
+        "_source_row": 859,
+        "cleaned": null,
+        "duplicate_of": null,
+        "outcome": "quarantined",
+        "raw": {
+          "amount": "110.45",
+          "category": "Electronics",
+          "currency": "USD",
+          "customer_id": "CUS-79110",
+          "order_date": "2026-04-22",
+          "order_id": null,
+          "quantity": "3",
+          "region": "West",
+          "weight_kg": "0.484"
+        },
+        "reasons": [
+          {
+            "code": "MISSING_ID",
+            "column": "order_id",
+            "message": "order_id is blank"
+          }
+        ],
+        "repairs": [],
+        "tags": [
+          "quarantine:MISSING_ID"
+        ]
+      }
+    ]
+  },
+  "limit_per_batch": 25
+}

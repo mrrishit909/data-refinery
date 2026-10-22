@@ -1,0 +1,76 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "detail": "rows_in 1000 = accepted 1000 + quarantined 0 + merged 0",
+      "id": "accounting:2026-01",
+      "passed": true
+    },
+    {
+      "detail": "rows_in 1206 = accepted 1166 + quarantined 20 + merged 20",
+      "id": "accounting:2026-02",
+      "passed": true
+    },
+    {
+      "detail": "rows_in 1100 = accepted 1071 + quarantined 29 + merged 0",
+      "id": "accounting:2026-03",
+      "passed": true
+    },
+    {
+      "detail": "rows_in 1040 = accepted 1032 + quarantined 8 + merged 0",
+      "id": "accounting:2026-04",
+      "passed": true
+    },
+    {
+      "detail": "sha256 of the source file re-read after the run equals the intake manifest",
+      "id": "raw_unchanged:orders_2026-01.csv",
+      "passed": true
+    },
+    {
+      "detail": "sha256 of the source file re-read after the run equals the intake manifest",
+      "id": "raw_unchanged:orders_2026-02.csv",
+      "passed": true
+    },
+    {
+      "detail": "sha256 of the source file re-read after the run equals the intake manifest",
+      "id": "raw_unchanged:orders_2026-03.json",
+      "passed": true
+    },
+    {
+      "detail": "sha256 of the source file re-read after the run equals the intake manifest",
+      "id": "raw_unchanged:orders_2026-04.xlsx",
+      "passed": true
+    },
+    {
+      "detail": "every accepted cell is the trimmed source value, a numeric re-format of it, or the output of an applied repair; nulls stay null; amount_usd recomputed from the FX table",
+      "id": "no_invented_values",
+      "passed": true
+    },
+    {
+      "detail": "pandera re-validation of all accepted rows with uniqueness enforced: 0 failures",
+      "id": "accepted_rows_satisfy_contract",
+      "passed": true
+    },
+    {
+      "detail": "accepted rows re-processed as a fresh batch with no repairs are all accepted again with identical values (cleaned output is a fixed point)",
+      "id": "idempotency",
+      "passed": true
+    }
+  ],
+  "reason_codes": {
+    "AMBIGUOUS_CATEGORY": "category whose meaning is undetermined; never auto-mapped",
+    "BAD_DATE": "date does not parse as ISO or under an applied date-format repair",
+    "BAD_NUMBER": "not a number, or more decimal places than the contract scale",
+    "BAD_PATTERN": "identifier does not match the contract pattern",
+    "DUPLICATE_CONFLICT": "order_id repeated with different content; every copy is quarantined",
+    "DUPLICATE_PRIOR_BATCH": "order_id already accepted from an earlier batch in this run",
+    "INVALID_CATEGORY": "category outside the contract with no applied mapping",
+    "INVALID_ENUM": "enum value outside the contract",
+    "MISSING_ID": "order_id is null or blank",
+    "NEGATIVE_AMOUNT": "amount below zero",
+    "NULL_REQUIRED": "required value is null",
+    "OUT_OF_RANGE": "number outside the contract range, or more than 15 integer digits",
+    "UNKNOWN_COLUMN_SET": "a required contract column is absent and no rename was applied",
+    "UNRESOLVED_UNIT_SCALE": "column looks like a different unit and the conversion was not applied, or the value is implausible after conversion"
+  }
+}

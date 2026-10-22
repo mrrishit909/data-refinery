@@ -1,10 +1,12 @@
 {
   "attempt": 1,
-  "completed_at": null,
+  "completed_at": "2026-10-22T02:14:44Z",
   "created_at": "2026-10-22T02:14:11Z",
   "error_summary": null,
-  "evidence_paths": [],
-  "input_manifest_hash": null,
+  "evidence_paths": [
+    "https://github.com/mrrishit909/data-refinery/actions/runs/39710237947"
+  ],
+  "input_manifest_hash": "sha256:34dc2c6e681f05ad7decd55c999b99e7086fff05e89ea6615e249ecca372205d",
   "parent_run_id": null,
   "project": "data-refinery",
   "request_id": "b9b61d3ded9bd958",
@@ -18,14 +20,30 @@
       "usd": null,
       "used": false
     },
-    "output_bytes": null,
-    "wall_seconds": null
+    "output_bytes": 686301,
+    "wall_seconds": 33.0
   },
-  "result_paths": [],
+  "result_paths": [
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/ambiguities.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/checks.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/cleaned.csv",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/contract.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/drift.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/lineage.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/manifest.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/plan.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/profiles.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/quality.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/quarantine.csv",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/reconciliation.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/repairs.json",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/report.md",
+    "runs/data-refinery-20261022T021411Z-b9b61d3d-a1/samples.json"
+  ],
   "run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
   "schema_version": "1.0",
   "source_commit": "6f0ace54a81cb9a4f499f326b774e797bdab1eb7",
   "started_at": "2026-10-22T02:14:11Z",
-  "status": "running",
+  "status": "completed",
   "workflow_run_id": 39710237947
 }
