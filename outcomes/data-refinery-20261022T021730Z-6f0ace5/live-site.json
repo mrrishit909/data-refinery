@@ -1,0 +1,15 @@
+[
+  {
+    "ok": true,
+    "status": 200,
+    "url": "https://mrrishit909.github.io/data-refinery/"
+  },
+  {
+    "latest_run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+    "matches_state": true,
+    "ok": true,
+    "state_latest_run_id": "data-refinery-20261022T021411Z-b9b61d3d-a1",
+    "status": 200,
+    "url": "https://mrrishit909.github.io/data-refinery/data/snapshot.json"
+  }
+]
