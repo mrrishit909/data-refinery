@@ -41,6 +41,6 @@ accounted for: `rows in = accepted + quarantined + merged duplicates`.
 
 Synthetic fixtures only (durable runs never take uploads); one contract (`orders.v1`) and one
 fixed, synthetic FX table; repairs cover renames, date formats, unit scale and unambiguous
-category variants, and never guess business meaning; intake is bounded to four batches, 5,000
+category variants, and never guess business meaning (category rules are lexical only); duplicates are detected within a run, not across runs; intake is bounded to four batches, 5,000
 rows and 2 MB per file and one XLSX sheet. The optional AI grader runs only if the owner adds an
 inference secret; release records state whether it ran.

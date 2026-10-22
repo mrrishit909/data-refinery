@@ -124,9 +124,11 @@ export interface LineageModel {
 
 export interface Restatement {
   period: string;
-  before: Record<string, number>;
-  after: Record<string, number>;
+  batch: string;
   rows: number;
+  beforeUsd: number;
+  lateUsd: number;
+  afterUsd: number;
 }
 
 export interface RunRecordLite {
@@ -150,6 +152,8 @@ export interface RunModel {
   ambiguities: Ambiguity[];
   drift: DriftFinding[];
   profiles: ColumnProfile[];
+  profilesAccepted: ColumnProfile[];
+  reasonText: Record<string, string>;
   plan: PlanStep[];
   quarantine: QuarantinedRow[];
   cleaned: Row[];

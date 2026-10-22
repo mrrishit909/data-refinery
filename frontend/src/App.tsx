@@ -2,6 +2,7 @@ import { type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } fr
 import { ErrorState, Segmented, useIndicator } from "./components/Controls";
 import { Equation } from "./components/Flow";
 import { Icon } from "./components/Icon";
+import { StageBoundary } from "./components/Boundary";
 import { Inspector, type Selection } from "./components/Inspector";
 import { type AppConfig, resolveConfig, type Theme } from "./config";
 import { STAGES, type StageId } from "./data/model";
@@ -145,7 +146,9 @@ export function DataRefineryApp(props: Partial<AppConfig>) {
             })}
           </nav>
           <div className="dr-surface" ref={surface}>
-            <View run={model} batch={batch} select={setSelection} selection={selection} config={config} />
+            <StageBoundary key={stage} label={STAGES[stageIndex]!.label}>
+              <View run={model} batch={batch} select={setSelection} selection={selection} config={config} />
+            </StageBoundary>
             <div className="dr-toolbar" role="navigation" aria-label="Previous and next stage">
               {stageIndex > 0 && <a className="dr-btn" href={stageHref(STAGES[stageIndex - 1]!.id)}>Back to {STAGES[stageIndex - 1]!.label}</a>}
               {stageIndex < STAGES.length - 1 && <a className="dr-btn dr-btn-primary" href={stageHref(STAGES[stageIndex + 1]!.id)}>Next: {STAGES[stageIndex + 1]!.label}</a>}
@@ -164,7 +167,7 @@ export function DataRefineryApp(props: Partial<AppConfig>) {
   );
 
   return (
-    <div className="dr-root" data-theme={theme} onClick={onClick}>
+    <div className="dr-root" data-theme={theme} data-shell={config.showShell} onClick={onClick}>
       <a className="dr-skip" href="#dr-main" onClick={(e) => { e.preventDefault(); document.getElementById("dr-main")?.focus(); }}>Skip to content</a>
       {config.showShell && (
         <header className="dr-housing">

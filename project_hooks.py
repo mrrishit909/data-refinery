@@ -63,16 +63,18 @@ def headline(out_dir: Path) -> str | None:
     applied = sum(1 for r in items if r.get("applied"))
     amb = json.loads((out_dir / "ambiguities.json").read_text())
     n_amb = len(amb if isinstance(amb, list) else amb.get("ambiguities", []))
-    return (f"{totals['rows_in']:,} rows in: {totals['rows_accepted']:,} accepted, {totals['rows_quarantined']:,} "
-            f"quarantined, {totals['rows_merged_duplicates']:,} merged; {applied} repairs applied, {n_amb} need a human.")
+    return (f"{totals['rows_in']:,} rows in: {totals['rows_accepted']:,} accepted, "
+            f"{totals['rows_quarantined']:,} quarantined, {totals['rows_merged_duplicates']:,} merged; "
+            f"{applied} repairs applied, {n_amb} need a human.")
 
 
 def _batches(rec: Any) -> list[dict[str, Any]]:
+    """Per-batch accounting entries. An unrecognised shape is an error, never an empty (all-zero) headline."""
     if isinstance(rec, dict) and isinstance(rec.get("batches"), list):
         return rec["batches"]
     if isinstance(rec, dict) and isinstance(rec.get("batches"), dict):
         return [{"batch": k, **v} for k, v in rec["batches"].items()]
-    return []
+    raise ValueError("reconciliation.json has no recognisable per-batch accounting")
 
 
 def on_publish(root: Path, record: dict[str, Any], out_dir: Path) -> list[str]:
@@ -95,7 +97,7 @@ def memory_candidates(root: Path) -> list[dict[str, Any]]:
         if rec:
             seen = set()
             for b in _batches(rec):
-                for code, n in (b.get("quarantined_by_reason") or {}).items():
+                for code, n in (b.get("quarantine_reasons") or {}).items():
                     if n and code not in seen:
                         seen.add(code)
                         reasons[code] += 1
@@ -113,8 +115,8 @@ def memory_candidates(root: Path) -> list[dict[str, Any]]:
             runs = sorted(set(amb_runs[key]))[:20]
             out.append({
                 "topic": f"Recurring ambiguous value {key}",
-                "finding": f"The value {key} was left for a human decision in {count} completed runs; it has never been "
-                           "auto-mapped because its business meaning is ambiguous.",
+                "finding": f"The value {key} was left for a human decision in {count} completed runs; "
+                           "it has never been auto-mapped because its business meaning is ambiguous.",
                 "supporting_run_ids": runs,
                 "evidence_links": [f"{base}/runs/{r}/ambiguities.json" for r in runs[:5]],
                 "scope": "data-quality",

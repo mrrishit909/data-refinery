@@ -12,7 +12,7 @@ export default defineConfig({
   workers: 2,
   reporter: [["list"], ["./tests/e2e/summary-reporter.ts"]],
   use: {
-    baseURL: live ?? "http://127.0.0.1:4173/data-refinery/",
+    baseURL: live ?? "http://127.0.0.1:4174/data-refinery/",
     trace: "retain-on-failure",
   },
   projects: [
@@ -23,8 +23,8 @@ export default defineConfig({
   webServer: live
     ? undefined
     : {
-        command: "npx vite preview --port 4173 --strictPort --host 127.0.0.1",
-        url: "http://127.0.0.1:4173/data-refinery/",
+        command: "npx vite preview --port 4174 --strictPort --host 127.0.0.1",
+        url: "http://127.0.0.1:4174/data-refinery/",
         reuseExistingServer: true,
         timeout: 60_000,
       },

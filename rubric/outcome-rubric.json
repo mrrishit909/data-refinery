@@ -14,8 +14,8 @@
      "kind": "live", "marker": "data-app=\"data-refinery\""},
     {"id": "published-matches-state", "title": "Published result files are byte-identical to the accepted computation",
      "kind": "command", "argv": ["python", "-m", "harness", "verify-published", "--state-dir", "state"], "timeout": 300},
-    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (states, interactions, keyboard, reduced motion, axe, overflow, console)",
-     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 12}
+    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (states, interactions, keyboard, reduced motion, dark theme, axe, overflow, console)",
+     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 36}
   ],
   "subjective": [
     {"id": "hierarchy", "title": "Clear order of attention on every view"},

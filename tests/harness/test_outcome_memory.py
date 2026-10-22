@@ -79,3 +79,25 @@ def test_rubric_hard_gates_are_well_formed():
     ids = [g["id"] for g in rubric["hard_gates"]]
     assert len(ids) == len(set(ids)) and rubric["max_repair_rounds"] == 3
     assert all(g["kind"] in {"pytest", "command", "live", "evidence-file"} for g in rubric["hard_gates"])
+
+
+def test_evidence_is_allowlisted_capped_and_old_screenshots_pruned(state, tmp_path):
+    from harness.outcome import KEEP_SCREENSHOT_RELEASES, select_evidence
+
+    ev = tmp_path / "ev"
+    (ev / "e2e" / "screens").mkdir(parents=True)
+    (ev / "e2e" / "summary.json").write_text('{"passed": 1, "failed": 0}')
+    (ev / "g1.log").write_text("log")
+    (ev / "e2e" / "screens" / "desktop-1440-report-first-viewport.jpg").write_bytes(b"x" * 1000)
+    (ev / "e2e" / "screens" / "desktop-1440-report.jpg").write_bytes(b"x" * 1000)  # full page: not kept
+    (ev / "e2e" / "results.bin").write_bytes(b"x")
+    names = {p.relative_to(ev).as_posix() for p in select_evidence(ev)}
+    assert names == {"e2e/summary.json", "g1.log", "e2e/screens/desktop-1440-report-first-viewport.jpg"}
+    ctx = {"evidence_dir": str(ev), "state_latest_run_id": None, "run_url": None}
+    for i in range(KEEP_SCREENSHOT_RELEASES + 2):
+        record(state, _result(False), f"{i + 1:07x}" + "a" * 33, ctx, None)
+    state.sync()
+    with_jpg = [d.name for d in sorted((state.path / "outcomes").iterdir()) if d.is_dir() and any(d.rglob("*.jpg"))]
+    assert len(with_jpg) == KEEP_SCREENSHOT_RELEASES
+    assert all((state.path / "outcomes" / d.name / "release.json").exists()
+               for d in (state.path / "outcomes").iterdir() if d.is_dir())

@@ -199,17 +199,19 @@ def contract_failures(contract: Contract, canonical: pd.DataFrame, enforce_uniqu
     """Run the pandera schema lazily; return (row index, column, reason code) for every failing cell."""
     try:
         pandera_schema(contract, enforce_unique).validate(typed_frame(contract, canonical), lazy=True)
+        return []
     except pa.errors.SchemaErrors as err:
-        out = []
-        for case in err.failure_cases.itertuples():
-            check = str(case.check)
-            if check == "not_nullable":
-                code = "MISSING_ID" if case.column == contract.primary_key else "NULL_REQUIRED"
-            elif check == "field_uniqueness":
-                code = "DUPLICATE_CONFLICT"
-            else:
-                code = check
-            idx = None if pd.isna(case.index) else int(case.index)
-            out.append((idx, case.column, code))
-        return out
-    return []
+        cases = err.failure_cases
+    out = []
+    for case in cases.itertuples():
+        check = str(case.check)
+        if check == "not_nullable":
+            code = "MISSING_ID" if case.column == contract.primary_key else "NULL_REQUIRED"
+        elif check == "field_uniqueness":
+            code = "DUPLICATE_CONFLICT"
+        else:
+            code = check
+        if pd.isna(case.index):
+            raise ValueError(f"schema-level contract failure on {case.column}: {check}")
+        out.append((int(case.index), case.column, code))
+    return out

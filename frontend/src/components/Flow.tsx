@@ -31,7 +31,7 @@ export function Equation({ rows, label }: { rows: Accounting[]; label: string })
     );
   }, []);
   return (
-    <p className="dr-equation" ref={ref} aria-label={`${label}: ${fmt(t.rowsIn)} rows in equals ${fmt(t.accepted)} accepted plus ${fmt(t.quarantined)} quarantined plus ${fmt(t.merged)} merged duplicates. ${holds ? "Every row is accounted for." : "The accounting does not balance."}`}>
+    <p className="dr-equation" ref={ref} role="img" aria-label={`${label}: ${fmt(t.rowsIn)} rows in equals ${fmt(t.accepted)} accepted plus ${fmt(t.quarantined)} quarantined plus ${fmt(t.merged)} merged duplicates. ${holds ? "Every row is accounted for." : "The accounting does not balance."}`}>
       <span className="dr-term" data-term aria-hidden>{fmt(t.rowsIn)}<small>in</small></span>
       <span className="dr-op" data-term aria-hidden>=</span>
       <span className="dr-term dr-term-accepted" data-term aria-hidden>{fmt(t.accepted)}<small>accepted</small></span>
@@ -62,9 +62,11 @@ export function FlowRibbons({ rows, onPick }: { rows: Accounting[]; onPick?: (de
   ];
   let yIn = 0;
   let yOut = 0;
-  const gap = 12;
+  const gap = 16;
+  const minThick = 10; // small flows would be hairlines at true scale
+  const enlarged = dests.some((d) => d.count > 0 && d.count * scale < minThick);
   const bands = dests.map((d) => {
-    const thick = Math.max(d.count ? 2 : 0, d.count * scale);
+    const thick = d.count ? Math.max(minThick, d.count * scale) : 0;
     const band = { ...d, thick, y0: yIn, y1: yOut };
     yIn += thick;
     yOut += thick + gap;
@@ -117,6 +119,7 @@ export function FlowRibbons({ rows, onPick }: { rows: Accounting[]; onPick?: (de
           </svg>
         )}
       </div>
+      {enlarged && <figcaption className="dr-small">Band widths follow row counts; bands for small counts are drawn at a minimum width so they stay visible.</figcaption>}
       <Disclosure summary={<span className="dr-small">Show the accounting as a table</span>}>
         <div className="dr-table-wrap" tabIndex={0} role="region" aria-label="Row accounting by batch">
           <table className="dr-table">

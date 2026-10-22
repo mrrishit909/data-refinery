@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shlex
 import subprocess
 import sys
@@ -25,6 +26,37 @@ from typing import Any
 from .core import ROOT, config, iso, pretty, require_valid, utcnow
 from .github import GitHub
 from .state import StateRepo, read_json, write_json
+
+# Durable evidence is a small representative set; full screenshot sets stay in Actions artifacts (14 days).
+EVIDENCE_KEEP = re.compile(
+    r"^(e2e/summary\.json|[^/]+\.(junit\.xml|log|json)|e2e/screens/[a-z0-9-]+-first-viewport\.jpg)$"
+)
+MAX_EVIDENCE_BYTES = 900_000
+KEEP_SCREENSHOT_RELEASES = 3
+
+
+def select_evidence(evidence_src: Path) -> list[Path]:
+    """Allow-listed evidence files, smallest first, within the per-release byte cap."""
+    files = sorted((f for f in evidence_src.rglob("*") if f.is_file()
+                    and EVIDENCE_KEEP.match(f.relative_to(evidence_src).as_posix())), key=lambda f: f.stat().st_size)
+    chosen, total = [], 0
+    for f in files:
+        if total + f.stat().st_size > MAX_EVIDENCE_BYTES:
+            continue
+        chosen.append(f)
+        total += f.stat().st_size
+    return sorted(chosen)
+
+
+def prune_screenshots(root: Path, keep: set[str]) -> None:
+    """Keep screenshots only for the newest releases and the current one; records and logs stay."""
+    out = root / "outcomes"
+    releases = sorted((d for d in out.iterdir() if d.is_dir()), key=lambda d: d.name) if out.exists() else []
+    recent = {d.name for d in releases[-KEEP_SCREENSHOT_RELEASES:]} | keep
+    for d in releases:
+        if d.name not in recent:
+            for jpg in d.rglob("*.jpg"):
+                jpg.unlink()
 
 
 def rubric_integrity(rubric_path: Path, lock_path: Path) -> tuple[bool, str]:
@@ -160,15 +192,14 @@ def record(state: StateRepo, result: dict[str, Any], source_commit: str, context
         require_valid(release, "release.schema.json")
         write_json(root, f"outcomes/{release_id}/release.json", release)
         evidence_src = Path(context["evidence_dir"])
-        for file in sorted(evidence_src.rglob("*")):
-            if ".git" in file.relative_to(evidence_src).parts:
-                continue
-            if file.is_file() and file.stat().st_size < 400_000:
-                dest = root / "outcomes" / release_id / file.relative_to(evidence_src)
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                dest.write_bytes(file.read_bytes())
+        for file in select_evidence(evidence_src):
+            dest = root / "outcomes" / release_id / file.relative_to(evidence_src)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(file.read_bytes())
         if not failed:
             write_json(root, "releases/current.json", release)
+        current = (read_json(root, "releases/current.json") or {}).get("release_id")
+        prune_screenshots(root, {release_id} | ({current} if current else set()))
         history = read_json(root, "releases/history.json", {"releases": []})
         history["releases"] = ([{k: release[k] for k in ("release_id", "status", "source_commit", "created_at",
                                                            "run_id")}] + history["releases"])[:100]

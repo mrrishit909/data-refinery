@@ -64,14 +64,33 @@ export function Inspector({ selection, run, onClose }: { selection: Selection; r
             <p><span className="dr-tag dr-tone-danger"><Icon name="cross" /> Quarantined</span></p>
             <ul style={{ listStyle: "disc", paddingLeft: 18 }}>
               {row.reasons.map((r) => (
-                <li key={r}>{reasonLabel(r)} <span className="dr-small dr-mono">{r}</span></li>
+                <li key={r}>
+                  {reasonLabel(r)} <span className="dr-small dr-mono">{r}</span>
+                  {run.reasonText[r] && <span className="dr-small" style={{ display: "block" }}>{run.reasonText[r]}</span>}
+                </li>
               ))}
+              {row.values._reason_detail && <li className="dr-small" style={{ listStyle: "none" }}>{row.values._reason_detail}</li>}
             </ul>
           </div>
         ) : (
           <p><span className="dr-tag dr-tone-success"><Icon name="check" /> Accepted</span></p>
         )}
         {sample?.note && <p className="dr-small">{sample.note}</p>}
+        {cleaned === null ? (
+          <div className="dr-table-wrap" tabIndex={0} role="region" aria-label="Values as received">
+            <table className="dr-table">
+              <thead><tr><th scope="col">Column</th><th scope="col">Value as received</th></tr></thead>
+              <tbody>
+                {keys.map((k) => (
+                  <tr key={k}>
+                    <th scope="row" style={{ fontWeight: 500 }}>{k}</th>
+                    <td className="dr-mono">{raw?.[k] || <span className="dr-small">(empty)</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
         <div className="dr-table-wrap" tabIndex={0} role="region" aria-label="Values before and after">
           <table className="dr-table">
             <thead><tr><th scope="col">Column</th><th scope="col">Source value</th><th scope="col">Output value</th></tr></thead>
@@ -84,13 +103,14 @@ export function Inspector({ selection, run, onClose }: { selection: Selection; r
                   <tr key={k}>
                     <th scope="row" style={{ fontWeight: 500 }}>{k}</th>
                     <td className={`dr-mono${changed ? " dr-cell-raw" : ""}`}>{before ?? (raw ? "" : "not in sample")}</td>
-                    <td className={`dr-mono${changed ? " dr-cell-changed" : ""}`}>{after ?? (cleaned ? "" : "not accepted")}</td>
+                    <td className={`dr-mono${changed ? " dr-cell-changed" : ""}`}>{after ?? ""}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
+        )}
         <div style={{ display: "grid", gap: 6 }}>
           <p className="dr-h3">Steps applied to batch {row.batch}</p>
           <Steps steps={steps} />

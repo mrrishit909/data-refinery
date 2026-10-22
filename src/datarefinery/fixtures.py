@@ -207,7 +207,8 @@ def batch_03(rng: np.random.Generator) -> tuple[bytes, dict]:
             base[i]["category"] = label
             if target:
                 exp = {"outcome": "accepted", "cleaned": {"category": target}}
-                defects.append(_defect(i + 1, "category_variant", "category", label, exp, _quarantined("INVALID_CATEGORY")))
+                defects.append(_defect(i + 1, "category_variant", "category", label, exp,
+                                       _quarantined("INVALID_CATEGORY")))
             elif label == "Gift Cards":
                 defects.append(_defect(i + 1, "category_unknown", "category", label, _quarantined("INVALID_CATEGORY")))
             else:

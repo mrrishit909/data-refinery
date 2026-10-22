@@ -296,11 +296,16 @@ def propose_repairs(batch: str, frame: pd.DataFrame, findings: list[dict], contr
         rivals = [g for g in renames if g is not f and (g["column"] == f["column"]
                                                         or g["evidence"]["source_column"] == ev["source_column"])
                   and g["evidence"]["value_match_share"] >= RENAME_MIN_VALUE_MATCH]
-        strong = ev["value_match_share"] >= RENAME_MIN_VALUE_MATCH and ev["name_similarity"] >= RENAME_MIN_NAME_SIMILARITY
+        strong = (ev["value_match_share"] >= RENAME_MIN_VALUE_MATCH
+                  and ev["name_similarity"] >= RENAME_MIN_NAME_SIMILARITY)
         auto = strong and not rivals
-        reason = None if auto else (
-            "more than one column matches" if rivals else
-            f"value match {ev['value_match_share']} or name similarity {ev['name_similarity']} below the safe threshold")
+        if auto:
+            reason = None
+        elif rivals:
+            reason = "more than one column matches"
+        else:
+            reason = (f"value match {ev['value_match_share']} or name similarity {ev['name_similarity']} "
+                      "is below the safe threshold")
         repairs.append(_repair(batch, "rename", {"from": ev["source_column"], "to": f["column"]},
                                {**ev, "competing_candidates": len(rivals)},
                                ev["value_match_share"] * (0.5 + 0.5 * ev["name_similarity"]), auto, reason, f,

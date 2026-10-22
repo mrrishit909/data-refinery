@@ -114,7 +114,7 @@ export function PreviewView({ rules }: { rules: ContractRule[] }) {
 function PreviewReport({ name, result, onClear }: { name: string; result: PreviewResult; onClear: () => void }) {
   const failing = result.columns.filter((c) => c.contract && c.contract.passRate < 1);
   return (
-    <div style={{ display: "grid", gap: 18 }}>
+    <div className="dr-stack">
       <div className="dr-panel" style={{ display: "grid", gap: 8 }}>
         <p className="dr-h3"><span className="dr-mono">{name}</span>: {fmt(result.rows)} rows, {result.columns.length} columns</p>
         <ul style={{ listStyle: "none", display: "grid", gap: 4 }}>

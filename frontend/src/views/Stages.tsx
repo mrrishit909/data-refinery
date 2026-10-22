@@ -6,12 +6,12 @@ import type { Selection } from "../components/Inspector";
 import type { AppConfig } from "../config";
 import type { QuarantinedRow, Repair, RunModel, Sample } from "../data/model";
 import { reasonLabel } from "../data/model";
-import { useWidth } from "../lib/useWidth";
 
 type Props = { run: RunModel; batch: string | null; select: (s: Selection) => void; selection: Selection; config: AppConfig };
 
 const fmt = (n: number) => n.toLocaleString("en-US");
 const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
+const usd = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const inBatch = <T extends { batch: string }>(items: T[], batch: string | null) => (batch ? items.filter((i) => i.batch === batch) : items);
 
 function Head({ title, children }: { title: string; children?: React.ReactNode }) {
@@ -65,7 +65,8 @@ export function IntakeStage({ run, batch, config }: Props) {
 
 export function ProfileStage({ run, batch, select, selection }: Props) {
   const current = batch ?? run.params.batches[run.params.batches.length - 1] ?? null;
-  const profiles = run.profiles.filter((p) => p.batch === current);
+  const [view, setView] = useState<"raw" | "accepted">("raw");
+  const profiles = (view === "raw" ? run.profiles : run.profilesAccepted).filter((p) => p.batch === current);
   const contract = new Map(run.contractColumns.map((c) => [c.name, c.rule]));
   const drifted = new Set(run.drift.filter((d) => d.batch === current && d.column).map((d) => d.column));
   return (
@@ -74,6 +75,7 @@ export function ProfileStage({ run, batch, select, selection }: Props) {
         Observed columns compared with the contract. A column the contract does not know, or one with drift, is marked.
         Select a column to see its most common values.
       </Head>
+      <Segmented label="Profile" value={view} options={[{ value: "raw", label: "As received" }, { value: "accepted", label: "After refining" }]} onChange={setView} />
       <div className="dr-panel">
         <Region label={`Column profiles for batch ${current}`}>
           <table className="dr-table">
@@ -131,8 +133,10 @@ function RepairCard({ r, active, onSelect }: { r: Repair; active: boolean; onSel
 
 function BeforeAfter({ samples, select }: { samples: Sample[]; select: (s: Selection) => void }) {
   const [mode, setMode] = useState<"after" | "before">("after");
+  const [all, setAll] = useState(false);
   const cols = useMemo(() => [...new Set(samples.flatMap((s) => Object.keys(s.raw)))].filter((c) => !c.startsWith("_")).slice(0, 8), [samples]);
   if (!samples.length) return null;
+  const shown = all ? samples : samples.slice(0, SAMPLE_PREVIEW);
   return (
     <div className="dr-panel" style={{ display: "grid", gap: 12 }}>
       <div className="dr-toolbar" style={{ justifyContent: "space-between" }}>
@@ -143,7 +147,7 @@ function BeforeAfter({ samples, select }: { samples: Sample[]; select: (s: Selec
         <table className="dr-table">
           <thead><tr><th scope="col">Row</th>{cols.map((c) => <th key={c} scope="col">{c}</th>)}<th scope="col">Outcome</th></tr></thead>
           <tbody>
-            {samples.map((s) => (
+            {shown.map((s) => (
               <tr key={`${s.batch}-${s.sourceRow}`} data-selectable onClick={() => select({ kind: "row", row: s.cleaned ? { batch: s.batch, sourceFile: "", sourceRow: s.sourceRow, values: s.cleaned } : { batch: s.batch, sourceFile: "", sourceRow: s.sourceRow, values: s.raw, reasons: s.reasons }, sample: s })}>
                 <th scope="row" className="dr-mono">{s.sourceRow}</th>
                 {cols.map((c) => {
@@ -159,10 +163,19 @@ function BeforeAfter({ samples, select }: { samples: Sample[]; select: (s: Selec
           </tbody>
         </table>
       </Region>
-      <p className="dr-small">Underlined cells changed between the source and the output. Select a row for its full lineage.</p>
+      <div className="dr-toolbar">
+        {samples.length > SAMPLE_PREVIEW && (
+          <button type="button" className="dr-btn" aria-expanded={all} onClick={() => setAll((v) => !v)}>
+            {all ? `Show the first ${SAMPLE_PREVIEW}` : `Show all ${samples.length} sample rows`}
+          </button>
+        )}
+        <p className="dr-small">Underlined cells changed between the source and the output. Select a row for its full lineage.</p>
+      </div>
     </div>
   );
 }
+
+const SAMPLE_PREVIEW = 12;
 
 export function DriftStage({ run, batch, select, selection }: Props) {
   const drift = inBatch(run.drift, batch);
@@ -375,14 +388,16 @@ export function ReconcileStage({ run, batch, select }: Props) {
           <p className="dr-small" style={{ marginBottom: 10 }}>Rows dated in a month an earlier batch already closed are accepted and flagged, and that month's totals are restated, never silently changed.</p>
           <Region label="Restated periods">
             <table className="dr-table">
-              <thead><tr><th scope="col">Period</th><th scope="col" className="dr-num">Late rows</th><th scope="col">Totals before</th><th scope="col">Totals after</th></tr></thead>
+              <thead><tr><th scope="col">Period</th><th scope="col">Restated by</th><th scope="col" className="dr-num">Late rows</th><th scope="col" className="dr-num">Before, USD</th><th scope="col" className="dr-num">Late, USD</th><th scope="col" className="dr-num">After, USD</th></tr></thead>
               <tbody>
                 {run.restatements.map((r) => (
-                  <tr key={r.period}>
+                  <tr key={`${r.period}-${r.batch}`}>
                     <th scope="row" className="dr-mono">{r.period}</th>
+                    <td className="dr-mono">{r.batch}</td>
                     <td className="dr-num dr-mono">{fmt(r.rows)}</td>
-                    <td className="dr-mono dr-small">{Object.entries(r.before).map(([k, v]) => `${k} ${fmt(v)}`).join("; ")}</td>
-                    <td className="dr-mono dr-small">{Object.entries(r.after).map(([k, v]) => `${k} ${fmt(v)}`).join("; ")}</td>
+                    <td className="dr-num dr-mono">{usd(r.beforeUsd)}</td>
+                    <td className="dr-num dr-mono">+{usd(r.lateUsd)}</td>
+                    <td className="dr-num dr-mono"><strong>{usd(r.afterUsd)}</strong></td>
                   </tr>
                 ))}
               </tbody>
@@ -404,55 +419,53 @@ export function ReconcileStage({ run, batch, select }: Props) {
   );
 }
 
-function LineageGraph({ run, active }: { run: RunModel; active: string | null }) {
-  const [ref, width] = useWidth<HTMLDivElement>();
-  const cols = { source: [] as typeof run.lineage.nodes, step: [] as typeof run.lineage.nodes, output: [] as typeof run.lineage.nodes };
-  for (const n of run.lineage.nodes) cols[n.kind].push(n);
+/** Source file, the batch's step line and the output files; the steps that touch the chosen column are lit. */
+function LineageTrace({ run, active, batch }: { run: RunModel; active: string | null; batch: string }) {
+  const { nodes, edges } = run.lineage;
+  const sources = nodes.filter((n) => n.kind === "source" && n.batch === batch);
+  const steps = nodes.filter((n) => n.kind === "step" && n.batch === batch);
+  const outputs = nodes.filter((n) => n.kind === "output");
   const path = active ? run.lineage.columns.find((c) => c.output === active) : null;
-  const lit = new Set<string>(path ? [...path.sources, ...path.steps, active!] : []);
-  const rowH = 30;
-  const height = Math.max(cols.source.length, cols.step.length, cols.output.length) * rowH + 20;
-  const colX = (i: number) => 10 + i * Math.max(150, (width - 180) / 2);
-  const nodeW = Math.min(170, Math.max(110, width / 3 - 20));
-  const pos = new Map<string, { x: number; y: number }>();
-  (["source", "step", "output"] as const).forEach((k, i) => cols[k].forEach((n, j) => pos.set(n.id, { x: colX(i), y: 10 + j * rowH })));
-  const matches = (n: { id: string; label: string }) => lit.has(n.id) || lit.has(n.label);
+  const lit = new Set(path?.steps ?? []);
+  const label = new Map(nodes.map((n) => [n.id, n.label]));
+  const writes = (id: string) => edges.filter((e) => e.from === id && outputs.some((o) => o.id === e.to)).map((e) => label.get(e.to));
   return (
-    <div ref={ref}>
-      {width > 0 && (
-        <svg className="dr-graph" width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Lineage from source files through steps to output columns">
-          {run.lineage.edges.map((e, i) => {
-            const a = pos.get(e.from);
-            const b = pos.get(e.to);
-            if (!a || !b) return null;
-            const on = lit.has(e.from) && lit.has(e.to);
-            const x0 = a.x + nodeW, y0 = a.y + 11, x1 = b.x, y1 = b.y + 11;
-            return <path key={i} className="dr-edge" data-active={on} d={`M${x0} ${y0} C ${(x0 + x1) / 2} ${y0}, ${(x0 + x1) / 2} ${y1}, ${x1} ${y1}`} />;
-          })}
-          {run.lineage.nodes.map((n) => {
-            const p = pos.get(n.id)!;
-            return (
-              <g key={n.id} className="dr-node" data-active={matches(n)} transform={`translate(${p.x} ${p.y})`}>
-                <rect width={nodeW} height={22} rx={3} />
-                <text x={8} y={15}>{n.label.length > 24 ? `${n.label.slice(0, 23)}...` : n.label}</text>
-              </g>
-            );
-          })}
-        </svg>
-      )}
+    <div className="dr-trace">
+      <div className="dr-trace-end">
+        <p className="dr-small">Read from</p>
+        {sources.map((n) => <span key={n.id} className="dr-trace-file dr-mono" data-active={Boolean(path)}>{n.label}</span>)}
+      </div>
+      <ol className="dr-trace-line" aria-label={`Steps in batch ${batch}${active ? `; steps that touch ${active} are marked` : ""}`}>
+        {steps.map((s) => {
+          const on = lit.has(s.id);
+          const w = writes(s.id);
+          return (
+            <li key={s.id} data-active={on}>
+              <span className="dr-mono">{s.label}</span>
+              {on && <span className="dr-sr-only"> (touches {active})</span>}
+              {w.length > 0 && <span className="dr-small">writes {w.join(", ")}</span>}
+            </li>
+          );
+        })}
+      </ol>
+      <div className="dr-trace-end">
+        <p className="dr-small">Written to</p>
+        {outputs.map((n) => <span key={n.id} className="dr-trace-file dr-mono" data-active={Boolean(path) && n.label === "cleaned.csv"}>{n.label}</span>)}
+      </div>
     </div>
   );
 }
 
-export function LineageStage({ run }: Props) {
+export function LineageStage({ run, batch }: Props) {
+  const shown = batch ?? run.params.batches[0] ?? "";
   const outputs = run.lineage.columns.map((c) => c.output);
   const [active, setActive] = useState<string | null>(outputs[0] ?? null);
   const path = run.lineage.columns.find((c) => c.output === active);
   return (
     <>
       <Head title="Lineage: from a source cell to an output column">
-        Pick an output column to trace the source columns and steps it came from. Every row also carries its batch, source
-        file and source row number.
+        Pick an output column to trace the source columns and steps it came from in batch {shown} (choose another batch in
+        the rack). Every row also carries its batch, source file and source row number.
       </Head>
       <div className="dr-chips" role="group" aria-label="Output column">
         {outputs.map((o) => (
@@ -460,12 +473,13 @@ export function LineageStage({ run }: Props) {
         ))}
       </div>
       <div className="dr-panel" style={{ display: "grid", gap: 12 }}>
-        <LineageGraph run={run} active={active} />
+        <LineageTrace run={run} active={active} batch={shown} />
         {path && (
           <dl className="dr-kv">
             <dt>Output</dt><dd className="dr-mono">{path.output}</dd>
             <dt>From source columns</dt><dd className="dr-mono">{path.sources.join(", ") || "derived"}</dd>
-            <dt>Through steps</dt><dd>{path.steps.join(", ") || "identity"}</dd>
+            <dt>Through steps in {shown}</dt>
+            <dd>{path.steps.filter((id) => id.includes(`:${shown}:`)).map((id) => run.lineage.nodes.find((n) => n.id === id)?.label ?? id).join(", ") || "identity"}</dd>
           </dl>
         )}
       </div>
