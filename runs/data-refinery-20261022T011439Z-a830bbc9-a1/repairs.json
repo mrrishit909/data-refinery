@@ -1,0 +1,406 @@
+{
+  "repair_mode": "apply-safe",
+  "repairs": [
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-02",
+      "confidence": 0.889,
+      "confidence_basis": "value match share x (0.5 + 0.5 x name similarity)",
+      "detail": {
+        "from": "cust_id",
+        "to": "customer_id"
+      },
+      "evidence": {
+        "competing_candidates": 0,
+        "name_similarity": 0.7778,
+        "source_column": "cust_id",
+        "value_match_share": 1.0
+      },
+      "finding": "D-2026-02-03",
+      "id": "R-2026-02-01",
+      "kind": "rename"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-02",
+      "confidence": 0.76,
+      "confidence_basis": "0.5 + 0.5 x (1 - coverage of the best competing format)",
+      "detail": {
+        "column": "order_date",
+        "format": "%d/%m/%Y",
+        "rows_affected": 177,
+        "to_format": "%Y-%m-%d"
+      },
+      "evidence": {
+        "candidates": {
+          "%d/%m/%Y": {
+            "coverage": 1.0,
+            "in_batch_month_share": 1.0,
+            "parsed": 177
+          },
+          "%m/%d/%Y": {
+            "coverage": 0.4802,
+            "in_batch_month_share": 0.0588,
+            "parsed": 85
+          }
+        },
+        "malformed_examples": [
+          "2026-02-30",
+          "2026-02-31",
+          "31/02/2026",
+          "TBD",
+          "not a date"
+        ],
+        "malformed_values": 5,
+        "non_canonical_values": 182,
+        "parseable_by_some_format": 177
+      },
+      "finding": "D-2026-02-04",
+      "id": "R-2026-02-02",
+      "kind": "date_format"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.9,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Apparrel",
+        "rows_affected": 4,
+        "rule": "typo",
+        "to": "Apparel"
+      },
+      "evidence": {
+        "candidates": [
+          "Apparel"
+        ],
+        "edit_distances": {
+          "Apparel": 1,
+          "Electronics": 10,
+          "Grocery": 7,
+          "Home": 7,
+          "Toys": 8
+        },
+        "rows": 4,
+        "rule": "typo"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-01",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": "'Elec' is only a prefix of Electronics; a truncated label can also abbreviate a category outside the contract, so the data does not determine its meaning.",
+      "applied": false,
+      "auto_applicable": false,
+      "batch": "2026-03",
+      "confidence": 0.4,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Elec",
+        "rows_affected": 7,
+        "rule": "abbreviation",
+        "to": null
+      },
+      "evidence": {
+        "candidates": [
+          "Electronics"
+        ],
+        "edit_distances": {
+          "Apparel": 6,
+          "Electronics": 7,
+          "Grocery": 6,
+          "Home": 4,
+          "Toys": 4
+        },
+        "rows": 7,
+        "rule": "abbreviation"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-02",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.97,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Electronic",
+        "rows_affected": 6,
+        "rule": "plural",
+        "to": "Electronics"
+      },
+      "evidence": {
+        "candidates": [
+          "Electronics"
+        ],
+        "edit_distances": {
+          "Apparel": 9,
+          "Electronics": 1,
+          "Grocery": 8,
+          "Home": 9,
+          "Toys": 8
+        },
+        "rows": 6,
+        "rule": "plural"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-03",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": "'Gift Cards' matches no contract category by case, plural, single-edit typo, prefix or token.",
+      "applied": false,
+      "auto_applicable": false,
+      "batch": "2026-03",
+      "confidence": 0.0,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Gift Cards",
+        "rows_affected": 4,
+        "rule": "unmapped",
+        "to": null
+      },
+      "evidence": {
+        "candidates": [],
+        "edit_distances": {
+          "Apparel": 8,
+          "Electronics": 9,
+          "Grocery": 7,
+          "Home": 10,
+          "Toys": 8
+        },
+        "rows": 4,
+        "rule": "unmapped"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-04",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.9,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Grocey",
+        "rows_affected": 4,
+        "rule": "typo",
+        "to": "Grocery"
+      },
+      "evidence": {
+        "candidates": [
+          "Grocery"
+        ],
+        "edit_distances": {
+          "Apparel": 6,
+          "Electronics": 9,
+          "Grocery": 1,
+          "Home": 4,
+          "Toys": 5
+        },
+        "rows": 4,
+        "rule": "typo"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-05",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.99,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "HOME",
+        "rows_affected": 5,
+        "rule": "case",
+        "to": "Home"
+      },
+      "evidence": {
+        "candidates": [
+          "Home"
+        ],
+        "edit_distances": {
+          "Apparel": 6,
+          "Electronics": 10,
+          "Grocery": 5,
+          "Home": 0,
+          "Toys": 3
+        },
+        "rows": 5,
+        "rule": "case"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-06",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": "'Home & Garden' combines Home with other terms (garden) that have no contract category; it is broader than Home and may belong elsewhere.",
+      "applied": false,
+      "auto_applicable": false,
+      "batch": "2026-03",
+      "confidence": 0.3,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Home & Garden",
+        "rows_affected": 6,
+        "rule": "composite",
+        "to": null
+      },
+      "evidence": {
+        "candidates": [
+          "Home"
+        ],
+        "edit_distances": {
+          "Apparel": 10,
+          "Electronics": 12,
+          "Grocery": 11,
+          "Home": 9,
+          "Toys": 12
+        },
+        "rows": 6,
+        "rule": "composite"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-07",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.97,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "Toy",
+        "rows_affected": 6,
+        "rule": "plural",
+        "to": "Toys"
+      },
+      "evidence": {
+        "candidates": [
+          "Toys"
+        ],
+        "edit_distances": {
+          "Apparel": 7,
+          "Electronics": 9,
+          "Grocery": 5,
+          "Home": 3,
+          "Toys": 1
+        },
+        "rows": 6,
+        "rule": "plural"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-08",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.99,
+      "confidence_basis": "fixed confidence per matching rule (case, plural, typo, abbreviation, ...)",
+      "detail": {
+        "column": "category",
+        "from": "electronics",
+        "rows_affected": 8,
+        "rule": "case",
+        "to": "Electronics"
+      },
+      "evidence": {
+        "candidates": [
+          "Electronics"
+        ],
+        "edit_distances": {
+          "Apparel": 10,
+          "Electronics": 0,
+          "Grocery": 9,
+          "Home": 10,
+          "Toys": 8
+        },
+        "rows": 8,
+        "rule": "case"
+      },
+      "finding": "D-2026-03-01",
+      "id": "R-2026-03-09",
+      "kind": "category_map"
+    },
+    {
+      "ambiguity": null,
+      "applied": true,
+      "auto_applicable": true,
+      "batch": "2026-03",
+      "confidence": 0.84,
+      "confidence_basis": "1 - max log10 deviation from the declared factor / 0.3",
+      "detail": {
+        "column": "weight_kg",
+        "factor": "0.001",
+        "from_unit": "g",
+        "guard": {
+          "median_max": 2498.9669,
+          "median_min": 1576.7415
+        },
+        "to_unit": "kg"
+      },
+      "evidence": {
+        "baseline": "accepted rows of 2026-02",
+        "baseline_scale": {
+          "median": 1.985,
+          "p05": 0.282,
+          "p95": 20.08275
+        },
+        "declared_conversions": {
+          "g": 1000.0
+        },
+        "log10_deviation": {
+          "median": 0.0165,
+          "p05": 0.0479,
+          "p95": 0.0016
+        },
+        "matches_unit": "g",
+        "ratios": {
+          "median": 1038.7909,
+          "p05": 1116.6667,
+          "p95": 1003.6076
+        },
+        "scale": {
+          "median": 2062.0,
+          "p05": 314.9,
+          "p95": 20155.2
+        }
+      },
+      "finding": "D-2026-03-03",
+      "id": "R-2026-03-10",
+      "kind": "unit_scale"
+    }
+  ],
+  "summary": {
+    "applied": 9,
+    "auto_applicable": 9,
+    "proposed": 12
+  }
+}

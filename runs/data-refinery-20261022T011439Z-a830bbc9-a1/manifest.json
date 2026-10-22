@@ -1,0 +1,94 @@
+{
+  "contract_sha256": "20b0d796d38e85eae906b6fc6fd57be235db3128db35b80d81119afee0b707d5",
+  "contract_version": "orders.v1",
+  "fx_sha256": "e3ea63ec6b535a09fd5b97331c28230df3a15cf527fc15305ea07714d284527f",
+  "fx_table": "fixed-2026q1",
+  "input_manifest_hash": "sha256:91dc8289415086c582f289590d72d6d8f5d40aa9bbe8e22124cb61b4ab7d1a66",
+  "package_version": "1.0.0",
+  "params": {
+    "batches": [
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04"
+    ],
+    "contract": "orders.v1",
+    "fx_table": "fixed-2026q1",
+    "repair_mode": "apply-safe"
+  },
+  "row_numbering": "1-based data record number in the source file, header excluded",
+  "sources": [
+    {
+      "bytes": 64076,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "amount",
+        "currency",
+        "category",
+        "quantity",
+        "weight_kg",
+        "region"
+      ],
+      "file": "orders_2026-01.csv",
+      "format": "csv",
+      "rows": 1000,
+      "sha256": "6b4aa9a8f46e480bb4ba45486bc7e811efcff393786657bfafe0d90e44ea2e93"
+    },
+    {
+      "bytes": 77398,
+      "columns": [
+        "order_id",
+        "cust_id",
+        "order_date",
+        "amount",
+        "currency",
+        "category",
+        "quantity",
+        "weight_kg",
+        "region"
+      ],
+      "file": "orders_2026-02.csv",
+      "format": "csv",
+      "rows": 1206,
+      "sha256": "867d0acb2f9d6f42e34d28fec4dba84b45d3d5c23447a13ce6d3fb7cd762a9e6"
+    },
+    {
+      "bytes": 215933,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "amount",
+        "currency",
+        "category",
+        "quantity",
+        "weight_kg",
+        "region"
+      ],
+      "file": "orders_2026-03.json",
+      "format": "json",
+      "rows": 1100,
+      "sha256": "3ce3c65fd95bb847f60aa12ac4a2edf4b138ecf1f97b91192a35b5e071269b3a"
+    },
+    {
+      "bytes": 54499,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "order_date",
+        "amount",
+        "currency",
+        "category",
+        "quantity",
+        "weight_kg",
+        "region"
+      ],
+      "file": "orders_2026-04.xlsx",
+      "format": "xlsx",
+      "rows": 1040,
+      "sha256": "32b8e03155ad5fe08e17311f5a0789c319d4d262e471060304079a7add6a8dd2"
+    }
+  ]
+}
