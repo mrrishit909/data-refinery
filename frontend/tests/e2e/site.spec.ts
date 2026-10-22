@@ -231,6 +231,8 @@ test("states: loading, empty, error with retry, stale", async ({ page }) => {
 });
 
 test("pages: runs ledger, request form link, about", async ({ page }) => {
+  const preview = await page.request.get("./preview.jpg");
+  expect(preview.status(), "portfolio preview image (portfolio-manifest.json preview_image)").toBe(200);
   const problems = watch(page);
   await page.goto("./#/runs");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Every run");

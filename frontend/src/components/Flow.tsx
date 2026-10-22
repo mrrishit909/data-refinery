@@ -53,7 +53,7 @@ export function FlowRibbons({ rows, onPick }: { rows: Accounting[]; onPick?: (de
   const h = compact ? 150 : 170;
   const barW = 14;
   const inX = 0;
-  const outX = Math.max(120, width - (compact ? 118 : 190));
+  const outX = Math.max(120, width - (compact ? 128 : 214));
   const scale = t.rowsIn ? (h - 24) / t.rowsIn : 0;
   const dests = [
     { key: "accepted" as const, label: "Accepted", count: t.accepted, fill: "var(--dr-accepted-fill)", pattern: "solid" },

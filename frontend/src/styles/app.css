@@ -172,7 +172,7 @@
 .dr-root .dr-term-accepted { color: var(--dr-accepted); }
 .dr-root .dr-term-quarantined { color: var(--dr-quarantined); }
 .dr-root .dr-term-merged { color: var(--dr-merged); }
-.dr-root .dr-flow { width: 100%; display: block; }
+.dr-root .dr-flow { width: 100%; display: block; overflow: visible; }
 .dr-root .dr-flow text { font-family: var(--dr-sans); font-size: 12px; fill: var(--dr-text-2); }
 .dr-root .dr-flow .dr-flow-count { font-family: var(--dr-mono); fill: var(--dr-text); font-size: 12px; }
 
